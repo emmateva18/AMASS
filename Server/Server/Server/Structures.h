@@ -5,7 +5,8 @@ enum Status
 {
 	inUse,
 	notActive,
-	notArchived
+	notArchived,
+	pendingApproval
 };
 struct ROLE
 {
@@ -20,6 +21,7 @@ struct STUDENT //name and surname, class, role which the student prefers to carr
 	std::string email;
 	Status status;
 	ROLE role;
+	bool isInTeam = false;
 };
 struct TEACHER
 {
@@ -28,11 +30,17 @@ struct TEACHER
 	std::string email;
 	std::vector<TEAM> teams;
 };
+struct DATE
+{
+	int day;
+	int month;
+	int year;
+};
 struct TEAM
 {
 	std::string name;
 	std::string desc;
-	std::string dateOfSetUp;
+	DATE dateOfSetUp;
 	std::vector<STUDENT> students;
 };
 struct SCHOOL 
