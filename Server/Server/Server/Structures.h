@@ -1,52 +1,68 @@
 #pragma once
 #include <string>
 #include <vector>
-enum Status
+
+enum STATUS
 {
+	pendingApproval,
 	inUse,
 	notActive,
-	notArchived,
-	pendingApproval
+	notArchived
 };
+
 struct ROLE
 {
-	int id=0;
-	std::string name="teamless";
+	int id = -1;
+	std::string name = "teamless";
 };
-struct STUDENT //name and surname, class, role which the student prefers to carry out in the team, email.
+
+// Name and surname, class, role which the student prefers to carry out in the team, email.
+struct STUDENT 
 {
 	std::string firstName;
 	std::string middleName;
 	std::string surname;
-	std::string grade; // As in class
+	// As in class
+	std::string grade; 
 	std::string email;
-	ROLE role;
 	bool isInTeam = false;
 };
+
 struct TEACHER
 {
 	std::string firstName;
 	std::string middleName;
 	std::string surname;
 	std::string email;
-	//String will be compared to team names instead of wasting space for TEAM structs
-	std::vector<string> teams = {};
+	// The teams' ids will be compared instead of wasting space for TEAM structs
+	std::vector<int> teamIds = {};
 };
+
 struct DATE
 {
 	int day;
 	int month;
 	int year;
 };
+
+struct TEAM_MEMBER
+{
+	int teamId;
+	string studentMail;
+	int roleId;
+};
+
 struct TEAM
 {
+	int id;
 	std::string name;
 	std::string desc;
 	DATE dateOfSetUp;
-	Status status;
-	std::vector<STUDENT> students;
+	STATUS status = STATUS::pendingApproval;
+	std::vector<TEAM_MEMBER> members;
 };
-struct SCHOOL 
+
+struct SCHOOL
 {
 	std::string name;
 	std::string city;
