@@ -2,8 +2,12 @@
 #include <string>
 #include <vector>
 #include "Structures.h"
+#include "Logic.h"
 using namespace std;
+
 int main()
 {
-    std::cout << "Hello World!\n";
+	vector<SCHOOL> schools;
+	init(schools);
+	displaySchool(schools[0], 0);
 }

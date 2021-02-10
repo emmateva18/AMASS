@@ -48,7 +48,7 @@ struct DATE
 struct TEAM_MEMBER
 {
 	int teamId;
-	string studentMail;
+	std::string studentEmail;
 	int roleId;
 };
 
