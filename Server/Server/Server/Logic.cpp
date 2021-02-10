@@ -46,7 +46,7 @@ string statusToString(STATUS status)
 {
 	switch (status)
 	{
-		// may change the string later
+		// may change the strings later
 		case pendingApproval:
 			return "Pending Approval";
 		case inUse:
@@ -60,6 +60,22 @@ string statusToString(STATUS status)
 	}
 }
 
+void displayTeacher(TEACHER teacher, int id)
+{
+	cout << "Teacher " << id + 1 << ":" << endl;
+	cout << "First Name: " << teacher.firstName << endl;
+	cout << "Middle  Name: " << teacher.middleName << endl;
+	cout << "Surname: " << teacher.surname << endl;
+	cout << "E-mail: " << teacher.email << endl;
+	cout << "List of team ids he participates: " << endl;
+
+	for (size_t i = 0; i < teacher.teamIds.size(); i++)
+	{
+		cout << teacher.teamIds[i] << endl;
+		// display team's name by its id
+	}
+}
+
 void displaySchool(SCHOOL school, int id)
 {
 	cout << "School " << id << " details:" << endl;
@@ -67,20 +83,10 @@ void displaySchool(SCHOOL school, int id)
 	cout << "City: " << school.city << endl;
 	cout << "Adress: " << school.address << endl;
 	cout << "List of the teachers: " << endl;
+
 	for (size_t i = 0; i < school.teachers.size(); i++)
 	{
-		cout << "Teacher " << i + 1 << ":" << endl;
-		cout << "First Name: " << school.teachers[i].firstName << endl;
-		cout << "Middle  Name: " << school.teachers[i].middleName << endl;
-		cout << "Surname: " << school.teachers[i].surname << endl;
-		cout << "E-mail: " << school.teachers[i].email << endl;
-		cout << "List of team ids he participates: " << endl;
-
-		for (size_t j = 0; j < school.teachers[i].teamIds.size(); j++)
-		{
-			cout << school.teachers[i].teamIds[j] << endl;
-			// display team's name by its id
-		}
+		displayTeacher(school.teachers[i], id);
 	}
 
 	cout << "List of the teams:" << endl;
@@ -100,6 +106,7 @@ void displaySchool(SCHOOL school, int id)
 		cout << "Status: " << statusToString(school.teams[i].status) << endl;
 
 		cout << "List of team members:" << endl;
+
 		for (size_t j = 0; j < school.teams[i].members.size(); j++)
 		{
 			cout << "Student " << j + 1 << ":" << endl;
