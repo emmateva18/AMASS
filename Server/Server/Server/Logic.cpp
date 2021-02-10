@@ -76,12 +76,37 @@ void displayTeacher(TEACHER teacher, int id)
 	}
 }
 
+void displayTeam(TEAM team)
+{
+	cout << "Team's id: " << team.id << endl;
+	cout << "Name: " << team.name << endl;
+	// make description on several lines, instead of 1
+	cout << "Description: " << team.desc << endl;
+	cout << "Date of set up:" << endl;
+	// may change the format later
+	cout << team.dateOfSetUp.day << "/"
+		<< team.dateOfSetUp.month << "/"
+		<< team.dateOfSetUp.year <<
+		" (dd/mm/yyyy)" << endl;
+	cout << "Status: " << statusToString(team.status) << endl;
+
+	cout << "List of team members:" << endl;
+
+	for (size_t j = 0; j < team.members.size(); j++)
+	{
+		cout << "Student " << j + 1 << ":" << endl;
+		cout << "Email: " << team.members[j].studentEmail << endl;
+		// display student's role by id
+	}
+}
+
 void displaySchool(SCHOOL school, int id)
 {
 	cout << "School " << id << " details:" << endl;
 	cout << "Name: " << school.name << endl;
 	cout << "City: " << school.city << endl;
 	cout << "Adress: " << school.address << endl;
+
 	cout << "List of the teachers: " << endl;
 
 	for (size_t i = 0; i < school.teachers.size(); i++)
@@ -93,25 +118,6 @@ void displaySchool(SCHOOL school, int id)
 
 	for (size_t i = 0; i < school.teams.size(); i++)
 	{
-		cout << "Team's id: " << school.teams[i].id << endl;
-		cout << "Name: " << school.teams[i].name << endl;
-		// make description on several lines, instead of 1
-		cout << "Description: " << school.teams[i].desc << endl;
-		cout << "Date of set up:" << endl;
-		// may change the format later
-		cout << school.teams[i].dateOfSetUp.day << "/"
-			<< school.teams[i].dateOfSetUp.month << "/"
-			<< school.teams[i].dateOfSetUp.year <<
-			" (dd/mm/yyyy)" << endl;
-		cout << "Status: " << statusToString(school.teams[i].status) << endl;
-
-		cout << "List of team members:" << endl;
-
-		for (size_t j = 0; j < school.teams[i].members.size(); j++)
-		{
-			cout << "Student " << j + 1 << ":" << endl;
-			cout << "Email: " << school.teams[i].members[j].studentEmail << endl;
-			// display student's role by id
-		}
+		displayTeam(school.teams[i]);
 	}
 }
