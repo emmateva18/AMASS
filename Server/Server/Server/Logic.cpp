@@ -19,9 +19,9 @@ void init(vector<SCHOOL>& schools)
 	STUDENT s5 = { "Ivan","Ivanov","Ivanov","10B","III@abv.bg" };
 	STUDENT s6 = { "Mitko","Mitkov","Mitkov","9V","MMM@abv.bg" };
 
-	TEAM te1 = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{0, "GG@abv.bg", 1},{0, "SBP@abv.bg", 2}} };
-	TEAM te2 = { 1, "Anti-Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{1, "IUM@abv.bg", 1},{1, "SBP@abv.bg", 2}} };
-	TEAM te3 = { 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{2, "III@abv.bg", 1},{2, "MMM@abv.bg", 2}} };
+	TEAM te1 = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+	TEAM te2 = { 1, "Anti-Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"IUM@abv.bg", 1},{"SBP@abv.bg", 2}} };
+	TEAM te3 = { 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}} };
 
 	vector <TEACHER> teachers{ t1, t2, t3, t4, t5 };
 	vector <STUDENT> students{ s1,s2,s3,s4,s5,s6 };

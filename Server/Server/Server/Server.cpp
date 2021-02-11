@@ -14,10 +14,7 @@ int main()
 	string a = "aaa",b;
 	fstream f;
 	f.open("data.dat", ios::binary | ios::out | ios::in | ios::trunc);
-	saveStr(f,a);
-	f.close();
-	f.open("data.dat", ios::binary | ios::out | ios::in);
-	readStr(f, b);
-	cout << b;
-	f.close();
+	vector<SCHOOL> pgkpi;
+	init(pgkpi);
+	pgkpi[0].save(f);
 }
