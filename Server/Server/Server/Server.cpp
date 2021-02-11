@@ -12,7 +12,15 @@ int main()
 	string a = "aaa",b;
 	fstream f;
 	f.open("data.dat", ios::binary | ios::out | ios::in | ios::trunc);
-	vector<SCHOOL> pgkpi;
-	init(pgkpi);
-	pgkpi[0].save(f);
+	vector<string> vec1{ "test1","test2","test3" };
+	vector<string> vec2;
+	saveVec(f, vec1);
+	f.close();
+	f.open("data.dat", ios::binary | ios::out | ios::in);
+	readVec(f, vec2);
+	for (size_t i = 0; i < vec2.size(); i++)
+	{
+		cout << vec2[i];
+	}
+	f.close();
 }
