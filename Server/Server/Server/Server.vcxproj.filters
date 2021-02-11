@@ -24,6 +24,9 @@
     <ClCompile Include="Connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Structures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
