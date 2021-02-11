@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <vector>
+#include "Libraries.h"
 #include "Structures.h"
 using namespace std;
 

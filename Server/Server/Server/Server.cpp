@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include "Libraries.h"
 #include "Structures.h"
 #include "Logic.h"
 #include "DataFunctions.h"

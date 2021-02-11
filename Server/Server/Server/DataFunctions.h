@@ -1,8 +1,5 @@
 #pragma once
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
+#include "Libraries.h"
 
 void saveStr(std::fstream& file, std::string str);
 void readStr(std::fstream& file, std::string& str);
