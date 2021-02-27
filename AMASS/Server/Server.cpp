@@ -8,7 +8,6 @@ int main()
 {
 	vector<SCHOOL> schools;
 	init(schools);
-	displaySchool(schools[0], 0);
 	string a = "aaa", b;
 	fstream f;
 	f.open("data.dat", ios::binary | ios::out | ios::in | ios::trunc);
