@@ -47,16 +47,16 @@ string statusToString(STATUS status)
 	switch (status)
 	{
 		// may change the strings later
-		case pendingApproval:
-			return "Pending Approval";
-		case inUse:
-			return "In Use";
-		case notActive:
-			return "Not Active";
-		case notArchived:
-			return "Not Archived";
-		default:
-			return "";
+	case pendingApproval:
+		return "Pending Approval";
+	case inUse:
+		return "In Use";
+	case notActive:
+		return "Not Active";
+	case notArchived:
+		return "Not Archived";
+	default:
+		return "";
 	}
 }
 

@@ -24,13 +24,13 @@ struct ROLE
 };
 
 // Name and surname, class, role which the student prefers to carry out in the team, email.
-struct STUDENT 
+struct STUDENT
 {
 	std::string firstName;
 	std::string middleName;
 	std::string surname;
 	// As in class
-	std::string grade; 
+	std::string grade;
 	std::string email;
 	bool isInTeam = false;
 
