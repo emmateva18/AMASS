@@ -144,6 +144,7 @@
     <ClCompile Include="BasicFileOperations.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Structures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedFileOperations.h" />
