@@ -98,3 +98,19 @@ STUDENT enterStudent()
 
 	return student;
 }
+
+TEACHER enterTeacher()
+{
+	TEACHER teacher;
+
+	cout << "Enter teacher's first name: ";
+	cin >> teacher.firstName;
+	cout << "Enter teacher's middle name: ";
+	cin >> teacher.middleName;
+	cout << "Enter teacher's surname: ";
+	cin >> teacher.surname;
+	cout << "Enter teacher's email: ";
+	cin >> teacher.email;
+	
+	return teacher;
+}
