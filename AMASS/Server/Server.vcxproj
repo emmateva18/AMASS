@@ -144,19 +144,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdvancedFileOperations.cpp" />
-    <ClCompile Include="Connection.cpp" />
+    <ClCompile Include="ServerConnection.cpp" />
     <ClCompile Include="BasicFileOperations.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Server.cpp" />
-    <ClCompile Include="Structures.cpp" />
+    <ClCompile Include="ServerStructures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedFileOperations.h" />
-    <ClInclude Include="Connection.h" />
+    <ClInclude Include="ServerConnection.h" />
     <ClInclude Include="BasicFileOperations.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Logic.h" />
-    <ClInclude Include="Structures.h" />
+    <ClInclude Include="ServerStructures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

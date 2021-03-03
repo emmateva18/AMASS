@@ -1,4 +1,4 @@
-#include "Structures.h"
+#include "ServerStructures.h"
 void ROLE::save(std::fstream& file)
 {
 	saveInt(file, id);

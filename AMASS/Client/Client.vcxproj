@@ -144,11 +144,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="ClientConnection.cpp" />
+    <ClCompile Include="ClientStructures.cpp" />
     <ClCompile Include="Presentation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientConnection.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Presentation.h" />
+    <ClInclude Include="ClientStructures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

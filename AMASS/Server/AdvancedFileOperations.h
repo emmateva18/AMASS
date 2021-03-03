@@ -1,5 +1,5 @@
 #pragma once
-#include "Structures.h"
+#include "ServerStructures.h"
 void readRecord(std::fstream& file, STUDENT& student);
 void readRecord(std::fstream& file, TEACHER& teacher);
 void readRecord(std::fstream& file, DATE& date);

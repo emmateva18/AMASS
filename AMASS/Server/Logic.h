@@ -1,6 +1,6 @@
 #pragma once
 #include "Libraries.h"
-#include "Structures.h"
+#include "ServerStructures.h"
 using namespace std;
 
 //CRUD
