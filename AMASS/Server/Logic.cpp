@@ -36,6 +36,11 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
+void createStudent(vector<SCHOOL>& schools, int schoolId, STUDENT student)
+{
+	schools[schoolId].students.push_back(student);
+}
+
 void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 {
 	schools.push_back(school);

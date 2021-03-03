@@ -1,5 +1,5 @@
 #pragma once
-#include "../Server/Structures.h"
+#include "../Server/ServerStructures.h"
 void displaySchool(SCHOOL school, int id);
 void displayTeacher(TEACHER teacher, int id);
 void displayTeam(TEAM team);

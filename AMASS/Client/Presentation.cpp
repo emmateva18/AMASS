@@ -80,3 +80,21 @@ void displaySchool(SCHOOL school, int id)
 		displayTeam(school.teams[i]);
 	}
 }
+
+STUDENT enterStudent()
+{
+	STUDENT student;
+
+	cout << "Enter student's first name: ";
+	cin >> student.firstName;
+	cout << "Enter student's middle name: ";
+	cin >> student.middleName;
+	cout << "Enter student's surname: ";
+	cin >> student.surname;
+	cout << "Enter student's grade: ";
+	cin >> student.grade;
+	cout << "Enter student's email: ";
+	cin >> student.email;
+
+	return student;
+}
