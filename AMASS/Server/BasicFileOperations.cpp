@@ -12,9 +12,9 @@ void saveStr(fstream& file, string str)
 	file.write((const char*)buffer, (uint16_t)size);
 }
 
-void saveInt(fstream& file, int a)
+void saveInt(fstream& file, int integer)
 {
-	file.write((const char*)&a, sizeof(int));
+	file.write((const char*)&integer, sizeof(int));
 }
 
 void saveBool(fstream& file, bool a)

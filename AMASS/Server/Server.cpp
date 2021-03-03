@@ -1,25 +1,32 @@
 #include "Libraries.h"
 #include "Structures.h"
 #include "Logic.h"
-#include "DataFunctions.h"
+#include "BasicFileOperations.h"
 using namespace std;
+
+bool isInputNumeric(int a)
+{
+	try
+	{
+		std::cin >> a;
+	}
+	catch (const std::exception& ex)
+	{
+		cout << ex.what();
+		return false;
+	}
+	return true;
+}
 
 int main()
 {
-	vector<SCHOOL> schools;
+	/*vector<SCHOOL> schools;
 	init(schools);
 	string a = "aaa", b;
 	fstream f;
 	f.open("data.dat", ios::binary | ios::out | ios::in | ios::trunc);
-	vector<string> vec1{ "test1","test2","test3" };
-	vector<string> vec2;
-	saveVec(f, vec1);
-	f.close();
-	f.open("data.dat", ios::binary | ios::out | ios::in);
-	readVec(f, vec2);
-	for (size_t i = 0; i < vec2.size(); i++)
-	{
-		cout << vec2[i];
-	}
-	f.close();
+	schools[0].save(f);
+	f.close();*/
+	int a;
+	isInputNumeric(a);
 }
