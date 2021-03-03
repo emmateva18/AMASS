@@ -1,3 +1,4 @@
 #pragma once
 #include <asio.hpp>
-void Connect()
+#include "ClientStructures.h"
+void Connect();

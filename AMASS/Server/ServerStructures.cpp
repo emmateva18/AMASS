@@ -7,6 +7,7 @@ void ROLE::save(std::fstream& file)
 
 void STUDENT::save(std::fstream& file)
 {
+	saveInt(file, id);
 	saveStr(file, firstName);
 	saveStr(file, middleName);
 	saveStr(file, surname);
@@ -17,6 +18,7 @@ void STUDENT::save(std::fstream& file)
 
 void TEACHER::save(std::fstream& file)
 {
+	saveInt(file, id);
 	saveStr(file, firstName);
 	saveStr(file, middleName);
 	saveStr(file, surname);
@@ -56,6 +58,7 @@ void TEAM::save(std::fstream& file)
 
 void SCHOOL::save(std::fstream& file)
 {
+	saveInt(file, id);
 	saveStr(file, name);
 	saveStr(file, city);
 	saveStr(file, address);

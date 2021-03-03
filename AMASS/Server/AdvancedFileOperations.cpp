@@ -3,6 +3,7 @@ using namespace std;
 
 void readRecord(fstream& file, STUDENT& student)
 {
+	readInt(file, student.id);
 	readStr(file, student.firstName);
 	readStr(file, student.middleName);
 	readStr(file, student.surname);
@@ -13,6 +14,7 @@ void readRecord(fstream& file, STUDENT& student)
 
 void readRecord(fstream& file, TEACHER& teacher)
 {
+	readInt(file, teacher.id);
 	readStr(file, teacher.firstName);
 	readStr(file, teacher.middleName);
 	readStr(file, teacher.surname);
@@ -56,13 +58,14 @@ void readRecord(fstream& file, TEAM& team)
 
 void readRecord(fstream& file, SCHOOL& school)
 {
+	readInt(file, school.id);
 	readStr(file, school.name);
 	readStr(file, school.city);
 	readStr(file, school.address);
 
-	uint16_t teacherVecSize = 0, itemCount;
-	TEACHER teacher;
+	uint16_t itemCount=0;
 
+	TEACHER teacher;
 	readShortInt(file, itemCount);
 	for (int i = 0; i < itemCount; i++)
 	{
@@ -71,7 +74,6 @@ void readRecord(fstream& file, SCHOOL& school)
 	}
 
 	TEAM team;
-	uint16_t teamsVecSize = 0;
 	readShortInt(file, itemCount);
 	for (int i = 0; i < itemCount; i++)
 	{
@@ -80,9 +82,8 @@ void readRecord(fstream& file, SCHOOL& school)
 	}
 
 	STUDENT student;
-	uint16_t studentsVecSize = 0;
-	readShortInt(file, studentsVecSize);
-	for (int i = 0; i < studentsVecSize; i++)
+	readShortInt(file, itemCount);
+	for (int i = 0; i < itemCount; i++)
 	{
 		readRecord(file, student);
 		school.students.push_back(student);

@@ -20,6 +20,7 @@ struct ROLE
 // Name and surname, class, role which the student prefers to carry out in the team, email.
 struct STUDENT
 {
+	int id;
 	std::string firstName;
 	std::string middleName;
 	std::string surname;
@@ -32,6 +33,7 @@ struct STUDENT
 
 struct TEACHER
 {
+	int id;
 	std::string firstName;
 	std::string middleName;
 	std::string surname;
@@ -69,6 +71,7 @@ struct TEAM
 
 struct SCHOOL
 {
+	int id;
 	std::string name;
 	std::string city;
 	std::string address;
