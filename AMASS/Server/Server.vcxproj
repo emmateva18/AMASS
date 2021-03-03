@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdvancedFileOperations.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="BasicFileOperations.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdvancedFileOperations.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="BasicFileOperations.h" />
     <ClInclude Include="Libraries.h" />
