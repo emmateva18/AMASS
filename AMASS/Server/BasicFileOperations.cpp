@@ -55,9 +55,12 @@ void readStr(fstream& file, string& str)
 
 void readInt(fstream& file, int& num)
 {
-	int buf;
-	file.read((char*)&buf, sizeof(int));
-	num = (int)buf;
+	file.read((char*)&num, sizeof(int));
+}
+
+void readShortInt(fstream& file, uint16_t& num)
+{
+	file.read((char*)&num, sizeof(num));
 }
 
 void readBool(fstream& file, bool& a)

@@ -1,7 +1,7 @@
 #include "AdvancedFileOperations.h"
 using namespace std;
 
-void read(fstream& file, STUDENT& student)
+void readRecord(fstream& file, STUDENT& student)
 {
 	readStr(file, student.firstName);
 	readStr(file, student.middleName);
@@ -11,7 +11,7 @@ void read(fstream& file, STUDENT& student)
 	readBool(file, student.isInTeam);
 }
 
-void read(fstream& file, TEACHER& teacher)
+void readRecord(fstream& file, TEACHER& teacher)
 {
 	readStr(file, teacher.firstName);
 	readStr(file, teacher.middleName);
@@ -20,75 +20,85 @@ void read(fstream& file, TEACHER& teacher)
 	readVec(file, teacher.teamIds);
 }
 
-void read(fstream& file, DATE& date)
+void readRecord(fstream& file, DATE& date)
 {
 	readInt(file, date.day);
 	readInt(file, date.month);
 	readInt(file, date.year);
 }
 
-void read(fstream& file, TEAM_MEMBER& member)
+void readRecord(fstream& file, TEAM_MEMBER& member)
 {
 	readStr(file, member.studentEmail);
 	readInt(file, member.roleId);
 }
 
-void read(fstream& file, TEAM& team)
+void readRecord(fstream& file, TEAM& team)
 {
 	readInt(file, team.id);
 	readStr(file, team.name);
 	readStr(file, team.desc);
-	read(file, team.dateOfSetUp);
+	readRecord(file, team.dateOfSetUp);
 
 	int status;
 	readInt(file, status);
 	team.status = static_cast<STATUS>(status);
 
-	int memberVecSize = 0;
-
-	readInt(file, memberVecSize);
+	uint16_t memberVecSize = 0;
+	TEAM_MEMBER member;
+	readShortInt(file, memberVecSize);
 	for (int i = 0; i < memberVecSize; i++)
 	{
-		read(file, team.members[i]);
+		readRecord(file, member);
+		team.members.push_back(member);
 	}
 }
 
-void read(fstream& file, SCHOOL school)
+void readRecord(fstream& file, SCHOOL& school)
 {
 	readStr(file, school.name);
 	readStr(file, school.city);
 	readStr(file, school.address);
 
-	int teacherVecSize = 0;
-	readInt(file, teacherVecSize);
-	for (int i = 0; i < teacherVecSize; i++)
+	uint16_t teacherVecSize = 0, itemCount;
+	TEACHER teacher;
+
+	readShortInt(file, itemCount);
+	for (int i = 0; i < itemCount; i++)
 	{
-		read(file, school.teachers[i]);
+		readRecord(file, teacher);
+		school.teachers.push_back(teacher);
 	}
 
-	int teamsVecSize = 0;
-	readInt(file, teamsVecSize);
-	for (int i = 0; i < teamsVecSize; i++)
+	TEAM team;
+	uint16_t teamsVecSize = 0;
+	readShortInt(file, itemCount);
+	for (int i = 0; i < itemCount; i++)
 	{
-		read(file, school.teams[i]);
+		readRecord(file, team);
+		school.teams.push_back(team);
 	}
 
-	int studentsVecSize = 0;
-	readInt(file, studentsVecSize);
+	STUDENT student;
+	uint16_t studentsVecSize = 0;
+	readShortInt(file, studentsVecSize);
 	for (int i = 0; i < studentsVecSize; i++)
 	{
-		read(file, school.students[i]);
+		readRecord(file, student);
+		school.students.push_back(student);
 	}
 }
 
 void readDataBase(fstream& file, vector<SCHOOL>& schools)
 {
+	SCHOOL school;
 	file.seekg(0);
-	int size = 0;
-	readInt(file, size);
-	for (int i = 0; i < size; i++)
+	uint16_t size = 0;
+	readShortInt(file, size);
+	for (int i = 0; i < int(size); i++)
 	{
-		read(file, schools[i]);
+		readRecord(file, school);
+		schools.push_back(school);
 	}
 }
 
