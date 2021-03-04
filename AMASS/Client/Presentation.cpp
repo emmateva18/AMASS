@@ -114,3 +114,24 @@ TEACHER enterTeacher()
 	
 	return teacher;
 }
+
+TEAM enterTeam()
+{
+	TEAM team;
+
+	cout << "Enter team's name: ";
+	cin >> team.name;
+	cout << "Enter team's description: ";
+	cin.ignore();
+	getline(cin,team.desc);
+	
+	
+
+	cin >> team.surname;
+
+	
+	cout << "Enter team's email: ";
+	cin >> team.email;
+	
+	return team;
+}
