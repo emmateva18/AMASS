@@ -2,10 +2,11 @@
 //
 
 #include <iostream>
+#include "ClientConnection.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Connect();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

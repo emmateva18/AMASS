@@ -1,4 +1,4 @@
 #pragma once
-#include <asio.hpp>
+#include "../CommunicationLibrary/CommunicationLibrary.h"
 #include "ClientStructures.h"
 void Connect();

@@ -1,5 +1,6 @@
 #pragma once
 #include "..\Server\Libraries.h"
+#include <asio.hpp>
 enum STATUS
 {
 	pendingApproval,
@@ -12,6 +13,7 @@ struct ROLE
 {
 	int id = -1;
 	std::string name = "teamless";
+	//void write(asio::ip::tcp::socket socket);
 };
 
 // Name and surname, class, role which the student prefers to carry out in the team, email.
@@ -25,6 +27,7 @@ struct STUDENT
 	std::string grade;
 	std::string email;
 	bool isInTeam = false;
+	//void write(asio::ip::tcp::socket socket);
 };
 
 struct TEACHER
@@ -36,6 +39,7 @@ struct TEACHER
 	std::string email;
 	// The teams' ids will be compared instead of wasting space for TEAM structs
 	std::vector<int> teamIds = {};
+	//void write(asio::ip::tcp::socket socket);
 };
 
 struct DATE
@@ -43,12 +47,14 @@ struct DATE
 	int day;
 	int month;
 	int year;
+	//void write(asio::ip::tcp::socket socket);
 };
 
 struct TEAM_MEMBER
 {
 	std::string studentEmail;
 	int roleId;
+	//void write(asio::ip::tcp::socket socket);
 };
 
 struct TEAM
@@ -59,6 +65,7 @@ struct TEAM
 	DATE dateOfSetUp;
 	STATUS status = STATUS::pendingApproval;
 	std::vector<TEAM_MEMBER> members;
+	//void write(asio::ip::tcp::socket socket);
 };
 
 struct SCHOOL
@@ -70,4 +77,5 @@ struct SCHOOL
 	std::vector<TEACHER> teachers;
 	std::vector<TEAM> teams;
 	std::vector<STUDENT> students;
+	//void write(asio::ip::tcp::socket socket);
 };
