@@ -9,7 +9,7 @@ void serverStart()
 	asio::ip::tcp::socket socket_(io_service);
 	acceptor_.accept(socket_);
 	asio::streambuf buf;
-	int id;
-	readInt(socket_, id);
-	cout << id;
+	vector<string> a;
+	readVec(socket_, a);
+	cout << a[0] << a[1];
 }

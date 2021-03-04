@@ -3,7 +3,7 @@
 #include "Logic.h"
 #include "BasicFileOperations.h"
 #include "AdvancedFileOperations.h"
-#include <asio.hpp>
+#include "ServerConnection.h"
 using namespace std;
 
 int main()
@@ -19,8 +19,9 @@ int main()
 	//f.close();
 	//cout << schools2[0].students[2].id;
 
-	vector<SCHOOL> s;
-	init(s);
-	deleteStudent(s, 0, 0);
+	//vector<SCHOOL> s;
+	//init(s);
+	//deleteStudent(s, 0, 0);
 
+	serverStart();
 }

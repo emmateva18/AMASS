@@ -1,5 +1,4 @@
 #include "ClientStructures.h"
-#include "../CommunicationLibrary/CommunicationLibrary.h"
 /*void ROLE::write(asio::ip::tcp::socket socket)
 {
 	saveInt(socket, id);
