@@ -127,11 +127,11 @@ TEAM enterTeam()
 	
 	
 
-	cin >> team.surname;
+	//cin >> team.surname;
 
-	
-	cout << "Enter team's email: ";
-	cin >> team.email;
+	//
+	//cout << "Enter team's email: ";
+	//cin >> team.email;
 	
 	return team;
 }

@@ -72,11 +72,13 @@ struct TEAM
 struct SCHOOL
 {
 	int id;
+	int maxPlayerCountPerTeam;
 	std::string name;
 	std::string city;
 	std::string address;
 	std::vector<TEACHER> teachers;
 	std::vector<TEAM> teams;
 	std::vector<STUDENT> students;
+	std::vector<ROLE> roles;
 	void save(std::fstream& file);
 };
