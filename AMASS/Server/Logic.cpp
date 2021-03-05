@@ -64,20 +64,14 @@ void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 	//saveData(schools);
 }
 
-void deleteStudent(vector<SCHOOL>& schools, int schoolId, int studentId)
+void deleteStudent(SCHOOL& school, int studentId)
 {
-	for (size_t i = 0; i < schools.size(); i++)
+	for (size_t i = 0; i < school.students.size(); i++)
 	{
-		if (schools[i].id == schoolId)
+		if (school.students[i].id == studentId)
 		{
-			for (size_t j = 0; j < schools[i].students.size(); j++)
-			{
-				if (schools[i].students[j].id == studentId)
-				{
-					schools[i].students.erase(schools[i].students.begin() + j);
-					return;
-				}
-			}
+			school.students.erase(school.students.begin() + i);
+			return;
 		}
 	}
 }
