@@ -1,15 +1,22 @@
 #include "ServerConnection.h"
 using namespace std;
 
-void serverStart()
+void startServer()
 {
 	asio::io_service io_service;
 	asio::error_code ec;
-	asio::ip::tcp::acceptor acceptor_(io_service, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), 1234));
-	asio::ip::tcp::socket socket_(io_service);
-	acceptor_.accept(socket_);
-	asio::streambuf buf;
-	ROLE role;
-	role.read(socket_);
-	cout << role.name;
+	asio::ip::tcp::endpoint ep (asio::ip::tcp::v4(), 1234);
+	asio::ip::tcp::acceptor acceptor_(io_service, ep.protocol());
+	asio::ip::tcp::socket sock(io_service);
+	acceptor_.bind(ep);
+
+	while (1)
+	{
+		acceptor_.listen(100);
+		acceptor_.accept(sock);
+		int test;
+		readInt(sock, test);
+		cout << test;
+		sock.close();
+	}
 }
