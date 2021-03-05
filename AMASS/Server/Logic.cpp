@@ -90,6 +90,7 @@ void deleteTeacher(SCHOOL& school, int teacherId)
 
 void deleteRoles(SCHOOL& school, int teamId)
 {
+	
 	for (size_t i = 0; i < school.roles.size(); i++)
 	{
 		if (school.roles[i].id == teamId)
@@ -108,6 +109,18 @@ void deleteSchool(vector<SCHOOL>& schools, int schoolId)
 		if (schools[i].id == schoolId)
 		{
 			schools.erase(schools.begin() + i);
+		}
+	}
+}
+
+void deleteTeam(SCHOOL& school, int teamId)
+{
+
+	for (size_t i = 0; i < school.teams.size(); i++)
+	{
+		if (school.teams[i].id == teamId)
+		{
+			school.teams.erase(school.teams.begin() + i);
 		}
 	}
 }
