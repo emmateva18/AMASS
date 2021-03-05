@@ -53,7 +53,7 @@ void createTeacher(SCHOOL& school, TEACHER teacher)
 	school.teachers.push_back(teacher);
 }
 
-void createTeam(SCHOOL& school, int schoolId, TEAM team)
+void createTeam(SCHOOL& school, TEAM team)
 {
 	school.teams.push_back(team);
 }
