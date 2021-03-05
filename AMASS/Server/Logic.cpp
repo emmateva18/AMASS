@@ -53,6 +53,11 @@ void createTeacher(vector<SCHOOL>& schools, int schoolId, TEACHER teacher)
 	schools[schoolId].teachers.push_back(teacher);
 }
 
+void createTeam(vector<SCHOOL>& schools, int schoolId, TEAM team)
+{
+	schools[schoolId].teams.push_back(team);
+}
+
 void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 {
 	schools.push_back(school);

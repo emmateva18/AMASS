@@ -181,7 +181,10 @@ void enterRecords(std::function<void()> callback, string text)
 			{
 				cout << "Enter data for " << text << " [" << i << "]: " << endl;
 
-				callback();
+				if (callback)
+				{
+					callback();
+				}
 			}
 		}
 
