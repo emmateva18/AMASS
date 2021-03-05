@@ -76,3 +76,14 @@ void deleteStudent(SCHOOL& school, int studentId)
 	}
 }
 
+void deleteTeacher(SCHOOL& school, int teacherId)
+{
+	for (size_t i = 0; i < school.teachers.size(); i++)
+	{
+		if (school.teachers[i].id == teacherId)
+		{
+			school.teachers.erase(school.teachers.begin() + i);
+			return;
+		}
+	}
+}
