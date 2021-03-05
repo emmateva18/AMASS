@@ -203,7 +203,7 @@ SCHOOL enterSchool()
 	} while (!teacherPass);
 
 	cout << "Enter the count of max players per team: ";
-	cin >> school.maxPlayerCountPerTeam;
+	cin >> school.maxMemberCountPerTeam;
 
 	do
 	{
@@ -221,7 +221,7 @@ SCHOOL enterSchool()
 			for (int i = 0; i < teamsCount; i++)
 			{
 				cout << "Enter data for teams " << i << ": " << endl;
-				school.teams.push_back(enterTeam(school.maxPlayerCountPerTeam));
+				school.teams.push_back(enterTeam(school.maxMemberCountPerTeam));
 			}
 		}
 
@@ -250,4 +250,5 @@ SCHOOL enterSchool()
 	} while (!studentsCount);
 
 	// enter roles
+	return school;
 }

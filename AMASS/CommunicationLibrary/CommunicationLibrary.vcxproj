@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="CommunicationLibrary.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Libraries.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

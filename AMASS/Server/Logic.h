@@ -1,6 +1,6 @@
 #pragma once
 #include "Libraries.h"
-#include "ServerStructures.h"
+#include "../CommunicationLibrary/CommunicationLibrary.h"
 using namespace std;
 
 //CRUD

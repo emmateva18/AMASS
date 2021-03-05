@@ -12,14 +12,19 @@ void saveStr(fstream& file, string str)
 	file.write((const char*)buffer, (uint16_t)size);
 }
 
+void saveBool(fstream& file, bool a)
+{
+	file.write((const char*)&a, sizeof(bool));
+}
+
 void saveInt(fstream& file, int integer)
 {
 	file.write((const char*)&integer, sizeof(int));
 }
 
-void saveBool(fstream& file, bool a)
+void saveShortInt(fstream& file, uint16_t num)
 {
-	file.write((const char*)&a, sizeof(bool));
+	file.write((const char*)&num, sizeof(uint16_t));
 }
 
 void saveVec(fstream& file, vector<int> vec)

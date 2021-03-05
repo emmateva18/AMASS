@@ -156,7 +156,6 @@
     <ClCompile Include="BasicFileOperations.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Server.cpp" />
-    <ClCompile Include="ServerStructures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedFileOperations.h" />
@@ -164,7 +163,6 @@
     <ClInclude Include="BasicFileOperations.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Logic.h" />
-    <ClInclude Include="ServerStructures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

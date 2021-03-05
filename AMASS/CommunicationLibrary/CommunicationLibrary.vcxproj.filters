@@ -24,6 +24,9 @@
     <ClInclude Include="CommunicationLibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommunicationLibrary.cpp">

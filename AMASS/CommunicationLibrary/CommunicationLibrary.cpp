@@ -1,6 +1,3 @@
-// CommunicationLibrary.cpp : Defines the functions for the static library.
-//
-
 #include "pch.h"
 #include "framework.h"
 #include "CommunicationLibrary.h"
@@ -35,7 +32,7 @@ void writeBool(asio::ip::tcp::socket& socket, bool a)
 void writeVec(asio::ip::tcp::socket& socket, vector<int> vec)
 {
 	uint16_t size = (uint16_t)vec.size();
-	asio::write(socket,asio::buffer((const char*)&size, sizeof(size)));
+	asio::write(socket, asio::buffer((const char*)&size, sizeof(size)));
 	for (size_t i = 0; i < vec.size(); i++)
 	{
 		writeInt(socket, vec[i]);
@@ -141,5 +138,187 @@ void readVec(asio::ip::tcp::socket& socket, vector<int>& vec)
 	{
 		readInt(socket, temp);
 		vec.push_back(temp);
+	}
+}
+
+void ROLE::write(asio::ip::tcp::socket& socket)
+{
+	writeInt(socket, id);
+	writeStr(socket, name);
+}
+
+void STUDENT::write(asio::ip::tcp::socket& socket)
+{
+	writeInt(socket, id);
+	writeStr(socket, firstName);
+	writeStr(socket, middleName);
+	writeStr(socket, surname);
+	writeStr(socket, grade);
+	writeStr(socket, email);
+	writeBool(socket, isInTeam);
+}
+
+void TEACHER::write(asio::ip::tcp::socket& socket)
+{
+	writeInt(socket, id);
+	writeStr(socket, firstName);
+	writeStr(socket, middleName);
+	writeStr(socket, surname);
+	writeStr(socket, email);
+	writeVec(socket, teamIds);
+}
+
+void DATE::write(asio::ip::tcp::socket& socket)
+{
+	writeInt(socket, day);
+	writeInt(socket, month);
+	writeInt(socket, year);
+}
+
+void TEAM_MEMBER::write(asio::ip::tcp::socket& socket)
+{
+	writeStr(socket, studentEmail);
+	writeInt(socket, roleId);
+}
+
+void TEAM::write(asio::ip::tcp::socket& socket)
+{
+	writeInt(socket, id);
+	writeStr(socket, name);
+	writeStr(socket, desc);
+	dateOfSetUp.write(socket);
+	writeInt(socket, status);
+
+	uint16_t size = (uint16_t)members.size();
+	writeShortInt(socket, size);
+
+	for (uint16_t i = 0; i < size; i++)
+	{
+		members[i].write(socket);
+	}
+}
+
+void SCHOOL::write(asio::ip::tcp::socket& socket)
+{
+	writeInt(socket, id);
+	writeStr(socket, name);
+	writeStr(socket, city);
+	writeStr(socket, address);
+
+	uint16_t size = (uint16_t)teachers.size();
+	writeShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		teachers[i].write(socket);
+	}
+
+	size = (uint16_t)teams.size();
+	writeShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		teams[i].write(socket);
+	}
+
+	size = (uint16_t)students.size();
+	writeShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		students[i].write(socket);
+	}
+}
+
+void ROLE::read(asio::ip::tcp::socket& socket)
+{
+	readInt(socket, id);
+	readStr(socket, name);
+}
+
+void STUDENT::read(asio::ip::tcp::socket& socket)
+{
+	readInt(socket, id);
+	readStr(socket, firstName);
+	readStr(socket, middleName);
+	readStr(socket, surname);
+	readStr(socket, grade);
+	readStr(socket, email);
+	readBool(socket, isInTeam);
+}
+
+void TEACHER::read(asio::ip::tcp::socket& socket)
+{
+	readInt(socket, id);
+	readStr(socket, firstName);
+	readStr(socket, middleName);
+	readStr(socket, surname);
+	readStr(socket, email);
+	readVec(socket, teamIds);
+}
+
+void DATE::read(asio::ip::tcp::socket& socket)
+{
+	readInt(socket, day);
+	readInt(socket, month);
+	readInt(socket, year);
+}
+
+void TEAM_MEMBER::read(asio::ip::tcp::socket& socket)
+{
+	readStr(socket, studentEmail);
+	readInt(socket, roleId);
+}
+
+void TEAM::read(asio::ip::tcp::socket& socket)
+{
+	readInt(socket, id);
+	readStr(socket, name);
+	readStr(socket, desc);
+	dateOfSetUp.read(socket);
+	int tempStatus;
+	readInt(socket, tempStatus);
+	status = static_cast<STATUS>(tempStatus);
+
+	uint16_t size = (uint16_t)members.size();
+	readShortInt(socket, size);
+
+	for (uint16_t i = 0; i < size; i++)
+	{
+		members[i].read(socket);
+	}
+}
+
+void SCHOOL::read(asio::ip::tcp::socket& socket)
+{
+	readInt(socket, id);
+	readInt(socket, maxMemberCountPerTeam);
+	readStr(socket, name);
+	readStr(socket, city);
+	readStr(socket, address);
+
+	uint16_t size = (uint16_t)teachers.size();
+	readShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		teachers[i].read(socket);
+	}
+
+	size = (uint16_t)teams.size();
+	readShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		teams[i].read(socket);
+	}
+
+	size = (uint16_t)students.size();
+	readShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		students[i].read(socket);
+	}
+
+	size = (uint16_t)roles.size();
+	readShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		roles[i].read(socket);
 	}
 }
