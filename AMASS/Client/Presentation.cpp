@@ -6,16 +6,16 @@ string statusToString(STATUS status)
 	switch (status)
 	{
 		// may change the strings later
-	case pendingApproval:
-		return "Pending Approval";
-	case inUse:
-		return "In Use";
-	case notActive:
-		return "Not Active";
-	case notArchived:
-		return "Not Archived";
-	default:
-		return "";
+		case pendingApproval:
+			return "Pending Approval";
+		case inUse:
+			return "In Use";
+		case notActive:
+			return "Not Active";
+		case notArchived:
+			return "Not Archived";
+		default:
+			return "";
 	}
 }
 
@@ -111,11 +111,11 @@ TEACHER enterTeacher()
 	cin >> teacher.surname;
 	cout << "Enter teacher's email: ";
 	cin >> teacher.email;
-	
+
 	return teacher;
 }
 
-TEAM enterTeam()
+TEAM enterTeam(vector<SCHOOL> school, int schoolId)
 {
 	TEAM team;
 
@@ -123,15 +123,37 @@ TEAM enterTeam()
 	cin >> team.name;
 	cout << "Enter team's description: ";
 	cin.ignore();
-	getline(cin,team.desc);
-	
-	
+	getline(cin, team.desc);
 
-	//cin >> team.surname;
+	// date of set up
 
-	//
-	//cout << "Enter team's email: ";
-	//cin >> team.email;
-	
+	int playerCount;
+	bool pass = true;
+
+	do
+	{
+		cout << "Enter the count of the members: ";
+		cin >> playerCount;
+
+		if (playerCount > school[schoolId].maxPlayerCountPerTeam || playerCount < 0)
+		{
+			cout << "The entered number doesn't match the criteria (1 - 5)" << endl;
+			cout << "Try again!" << endl;
+			pass = false;
+		}
+		else
+		{
+			for (int i = 0; i < playerCount; i++)
+			{
+				cout << "Enter data for student " << i + 1 << endl;
+				cout << "Email: ";
+				cin >> team.members[i].studentEmail;
+				cout << "Role id: ";
+				cin >> team.members[i].roleId;
+			}
+		}
+
+	} while (!pass);
+
 	return team;
 }
