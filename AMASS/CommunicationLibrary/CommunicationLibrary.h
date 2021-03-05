@@ -1,6 +1,27 @@
 #pragma once
 #include "Libraries.h"
 #include <asio.hpp>
+
+enum REQUEST
+{
+	ok = 0,
+	sendRole = 101,
+	sendStudent = 102,
+	sendTeacher = 103,
+	sendDate = 104,
+	sendTeamMember = 105,
+	sendTeam = 106,
+	sendSchool = 107,
+	receiveRole=201,
+	receiveStudent = 202,
+	receiveTeacher = 203,
+	receiveDate = 204,
+	receiveTeamMember = 205,
+	receiveTeam = 206,
+	receiveSchool = 207,
+	errorConnection = 401,
+};
+
 enum STATUS
 {
 	pendingApproval,
