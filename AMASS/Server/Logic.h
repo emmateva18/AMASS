@@ -13,3 +13,4 @@ void createTeam(vector<SCHOOL>& schools, int schoolId, TEAM team);
 void createSchool(vector<SCHOOL>& schools, SCHOOL school);
 void deleteStudent(SCHOOL& school, int studentId);
 void deleteTeacher(SCHOOL& school, int teacherId);
+void deleteRoles(SCHOOL& school, int teamId);
