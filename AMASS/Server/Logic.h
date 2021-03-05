@@ -7,9 +7,10 @@ using namespace std;
 
 void init(vector<SCHOOL>& schools);
 
-void createStudent(vector<SCHOOL>& schools, int schoolId, STUDENT student);
-void createTeacher(vector<SCHOOL>& schools, int schoolId, TEACHER teacher);
-void createTeam(vector<SCHOOL>& schools, int schoolId, TEAM team);
+void createRole(SCHOOL school, ROLE role);
+void createStudent(SCHOOL school, STUDENT student);
+void createTeacher(SCHOOL school, TEACHER teacher);
+void createTeam(SCHOOL school, TEAM team);
 void createSchool(vector<SCHOOL>& schools, SCHOOL school);
 
 void deleteStudent(SCHOOL& school, int studentId);
