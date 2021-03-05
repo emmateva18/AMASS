@@ -43,25 +43,30 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
-void createStudent(vector<SCHOOL>& schools, int schoolId, STUDENT student)
+void createStudent(SCHOOL& school, STUDENT student)
 {
-	schools[schoolId].students.push_back(student);
+	school.students.push_back(student);
 }
 
-void createTeacher(vector<SCHOOL>& schools, int schoolId, TEACHER teacher)
+void createTeacher(SCHOOL& school, TEACHER teacher)
 {
-	schools[schoolId].teachers.push_back(teacher);
+	school.teachers.push_back(teacher);
 }
 
-void createTeam(vector<SCHOOL>& schools, int schoolId, TEAM team)
+void createTeam(SCHOOL& school, int schoolId, TEAM team)
 {
-	schools[schoolId].teams.push_back(team);
+	school.teams.push_back(team);
 }
 
 void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 {
 	schools.push_back(school);
 	//saveData(schools);
+}
+
+void createRole(SCHOOL& school, ROLE role)
+{
+	school.roles.push_back(role);
 }
 
 void deleteStudent(SCHOOL& school, int studentId)
