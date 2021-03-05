@@ -2,7 +2,7 @@
 #include "Libraries.h"
 #include <asio.hpp>
 
-enum REQUEST
+enum SYSTEM_CODE
 {
 	ok = 0,
 	sendRole = 101,
@@ -12,6 +12,10 @@ enum REQUEST
 	sendTeamMember = 105,
 	sendTeam = 106,
 	sendSchool = 107,
+	sendString = 108,
+	sendInt = 109,
+	sendBool = 110,
+	sendShortInt = 111,
 	receiveRole=201,
 	receiveStudent = 202,
 	receiveTeacher = 203,
@@ -19,6 +23,10 @@ enum REQUEST
 	receiveTeamMember = 205,
 	receiveTeam = 206,
 	receiveSchool = 207,
+	receiveString = 208,
+	receiveInt = 209,
+	receiveBool = 210,
+	receiveShortInt = 211,
 	errorConnection = 401,
 };
 
@@ -122,3 +130,39 @@ void readShortInt(asio::ip::tcp::socket& socket, uint16_t& num);
 void readBool(asio::ip::tcp::socket& socket, bool& a);
 void readVec(asio::ip::tcp::socket& socket, std::vector<std::string>& vec);
 void readVec(asio::ip::tcp::socket& socket, std::vector<int>& vec);
+
+template <typename T>
+void writeRequest(asio::ip::tcp::socket& socket, SYSTEM_CODE code, T data)
+{
+	writeInt(socket,code);
+	if(code>=101 and code<=107)
+		data.write(socket);
+	else {
+		switch (code)
+		{
+		case 108: writeStr(socket, data); break;
+		case 109: writeInt(socket, data); break;
+		case 110: writeBool(socket, data); break;
+		case 111: writeShortInt(socket, data); break;
+		}
+	}
+}
+
+template <typename T>
+void readRequest(asio::ip::tcp::socket& socket, SYSTEM_CODE& code, T& data)
+{
+	int temp;
+	readInt(socket, temp);
+	code = static_cast<SYSTEM_CODE>(temp);
+	if (code >= 201 and code <= 207)
+		data.read(socket);
+	else {
+		switch (code)
+		{
+		case 208: readStr(socket, data); break;
+		case 209: readInt(socket, data); break;
+		case 210: readBool(socket, data); break;
+		case 211: readShortInt(socket, data); break;
+		}
+	}
+}

@@ -1,6 +1,11 @@
 #include "ServerConnection.h"
 using namespace std;
 
+void processRequest()
+{
+
+}
+
 void startServer()
 {
 	asio::io_service io_service;
@@ -14,9 +19,10 @@ void startServer()
 	{
 		acceptor_.listen(100);
 		acceptor_.accept(sock);
-		int test;
-		readInt(sock, test);
-		cout << test;
+		ROLE role = { 0,"aaa" };
+		SYSTEM_CODE code;
+		readRequest(sock, code, role);
+		cout << role.name;
 		sock.close();
 	}
 }
