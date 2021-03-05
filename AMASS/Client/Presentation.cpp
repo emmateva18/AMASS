@@ -103,19 +103,19 @@ TEACHER enterTeacher()
 {
 	TEACHER teacher;
 
-	cout << "Enter teacher's first name: ";
+	cout << "First name: ";
 	cin >> teacher.firstName;
-	cout << "Enter teacher's middle name: ";
+	cout << "Middle name: ";
 	cin >> teacher.middleName;
-	cout << "Enter teacher's surname: ";
+	cout << "Surname: ";
 	cin >> teacher.surname;
-	cout << "Enter teacher's email: ";
+	cout << "Email: ";
 	cin >> teacher.email;
 
 	return teacher;
 }
 
-TEAM enterTeam(vector<SCHOOL> school, int schoolId)
+TEAM enterTeam(int maxPlayerPerTeam)
 {
 	TEAM team;
 
@@ -135,7 +135,7 @@ TEAM enterTeam(vector<SCHOOL> school, int schoolId)
 		cout << "Enter the count of the members: ";
 		cin >> playerCount;
 
-		if (playerCount > school[schoolId].maxPlayerCountPerTeam || playerCount < 0)
+		if (playerCount > maxPlayerPerTeam || playerCount < 0)
 		{
 			cout << "The entered number doesn't match the criteria (1 - 5)" << endl;
 			cout << "Try again!" << endl;
@@ -156,4 +156,98 @@ TEAM enterTeam(vector<SCHOOL> school, int schoolId)
 	} while (!pass);
 
 	return team;
+}
+
+SCHOOL enterSchool()
+{
+	SCHOOL school;
+
+	cout << "Enter school's name: ";
+	cin >> school.name;
+	cout << "Enter school's city: ";
+	cin >> school.city;
+	cout << "Enter school's address: ";
+	cin >> school.address;
+
+	int teachersCount;
+	int teamsCount;
+	int studentsCount;
+	int rolesCount;
+
+	bool teacherPass = true;
+	bool teamsPass = true;
+	bool studentsPass = true;
+
+	// will transform do while() to functions later
+
+	do
+	{
+		cout << "Enter the count of teachers: ";
+		cin >> teachersCount;
+
+		if (teachersCount < 0)
+		{
+			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
+			cout << "Try again!" << endl;
+			teacherPass = false;
+		}
+		else
+		{
+			for (int i = 0; i < teachersCount; i++)
+			{
+				cout << "Enter data for teacher " << i << ": " << endl;
+				school.teachers.push_back(enterTeacher());
+			}
+		}
+
+	} while (!teacherPass);
+
+	cout << "Enter the count of max players per team: ";
+	cin >> school.maxPlayerCountPerTeam;
+
+	do
+	{
+		cout << "Enter the count of teams: ";
+		cin >> teamsCount;
+
+		if (teamsCount < 0)
+		{
+			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
+			cout << "Try again!" << endl;
+			teamsCount = false;
+		}
+		else
+		{
+			for (int i = 0; i < teamsCount; i++)
+			{
+				cout << "Enter data for teams " << i << ": " << endl;
+				school.teams.push_back(enterTeam(school.maxPlayerCountPerTeam));
+			}
+		}
+
+	} while (!teamsCount);
+
+	do
+	{
+		cout << "Enter the count of students: ";
+		cin >> studentsCount;
+
+		if (studentsCount < 0)
+		{
+			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
+			cout << "Try again!" << endl;
+			studentsCount = false;
+		}
+		else
+		{
+			for (int i = 0; i < studentsCount; i++)
+			{
+				cout << "Enter data for students " << i << ": " << endl;
+				school.students.push_back(enterStudent());
+			}
+		}
+
+	} while (!studentsCount);
+
+	// enter roles
 }
