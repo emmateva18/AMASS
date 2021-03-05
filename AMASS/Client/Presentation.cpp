@@ -1,5 +1,6 @@
 #include "Presentation.h"
 #include "Libraries.h"
+#include <functional>
 
 string statusToString(STATUS status)
 {
@@ -158,6 +159,35 @@ TEAM enterTeam(int maxPlayerPerTeam)
 	return team;
 }
 
+void enterRecords(std::function<void()> callback, string text)
+{
+	int recordCount;
+	bool isRecordValid = true;
+
+	do
+	{
+		cout << "Enter the count of " << text << "s: ";
+		cin >> recordCount;
+
+		if (recordCount < 0)
+		{
+			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
+			cout << "Try again!" << endl;
+			isRecordValid = false;
+		}
+		else
+		{
+			for (int i = 0; i < recordCount; i++)
+			{
+				cout << "Enter data for " << text << " [" << i << "]: " << endl;
+
+				callback();
+			}
+		}
+
+	} while (!isRecordValid);
+}
+
 SCHOOL enterSchool()
 {
 	SCHOOL school;
@@ -169,86 +199,22 @@ SCHOOL enterSchool()
 	cout << "Enter school's address: ";
 	cin >> school.address;
 
-	int teachersCount;
-	int teamsCount;
-	int studentsCount;
-	int rolesCount;
-
-	bool teacherPass = true;
-	bool teamsPass = true;
-	bool studentsPass = true;
-
-	// will transform do while() to functions later
-
-	do
-	{
-		cout << "Enter the count of teachers: ";
-		cin >> teachersCount;
-
-		if (teachersCount < 0)
-		{
-			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
-			cout << "Try again!" << endl;
-			teacherPass = false;
-		}
-		else
-		{
-			for (int i = 0; i < teachersCount; i++)
-			{
-				cout << "Enter data for teacher " << i << ": " << endl;
-				school.teachers.push_back(enterTeacher());
-			}
-		}
-
-	} while (!teacherPass);
+	enterRecords([&]() {
+		school.students.push_back(enterStudent());
+		}, "teacher");
 
 	cout << "Enter the count of max players per team: ";
 	cin >> school.maxMemberCountPerTeam;
 
-	do
-	{
-		cout << "Enter the count of teams: ";
-		cin >> teamsCount;
+	enterRecords([&]() {
+		school.teams.push_back(enterTeam(school.maxMemberCountPerTeam));
+		}, "team");
 
-		if (teamsCount < 0)
-		{
-			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
-			cout << "Try again!" << endl;
-			teamsCount = false;
-		}
-		else
-		{
-			for (int i = 0; i < teamsCount; i++)
-			{
-				cout << "Enter data for teams " << i << ": " << endl;
-				school.teams.push_back(enterTeam(school.maxMemberCountPerTeam));
-			}
-		}
-
-	} while (!teamsCount);
-
-	do
-	{
-		cout << "Enter the count of students: ";
-		cin >> studentsCount;
-
-		if (studentsCount < 0)
-		{
-			cout << "The entered count doesn't match the criteria ( > 0)" << endl;
-			cout << "Try again!" << endl;
-			studentsCount = false;
-		}
-		else
-		{
-			for (int i = 0; i < studentsCount; i++)
-			{
-				cout << "Enter data for students " << i << ": " << endl;
-				school.students.push_back(enterStudent());
-			}
-		}
-
-	} while (!studentsCount);
+	enterRecords([&]() {
+		school.students.push_back(enterStudent());
+		}, "student");
 
 	// enter roles
+
 	return school;
 }

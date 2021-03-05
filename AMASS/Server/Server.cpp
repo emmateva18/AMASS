@@ -3,9 +3,11 @@
 #include "BasicFileOperations.h"
 #include "AdvancedFileOperations.h"
 #include "ServerConnection.h"
+#include "../Client/Presentation.h"
 using namespace std;
 
 int main()
 {
-	startServer();
+	startServer();	
+
 }
