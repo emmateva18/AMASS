@@ -86,3 +86,66 @@ void showMainMenu(int& selectedItem, int& ch)
 		showSecondaryMenu(selectedItem, ch);
 	}
 }
+vector<MENU> initMenus()
+{
+	vector<MENU> menus;
+	MENU mainMenu =
+	{
+		{
+			{true,'1',"Create School"},
+			{false,'2',"Display all schools"},
+			{false,'3',"Edit School"},
+			{false,'4',"Exit"}
+		}
+	};
+
+	MENU editMenu =
+	{
+		{
+			{true,'1',"Create elements"},
+			{false,'2',"Update elements"},
+			{false,'3',"Delete elements"},
+			{false,'4',"Exit"}
+		}
+	};
+
+	MENU createMenu =
+	{
+		{
+			{true,'1',"Create teacher"},
+			{false, '2',"Create team"},
+			{false,'3',"Create student"},
+			{false, '4', "Create Role"},
+			{false, '5',"Input maximum number of members per team"},
+			{false,'6',"Exit"}
+		}
+	};
+
+	MENU updateMenu =
+	{
+		{
+			{true,'1',"Update school name"},
+			{false,'2',"Update school address"},
+			{false,'3',"Update school city"},
+			{false,'4',"Update teachers"},
+			{false,'5',"Update students"},
+			{false,'6',"Update roles"},
+			{false,'7',"Update teams"},
+			{false,'8',"Exit"}
+		}
+	};
+
+	MENU deleteMenu =
+	{
+		{
+			{true,'1',"Delete School"},
+			{false,'2',"Delete team"},
+			{false,'3',"Delete Role"},
+			{false,'4',"Delete student"},
+			{false,'5',"Delete teacher"},
+			{false,'6',"Exit"}
+		}
+	};
+	menus = { mainMenu,createMenu,editMenu,updateMenu,deleteMenu };
+	return menus;
+}

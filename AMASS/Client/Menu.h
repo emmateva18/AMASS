@@ -23,4 +23,4 @@ struct MENU {
 void showMenuItems(std::vector<MENU_ITEMS>& items, int selectedIndex);
 void showSecondaryMenu(int& selectedItem, int& ch);
 void showMainMenu(int& selectedItem, int& ch);
-
+vector<MENU> initMenus();
