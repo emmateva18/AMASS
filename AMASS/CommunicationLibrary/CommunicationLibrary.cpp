@@ -201,6 +201,7 @@ void TEAM::write(asio::ip::tcp::socket& socket)
 void SCHOOL::write(asio::ip::tcp::socket& socket)
 {
 	writeInt(socket, id);
+	writeInt(socket, maxMemberCountPerTeam);
 	writeStr(socket, name);
 	writeStr(socket, city);
 	writeStr(socket, address);
@@ -224,6 +225,13 @@ void SCHOOL::write(asio::ip::tcp::socket& socket)
 	for (uint16_t i = 0; i < size; i++)
 	{
 		students[i].write(socket);
+	}
+
+	size = (uint16_t)roles.size();
+	writeShortInt(socket, size);
+	for (uint16_t i = 0; i < size; i++)
+	{
+		roles[i].write(socket);
 	}
 }
 

@@ -1,5 +1,5 @@
 #include "Logic.h"
-
+#include "AdvancedFileOperations.h"
 using namespace std;
 
 //CRUD
@@ -43,33 +43,33 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
-void createStudent(SCHOOL& school, STUDENT student)
+void createStudent(SCHOOL& school, STUDENT student, fstream& file)
 {
 	school.students.push_back(student);
 }
 
-void createTeacher(SCHOOL& school, TEACHER teacher)
+void createTeacher(SCHOOL& school, TEACHER teacher, fstream& file)
 {
 	school.teachers.push_back(teacher);
 }
 
-void createTeam(SCHOOL& school, TEAM team)
+void createTeam(SCHOOL& school, TEAM team, fstream& file)
 {
 	school.teams.push_back(team);
 }
 
-void createSchool(vector<SCHOOL>& schools, SCHOOL school)
+void createSchool(vector<SCHOOL>& schools, SCHOOL school, fstream& file)
 {
 	schools.push_back(school);
-	//saveData(schools);
+	saveDataBase(file, schools);
 }
 
-void createRole(SCHOOL& school, ROLE role)
+void createRole(SCHOOL& school, ROLE role, fstream& file)
 {
 	school.roles.push_back(role);
 }
 
-void deleteStudent(SCHOOL& school, int studentId)
+void deleteStudent(SCHOOL& school, int studentId, fstream& file)
 {
 	for (size_t i = 0; i < school.students.size(); i++)
 	{
@@ -81,7 +81,7 @@ void deleteStudent(SCHOOL& school, int studentId)
 	}
 }
 
-void deleteTeacher(SCHOOL& school, int teacherId)
+void deleteTeacher(SCHOOL& school, int teacherId, fstream& file)
 {
 	for (size_t i = 0; i < school.teachers.size(); i++)
 	{
@@ -93,7 +93,7 @@ void deleteTeacher(SCHOOL& school, int teacherId)
 	}
 }
 
-void deleteRoles(SCHOOL& school, int teamId)
+void deleteRoles(SCHOOL& school, int teamId, fstream& file)
 {
 	
 	for (size_t i = 0; i < school.roles.size(); i++)
@@ -106,7 +106,7 @@ void deleteRoles(SCHOOL& school, int teamId)
 	}
 }
 
-void deleteSchool(vector<SCHOOL>& schools, int schoolId)
+void deleteSchool(vector<SCHOOL>& schools, int schoolId, fstream& file)
 {
 
 	for (size_t i = 0; i < schools.size(); i++)
@@ -118,7 +118,7 @@ void deleteSchool(vector<SCHOOL>& schools, int schoolId)
 	}
 }
 
-void deleteTeam(SCHOOL& school, int teamId)
+void deleteTeam(SCHOOL& school, int teamId, fstream& file)
 {
 
 	for (size_t i = 0; i < school.teams.size(); i++)

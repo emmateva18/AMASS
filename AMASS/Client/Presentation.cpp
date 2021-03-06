@@ -196,13 +196,20 @@ SCHOOL enterSchool()
 	SCHOOL school;
 
 	cout << "Enter school's name: ";
-	cin >> school.name;
+	getline(cin,school.name);
 	cout << "Enter school's city: ";
-	cin >> school.city;
+	getline(cin,school.city);
 	cout << "Enter school's address: ";
-	cin >> school.address;
+	getline(cin,school.address);
 
-	enterRecords([&]() {
+	school.id = INT_MAX;
+	school.maxMemberCountPerTeam = INT_MAX;
+	school.teachers.clear();
+	school.students.clear();
+	school.teams.clear();
+	school.roles.clear();
+
+	/*enterRecords([&]() {
 		school.students.push_back(enterStudent());
 		}, "teacher");
 
@@ -215,7 +222,7 @@ SCHOOL enterSchool()
 
 	enterRecords([&]() {
 		school.students.push_back(enterStudent());
-		}, "student");
+		}, "student");*/
 
 	// enter roles
 

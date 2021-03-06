@@ -158,7 +158,7 @@ vector<MENU> initMenus()
 	MENU mainMenu =
 	{
 		{
-			{true,'1',"Create School",nullptr,-1},
+			{true,'1',"Create School",requestCrtSch,-1},
 			{false,'2',"Display all schools",nullptr,-1},
 			{false,'3',"Edit School",nullptr,1},
 			{false,'4',"Exit",nullptr,0}

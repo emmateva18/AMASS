@@ -8,6 +8,8 @@ using namespace std;
 
 int main()
 {
-	startServer();	
+	vector<SCHOOL> schools;
+	init(schools);
+	startServer(schools);	
 
 }
