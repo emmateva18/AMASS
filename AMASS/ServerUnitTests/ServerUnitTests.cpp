@@ -127,5 +127,25 @@ namespace ServerUnitTests
 				}
 			}
 		}
+		TEST_METHOD(ShouldSuccessfullyDeleteStudentFromSchool)
+		{
+			SCHOOL testSchool;
+			STUDENT testStudent1 = { 3,"Stoicho","Kirilov","Petrov","8G","SKP@abv.bg" };
+			STUDENT testStudent2 = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
+			createStudent(testSchool, testStudent2);
+			createStudent(testSchool, testStudent1);
+			deleteStudent(testSchool, testStudent1.id);
+			
+			for (size_t i = 0; i < testSchool.students.size(); i++)
+			{
+				Assert::AreNotEqual(testSchool.students[i].id, testStudent1.id);
+				Assert::AreNotEqual(testSchool.students[i].firstName, testStudent1.firstName);
+				Assert::AreNotEqual(testSchool.students[i].middleName, testStudent1.middleName);
+				Assert::AreNotEqual(testSchool.students[i].surname, testStudent1.surname);
+				Assert::AreNotEqual(testSchool.students[i].grade, testStudent1.grade);
+				Assert::AreNotEqual(testSchool.students[i].email, testStudent1.email);
+			}
+			
+		}
 	};
 }
