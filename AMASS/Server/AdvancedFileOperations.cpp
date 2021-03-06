@@ -127,9 +127,10 @@ void readDataBase(vector<SCHOOL>& schools)
 	file.close();
 }
 
-void saveDataBase(vector<SCHOOL> schools)
+void saveDataBase(vector<SCHOOL>& schools)
 {
 	fstream file = initFile();
+	file.seekp(0);
 	uint16_t size = (uint16_t)schools.size();
 	file.write((const char*)&size, sizeof(size));
 	for (size_t i = 0; i < schools.size(); i++)

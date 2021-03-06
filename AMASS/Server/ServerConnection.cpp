@@ -1,7 +1,7 @@
 #include "ServerConnection.h"
 using namespace std;
 
-void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL> schools)
+void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 {
 	SYSTEM_CODE code;
 	int temp;

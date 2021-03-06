@@ -9,7 +9,7 @@ void readRecord(std::fstream& file, TEAM_MEMBER& member);
 void readRecord(std::fstream& file, TEAM& team);
 void readRecord(std::fstream& file, SCHOOL& school);
 void readDataBase(std::vector<SCHOOL>& schools);
-void saveDataBase(std::vector<SCHOOL> schools);
+void saveDataBase(std::vector<SCHOOL>& schools);
 void save(std::fstream& file, ROLE role);
 void save(std::fstream& file, STUDENT student);
 void save(std::fstream& file, TEACHER teacher);
