@@ -1,5 +1,150 @@
 #include "ServerConnection.h"
+
 using namespace std;
+DATE getCurrentDate()
+{
+	DATE date;
+	tm t;
+	time_t now= time(0);
+	localtime_s(&t,&now);
+	date.day = t.tm_mday;
+	date.month = t.tm_mon + 1;
+	date.year = t.tm_year + 1900;
+	return date;
+}
+
+string codeToString(SYSTEM_CODE code)
+{
+	switch (code)
+	{
+	case ok: return "ok";
+		break;
+	case sendRole: return "sendRole";
+		break;
+	case sendStudent: return "sendStudent";
+		break;
+	case sendTeacher: return "sendTeacher";
+		break;
+	case sendDate: return "sendDate";
+		break;
+	case sendTeamMember: return "sendTeamMember";
+		break;
+	case sendTeam: return "sendTeam";
+		break;
+	case sendSchool: return "sendSchool";
+		break;
+	case sendString: return "sendString";
+		break;
+	case sendInt: return "sendInt";
+		break;
+	case sendBool: return "sendBool";
+		break;
+	case sendShortInt: return "sendShortInt";
+		break;
+	case receiveRole: return "receiveRole";
+		break;
+	case receiveStudent: return "receiveStudent";
+		break;
+	case receiveTeacher: return "receiveTeacher";
+		break;
+	case receiveDate: return "receiveDate";
+		break;
+	case receiveTeamMember: return "receiveTeamMember";
+		break;
+	case receiveTeam: return "receiveTeam";
+		break;
+	case receiveSchool: return "receiveSchool";
+		break;
+	case receiveString: return "receiveString";
+		break;
+	case receiveInt: return "receiveInt";
+		break;
+	case receiveBool: return "receiveBool";
+		break;
+	case receiveShortInt: return "receiveShortInt";
+		break;
+	case errorConnection: return "errorConnection";
+		break;
+	case crtRole: return "createRole";
+		break;
+	case crtStudent: return "createStudent";
+		break;
+	case crtTeacher: return "createTeacher";
+		break;
+	case crtDate: return "createDate";
+		break;
+	case crtTeamMember: return "createTeamMember";
+		break;
+	case crtTeam: return "createTeam";
+		break;
+	case crtSchool: return "createSchool";
+		break;
+	case readRole: return "readRole";
+		break;
+	case readStudent: return "readStudent";
+		break;
+	case readTeacher: return "readTeacher";
+		break;
+	case readDate: return "readDate";
+		break;
+	case readTeamMember: return "readTeamMember";
+		break;
+	case readTeam: return "readTeam";
+		break;
+	case readSchool: return "readSchool";
+		break;
+	case updRole: return "updateRole";
+		break;
+	case updStudent: return "updateStudent";
+		break;
+	case updTeacher: return "updateTeacher";
+		break;
+	case updDate: return "updateDate";
+		break;
+	case updTeamMember: return "updateTeamMember";
+		break;
+	case updTeam: return "updateTeam";
+		break;
+	case updSchool: return "updateSchool";
+		break;
+	case dltRole: return "deleteRole";
+		break;
+	case dltStudent: return "deleteStudent";
+		break;
+	case dltTeacher: return "deleteTeacher";
+		break;
+	case dltDate: return "deleteDate";
+		break;
+	case dltTeamMember: return "deleteTeamMember";
+		break;
+	case dltTeam: return "deleteTeam";
+		break;
+	case dltSchool: return "deleteSchool";
+		break;
+	}
+}
+
+void log(asio::ip::tcp::socket& socket, SYSTEM_CODE code)
+{
+	fstream file;
+	file.open("logs.txt", ios::app);
+	DATE date = getCurrentDate();
+	string log ="<";
+	log += to_string(date.day);
+	log += '.';
+	log += to_string(date.month); 
+	log += '.';
+	log += to_string(date.year); 
+	log += "> Log[i] CODE["; 
+	log += to_string(code);
+	log += "] OP["; 
+	log += codeToString(code); 
+	log += "] IP: "; 
+	log += socket.remote_endpoint().address().to_string();
+	cout << log <<endl;
+	file << log << endl;
+	file.close();
+}
 
 void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 {
@@ -60,7 +205,6 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 			break;
 		case crtStudent:
 			break;
-
 		case crtTeacher:
 			break;
 		case crtDate:
@@ -73,7 +217,6 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 		SCHOOL school;
 		school.read(socket);
 		createSchool(schools, school);
-		cout << school.name;
 		break;
 		/*
 		case readRole:
@@ -122,6 +265,7 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 			break;
 		}*/
 	}
+	log(socket, code);
 }
 
 void startServer(vector<SCHOOL> schools)
@@ -132,6 +276,8 @@ void startServer(vector<SCHOOL> schools)
 	asio::ip::tcp::acceptor acceptor_(io_service, ep.protocol());
 	asio::ip::tcp::socket socket(io_service);
 	acceptor_.bind(ep);
+
+	cout << "Server has been started! Waiting for client requests..."<<endl;
 
 	while (1)
 	{

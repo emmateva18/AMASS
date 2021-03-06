@@ -10,5 +10,5 @@ int main()
 {
 	vector<SCHOOL> schools;
 	readDataBase(schools);
-	startServer(schools);	
+	startServer(schools);
 }
