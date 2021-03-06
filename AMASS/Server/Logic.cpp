@@ -43,17 +43,17 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
-void createStudent(SCHOOL& school, STUDENT student, fstream& file)
+void createStudent(SCHOOL& school, STUDENT student)
 {
 	school.students.push_back(student);
 }
 
-void createTeacher(SCHOOL& school, TEACHER teacher, fstream& file)
+void createTeacher(SCHOOL& school, TEACHER teacher)
 {
 	school.teachers.push_back(teacher);
 }
 
-void createTeam(SCHOOL& school, TEAM team, fstream& file)
+void createTeam(SCHOOL& school, TEAM team)
 {
 	school.teams.push_back(team);
 }
@@ -64,12 +64,12 @@ void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 	saveDataBase(schools);
 }
 
-void createRole(SCHOOL& school, ROLE role, fstream& file)
+void createRole(SCHOOL& school, ROLE role)
 {
 	school.roles.push_back(role);
 }
 
-void deleteStudent(SCHOOL& school, int studentId, fstream& file)
+void deleteStudent(SCHOOL& school, int studentId)
 {
 	for (size_t i = 0; i < school.students.size(); i++)
 	{
@@ -81,7 +81,7 @@ void deleteStudent(SCHOOL& school, int studentId, fstream& file)
 	}
 }
 
-void deleteTeacher(SCHOOL& school, int teacherId, fstream& file)
+void deleteTeacher(SCHOOL& school, int teacherId)
 {
 	for (size_t i = 0; i < school.teachers.size(); i++)
 	{
@@ -93,7 +93,7 @@ void deleteTeacher(SCHOOL& school, int teacherId, fstream& file)
 	}
 }
 
-void deleteRoles(SCHOOL& school, int teamId, fstream& file)
+void deleteRoles(SCHOOL& school, int teamId)
 {
 	
 	for (size_t i = 0; i < school.roles.size(); i++)
@@ -106,7 +106,7 @@ void deleteRoles(SCHOOL& school, int teamId, fstream& file)
 	}
 }
 
-void deleteSchool(vector<SCHOOL>& schools, int schoolId, fstream& file)
+void deleteSchool(vector<SCHOOL>& schools, int schoolId)
 {
 
 	for (size_t i = 0; i < schools.size(); i++)
@@ -118,7 +118,7 @@ void deleteSchool(vector<SCHOOL>& schools, int schoolId, fstream& file)
 	}
 }
 
-void deleteTeam(SCHOOL& school, int teamId, fstream& file)
+void deleteTeam(SCHOOL& school, int teamId)
 {
 
 	for (size_t i = 0; i < school.teams.size(); i++)
