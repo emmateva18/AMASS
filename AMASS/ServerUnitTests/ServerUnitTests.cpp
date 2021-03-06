@@ -24,7 +24,22 @@ namespace ServerUnitTests
 			Assert::AreEqual(testSchool.students[0].grade, testStudent.grade);
 			Assert::AreEqual(testSchool.students[0].email, testStudent.email);
 		}
+		TEST_METHOD(ShouldSuccessfullyAddTeachertIntoSchool)
+		{
+			SCHOOL testSchool;
 
+			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg",{1,2,5,4,8,6} };
+			createTeacher(testSchool, testTeacher);
+			Assert::AreEqual(testSchool.teachers[0].id, testTeacher.id);
+			Assert::AreEqual(testSchool.teachers[0].firstName, testTeacher.firstName);
+			Assert::AreEqual(testSchool.teachers[0].middleName, testTeacher.middleName);
+			Assert::AreEqual(testSchool.teachers[0].surname, testTeacher.surname);
+			Assert::AreEqual(testSchool.teachers[0].email, testTeacher.email);
+			for (size_t i = 0; i < testTeacher.teamIds.size(); i++)
+			{
+				Assert::AreEqual(testSchool.teachers[0].teamIds[i], testTeacher.teamIds[i]);
+			}
+		}
 	};
 }
 
