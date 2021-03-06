@@ -63,14 +63,19 @@ void showSecondaryMenu(int& selectedItem, int& ch)
 	}
 }
 
-int findIndex(MENU menu)
+void resetPositions(vector<MENU>& menus)
 {
-	for (size_t i = 0; i < menu.items.size(); i++)
+	for (size_t i = 0; i < menus.size(); i++)
 	{
-		if (menu.items[i].isSelected)
-			return i;
+		for (size_t j = 0; j < menus[i].items.size(); j++)
+		{
+			menus[i].items[j].isSelected = false;
+		}
 	}
-	return string::npos;
+	for (size_t i = 0; i < menus.size(); i++)
+	{
+		menus[i].items[0].isSelected = true;
+	}
 }
 bool validate(int selection, MENU menu)
 {
@@ -114,8 +119,12 @@ void getUserInput(vector<MENU> menus)
 			action ac = menus[currentMenu].items[currentItem].action;
 			if (menus[currentMenu].items[currentItem].nextMenuPos == -1)
 				ac();
-			else
-				currentMenu= menus[currentMenu].items[currentItem].nextMenuPos;
+			else 
+			{
+				currentMenu = menus[currentMenu].items[currentItem].nextMenuPos;
+				currentItem = 0;
+				resetPositions(menus);
+			}
 		}
 	}
 }
@@ -149,20 +158,20 @@ vector<MENU> initMenus()
 	MENU mainMenu =
 	{
 		{
-			{true,'1',"Create School",nullptr,2},
+			{true,'1',"Create School",nullptr,-1},
 			{false,'2',"Display all schools",nullptr,-1},
 			{false,'3',"Edit School",nullptr,1},
-			{false,'4',"Exit",}
+			{false,'4',"Exit",nullptr,0}
 		}
 	};
 
 	MENU editMenu =
 	{
 		{
-			{true,'1',"Create elements"},
-			{false,'2',"Update elements"},
-			{false,'3',"Delete elements"},
-			{false,'4',"Exit"}
+			{true,'1',"Create elements",nullptr,2},
+			{false,'2',"Update elements",nullptr,3},
+			{false,'3',"Delete elements",nullptr,4},
+			{false,'4',"Exit",nullptr,0}
 		}
 	};
 
@@ -174,7 +183,7 @@ vector<MENU> initMenus()
 			{false,'3',"Create student"},
 			{false, '4', "Create Role"},
 			{false, '5',"Input maximum number of members per team"},
-			{false,'6',"Exit"}
+			{false,'6',"Exit",nullptr,1}
 		}
 	};
 
@@ -188,7 +197,7 @@ vector<MENU> initMenus()
 			{false,'5',"Update students"},
 			{false,'6',"Update roles"},
 			{false,'7',"Update teams"},
-			{false,'8',"Exit"}
+			{false,'8',"Exit",nullptr,1}
 		}
 	};
 
@@ -200,9 +209,9 @@ vector<MENU> initMenus()
 			{false,'3',"Delete Role"},
 			{false,'4',"Delete student"},
 			{false,'5',"Delete teacher"},
-			{false,'6',"Exit"}
+			{false,'6',"Exit",nullptr,1}
 		}
 	};
-	menus = { mainMenu,createMenu,editMenu,updateMenu,deleteMenu };
+	menus = { mainMenu,editMenu,createMenu,updateMenu,deleteMenu };
 	return menus;
 }
