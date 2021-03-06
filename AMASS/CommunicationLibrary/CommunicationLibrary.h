@@ -28,13 +28,13 @@ enum SYSTEM_CODE
 	receiveBool = 210,
 	receiveShortInt = 211,
 	errorConnection = 401,
-	createRole = 501,
-	createStudent = 502,
-	createTeacher = 503,
-	createDate = 504,
-	createTeamMember = 505,
-	createTeam = 506,
-	createSchool = 507,
+	crtRole = 501,
+	crtStudent = 502,
+	crtTeacher = 503,
+	crtDate = 504,
+	crtTeamMember = 505,
+	crtTeam = 506,
+	crtSchool = 507,
 	readRole = 601,
 	readStudent = 602,
 	readTeacher = 603,
@@ -42,20 +42,20 @@ enum SYSTEM_CODE
 	readTeamMember = 605,
 	readTeam = 606,
 	readSchool = 607,
-	updateRole = 701,
-	updateStudent = 702,
-	updateTeacher = 703,
-	updateDate = 704,
-	updateTeamMember=705,
-	updateTeam = 706,
-	updateSchool = 707,
-	deleteRole = 801,
-	deleteStudent = 802,
-	deleteTeacher = 803,
-	deleteDate = 804,
-	deleteTeamMember = 805,
-	deleteTeam = 806,
-	deleteSchool = 807
+	updRole = 701,
+	updStudent = 702,
+	updTeacher = 703,
+	updDate = 704,
+	updTeamMember=705,
+	updTeam = 706,
+	updSchool = 707,
+	dltRole = 801,
+	dltStudent = 802,
+	dltTeacher = 803,
+	dltDate = 804,
+	dltTeamMember = 805,
+	dltTeam = 806,
+	dltSchool = 807
 };
 
 enum STATUS
@@ -135,9 +135,11 @@ struct SCHOOL
 {
 	int id;
 	int maxMemberCountPerTeam;
+	// Enter at school creation
 	std::string name;
 	std::string city;
 	std::string address;
+	//
 	std::vector<TEACHER> teachers;
 	std::vector<TEAM> teams;
 	std::vector<STUDENT> students;
@@ -182,7 +184,7 @@ void readRequest(asio::ip::tcp::socket& socket, SYSTEM_CODE& code, T& data)
 	int temp;
 	readInt(socket, temp);
 	code = static_cast<SYSTEM_CODE>(temp);
-	if (code >= 201 and code <= 207)
+	if (code >= 201 and code <= 807)
 		data.read(socket);
 	else {
 		switch (code)
