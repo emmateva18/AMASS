@@ -12,12 +12,12 @@ namespace ServerUnitTests
 	TEST_CLASS(ServerUnitTests)
 	{
 	public:
-	
+
 		TEST_METHOD(ShouldSuccessfullyAddStudentIntoSchool)
 		{
-		SCHOOL testSchool;
-		STUDENT testStudent = { 3,"Stoicho","Kirilov","Petrov","8G","SKP@abv.bg" };
-		createStudent(testSchool, testStudent);
+			SCHOOL testSchool;
+			STUDENT testStudent = { 3,"Stoicho","Kirilov","Petrov","8G","SKP@abv.bg" };
+			createStudent(testSchool, testStudent);
 			Assert::AreEqual(testSchool.students[0].id, testStudent.id);
 			Assert::AreEqual(testSchool.students[0].firstName, testStudent.firstName);
 			Assert::AreEqual(testSchool.students[0].middleName, testStudent.middleName);
@@ -60,6 +60,72 @@ namespace ServerUnitTests
 				Assert::AreEqual(testSchool.teams[0].members[i].studentEmail, testTeam.members[i].studentEmail);
 			}
 		}
+		TEST_METHOD(ShouldSuccessfullyAddSchool)
+		{
+			std::vector<SCHOOL> schools;
+			SCHOOL testSchool = { 0,4,"PGKPI","Burgas","Meden Rudnik", {{ 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" }}, {{ 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}}} },{{ 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" }},{{ 0, "Scrum Master" }} };
+			createSchool(schools, testSchool);
+			for (size_t i = 0; i < schools.size(); i++)
+			{
+				Assert::AreEqual(schools[0].id, testSchool.id);
+				Assert::AreEqual(schools[0].maxMemberCountPerTeam, testSchool.maxMemberCountPerTeam);
+				Assert::AreEqual(schools[0].name, testSchool.name);
+				Assert::AreEqual(schools[0].city, testSchool.city);
+				Assert::AreEqual(schools[0].address, testSchool.address);
+
+				// Test teachers
+				for (size_t i = 0; i < testSchool.teachers.size(); i++)
+				{
+					Assert::AreEqual(schools[0].teachers[i].id, testSchool.teachers[i].id);
+					Assert::AreEqual(schools[0].teachers[i].firstName, testSchool.teachers[i].firstName);
+					Assert::AreEqual(schools[0].teachers[i].middleName, testSchool.teachers[i].middleName);
+					Assert::AreEqual(schools[0].teachers[i].surname, testSchool.teachers[i].surname);
+					Assert::AreEqual(schools[0].teachers[i].email, testSchool.teachers[i].email);
+					
+					// Test teams for teachers
+					for (size_t j = 0; j < testSchool.teachers[i].teamIds.size(); j++)
+					{
+						Assert::AreEqual(schools[0].teachers[i].teamIds[j], testSchool.teachers[i].teamIds[j]);
+					}
+				}
+
+				// Test teams
+				for (size_t i = 0; i < testSchool.teams.size(); i++)
+				{
+					Assert::AreEqual(schools[0].teams[i].id, testSchool.teams[i].id);
+					Assert::AreEqual(schools[0].teams[i].name, testSchool.teams[i].name);
+					Assert::AreEqual(schools[0].teams[i].dateOfSetUp.day, testSchool.teams[i].dateOfSetUp.day);
+					Assert::AreEqual(schools[0].teams[i].dateOfSetUp.month, testSchool.teams[i].dateOfSetUp.month);
+					Assert::AreEqual(schools[0].teams[i].dateOfSetUp.year, testSchool.teams[i].dateOfSetUp.year);
+					Assert::AreEqual(statusToString(schools[0].teams[0].status), statusToString(testSchool.teams[i].status));
+					
+					//Test members in team
+					for (size_t j = 0; j < testSchool.teams[i].members.size(); j++)
+					{
+						Assert::AreEqual(schools[0].teams[i].members[j].studentEmail, testSchool.teams[i].members[j].studentEmail);
+						Assert::AreEqual(schools[0].teams[i].members[j].roleId, testSchool.teams[i].members[j].roleId);
+					}
+				}
+
+				// Test students
+				for (size_t i = 0; i < testSchool.students.size(); i++)
+				{
+					Assert::AreEqual(schools[0].students[i].id, testSchool.students[i].id);
+					Assert::AreEqual(schools[0].students[i].firstName, testSchool.students[i].firstName);
+					Assert::AreEqual(schools[0].students[i].middleName, testSchool.students[i].middleName);
+					Assert::AreEqual(schools[0].students[i].surname, testSchool.students[i].surname);
+					Assert::AreEqual(schools[0].students[i].grade, testSchool.students[i].grade);
+					Assert::AreEqual(schools[0].students[i].email, testSchool.students[i].email);
+					Assert::AreEqual(schools[0].students[i].isInTeam, testSchool.students[i].isInTeam);
+				}
+
+				//Test roles
+				for (size_t i = 0; i < testSchool.roles.size(); i++)
+				{
+					Assert::AreEqual(schools[0].roles[i].id, testSchool.roles[i].id);
+					Assert::AreEqual(schools[0].roles[i].name, testSchool.roles[i].name);
+				}
+			}
+		}
 	};
 }
-
