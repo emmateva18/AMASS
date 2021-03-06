@@ -4,13 +4,13 @@ void MENU::showMenuItems()
 {
 	for (size_t i = 0; i < items.size(); i++)
 	{
-		if (i == selectedIndex)
+		if (items[i].isSelected)
 		{
-			cout << "\x1b[33m";
+			cout << "\x1b[36m" <<items[i].number<<"."<<items[i].text<<endl;
 		}
 		else
 		{
-			cout << "\x1b[97m";
+			cout << "\x1b[97m" << items[i].number << "." << items[i].text << endl;
 		}
 	}
 }
@@ -62,6 +62,58 @@ void showSecondaryMenu(int& selectedItem, int& ch)
 		}
 	}
 }
+
+int findIndex(MENU menu)
+{
+	for (size_t i = 0; i < menu.items.size(); i++)
+	{
+		if (menu.items[i].isSelected)
+			return i;
+	}
+	return string::npos;
+}
+bool validate(int selection, MENU menu)
+{
+	if (selection >= 0 and selection <= int(menu.items.size()))
+		return 1;
+	return 0;
+}
+void getUserInput(vector<MENU> menus)
+{
+	int currentItem = 0;
+	int currentMenu = 0;
+	while (1)
+	{
+		system("cls");
+		menus[currentMenu].showMenuItems();
+		int ch = _getch();
+		if (ch == 224)
+		{
+			switch (_getch())
+			{
+			case 80: 
+				if (validate(currentItem, menus[currentMenu]))
+				{
+					menus[currentMenu].items[currentItem].isSelected=false;
+					currentItem++;
+					menus[currentMenu].items[currentItem].isSelected = true;
+				}	
+				break;
+			case 72:
+				if (validate(currentItem, menus[currentMenu]))
+				{
+					menus[currentMenu].items[currentItem].isSelected = false;
+					currentItem--;
+					menus[currentMenu].items[currentItem].isSelected = true;
+				}
+				break;
+			case 13:
+				menus[currentMenu].items[currentItem].action;
+				break;
+			}
+		}
+	}
+}
 void showMainMenu(int& selectedItem, int& ch)
 {
 
@@ -92,7 +144,7 @@ vector<MENU> initMenus()
 	MENU mainMenu =
 	{
 		{
-			{true,'1',"Create School"},
+			{true,'1',"Create School",&processCrtSch},
 			{false,'2',"Display all schools"},
 			{false,'3',"Edit School"},
 			{false,'4',"Exit"}
