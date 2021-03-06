@@ -58,10 +58,10 @@ void createTeam(SCHOOL& school, TEAM team, fstream& file)
 	school.teams.push_back(team);
 }
 
-void createSchool(vector<SCHOOL>& schools, SCHOOL school, fstream& file)
+void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 {
 	schools.push_back(school);
-	saveDataBase(file, schools);
+	saveDataBase(schools);
 }
 
 void createRole(SCHOOL& school, ROLE role, fstream& file)

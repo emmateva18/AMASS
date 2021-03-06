@@ -1,5 +1,11 @@
 #include "AdvancedFileOperations.h"
 using namespace std;
+fstream initFile()
+{
+	fstream file;
+	file.open("data.dat", ios::in | ios::out | ios::binary | ios::trunc);
+	return file;
+}
 
 void readRecord(fstream& file, ROLE& role)
 {
@@ -105,8 +111,10 @@ void readRecord(fstream& file, SCHOOL& school)
 	}
 }
 
-void readDataBase(fstream& file, vector<SCHOOL>& schools)
+void readDataBase(vector<SCHOOL>& schools)
 {
+	fstream file;
+	file.open("data.dat", ios::in | ios::out | ios::binary);
 	SCHOOL school;
 	file.seekg(0);
 	uint16_t size = 0;
@@ -116,16 +124,19 @@ void readDataBase(fstream& file, vector<SCHOOL>& schools)
 		readRecord(file, school);
 		schools.push_back(school);
 	}
+	file.close();
 }
 
-void saveDataBase(fstream& file, vector<SCHOOL> schools)
+void saveDataBase(vector<SCHOOL> schools)
 {
+	fstream file = initFile();
 	uint16_t size = (uint16_t)schools.size();
 	file.write((const char*)&size, sizeof(size));
 	for (size_t i = 0; i < schools.size(); i++)
 	{
 		save(file, schools[i]);
 	}
+	file.close();
 }
 
 void save(std::fstream& file, ROLE role)
