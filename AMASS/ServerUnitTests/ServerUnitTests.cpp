@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "../Server/Logic.h"
+#include "../Client/Presentation.h"
 #include "../CommunicationLibrary/CommunicationLibrary.h"
 #include "../asio-1.18.1/include/asio.hpp"
 
@@ -38,6 +39,25 @@ namespace ServerUnitTests
 			for (size_t i = 0; i < testTeacher.teamIds.size(); i++)
 			{
 				Assert::AreEqual(testSchool.teachers[0].teamIds[i], testTeacher.teamIds[i]);
+			}
+		}
+		TEST_METHOD(ShouldSuccessfullyAddTeamIntoSchool)
+		{
+			SCHOOL testSchool;
+
+			TEAM testTeam = { 1, "Anti-Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"IUM@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			createTeam(testSchool, testTeam);
+			Assert::AreEqual(testSchool.teams[0].id, testTeam.id);
+			Assert::AreEqual(testSchool.teams[0].name, testTeam.name);
+			Assert::AreEqual(testSchool.teams[0].desc, testTeam.desc);
+			Assert::AreEqual(testSchool.teams[0].dateOfSetUp.day, testTeam.dateOfSetUp.day);
+			Assert::AreEqual(testSchool.teams[0].dateOfSetUp.month, testTeam.dateOfSetUp.month);
+			Assert::AreEqual(testSchool.teams[0].dateOfSetUp.year, testTeam.dateOfSetUp.year);
+			Assert::AreEqual(statusToString(testSchool.teams[0].status), statusToString(testTeam.status));
+			for (size_t i = 0; i < testTeam.members.size(); i++)
+			{
+				Assert::AreEqual(testSchool.teams[0].members[i].roleId, testTeam.members[i].roleId);
+				Assert::AreEqual(testSchool.teams[0].members[i].studentEmail, testTeam.members[i].studentEmail);
 			}
 		}
 	};

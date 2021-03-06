@@ -119,8 +119,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)CommunicationLibrary\Debug;$(SolutionDir)Server\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BasicFileOperations.obj;AdvancedFileOperations.obj;Logic.obj</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)CommunicationLibrary\Debug;$(SolutionDir)Server\Debug;$(SolutionDir)Client\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>BasicFileOperations.obj;AdvancedFileOperations.obj;Logic.obj;Presentation.obj</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
