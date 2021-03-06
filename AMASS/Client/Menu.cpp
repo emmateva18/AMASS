@@ -74,7 +74,7 @@ int findIndex(MENU menu)
 }
 bool validate(int selection, MENU menu)
 {
-	if (selection >= 0 and selection <= int(menu.items.size()))
+	if (selection >= 0 and selection < int(menu.items.size()))
 		return 1;
 	return 0;
 }
@@ -91,26 +91,31 @@ void getUserInput(vector<MENU> menus)
 		{
 			switch (_getch())
 			{
-			case 80: 
-				if (validate(currentItem, menus[currentMenu]))
+			case 80: //down
+				if (validate(currentItem+1, menus[currentMenu]))
 				{
 					menus[currentMenu].items[currentItem].isSelected=false;
 					currentItem++;
 					menus[currentMenu].items[currentItem].isSelected = true;
 				}	
 				break;
-			case 72:
-				if (validate(currentItem, menus[currentMenu]))
+			case 72: //up
+				if (validate(currentItem-1, menus[currentMenu]))
 				{
 					menus[currentMenu].items[currentItem].isSelected = false;
 					currentItem--;
 					menus[currentMenu].items[currentItem].isSelected = true;
 				}
 				break;
-			case 13:
-				menus[currentMenu].items[currentItem].action;
-				break;
 			}
+		}
+		if (ch == 13)
+		{
+			action ac = menus[currentMenu].items[currentItem].action;
+			if (menus[currentMenu].items[currentItem].nextMenuPos == -1)
+				ac();
+			else
+				currentMenu= menus[currentMenu].items[currentItem].nextMenuPos;
 		}
 	}
 }
@@ -144,10 +149,10 @@ vector<MENU> initMenus()
 	MENU mainMenu =
 	{
 		{
-			{true,'1',"Create School",&processCrtSch},
-			{false,'2',"Display all schools"},
-			{false,'3',"Edit School"},
-			{false,'4',"Exit"}
+			{true,'1',"Create School",nullptr,2},
+			{false,'2',"Display all schools",nullptr,-1},
+			{false,'3',"Edit School",nullptr,1},
+			{false,'4',"Exit",}
 		}
 	};
 
