@@ -1,6 +1,7 @@
 #include "Presentation.h"
 #include "Libraries.h"
 #include <functional>
+#include <iomanip>
 
 string statusToString(STATUS status)
 {
@@ -60,9 +61,9 @@ void displayTeam(TEAM team)
 	}
 }
 
-void displaySchool(SCHOOL school, int id)
+void displaySchool(SCHOOL school)
 {
-	cout << "School " << id << " details:" << endl;
+	cout << "School " << school.id << " details:" << endl;
 	cout << "Name: " << school.name << endl;
 	cout << "City: " << school.city << endl;
 	cout << "Adress: " << school.address << endl;
@@ -71,7 +72,7 @@ void displaySchool(SCHOOL school, int id)
 
 	for (size_t i = 0; i < school.teachers.size(); i++)
 	{
-		displayTeacher(school.teachers[i], id);
+		displayTeacher(school.teachers[i], school.id);
 	}
 
 	cout << "List of the teams:" << endl;
@@ -196,11 +197,11 @@ SCHOOL enterSchool()
 	SCHOOL school;
 
 	cout << "Enter school's name: ";
-	getline(cin,school.name);
+	getline(cin, school.name);
 	cout << "Enter school's city: ";
-	getline(cin,school.city);
+	getline(cin, school.city);
 	cout << "Enter school's address: ";
-	getline(cin,school.address);
+	getline(cin, school.address);
 
 	school.id = INT_MAX;
 	school.maxMemberCountPerTeam = INT_MAX;
@@ -224,7 +225,130 @@ SCHOOL enterSchool()
 		school.students.push_back(enterStudent());
 		}, "student");*/
 
-	// enter roles
+		// enter roles
 
 	return school;
+}
+
+void displayFullLine()
+{
+	cout << "|";
+	displayString("-", 150);
+	cout << "|";
+	cout << endl;
+}
+
+void displayString(string str, int count)
+{
+	for (int i = 0; i < count; i++)
+	{
+		cout << str;
+	}
+}
+
+void displaySchoolInformation(SCHOOL school)
+{
+	displayFullLine();
+	cout << "|" << setw(5) << left << "ID" << "|" << setw(50) << left << "NAME" << "|"
+		<< setw(30) << left << "CITY" << "|" << setw(41) << left << "ADDRESS" << "|"
+		<< setw(20) << left << "MAX_PLAYER_COUNT" << "|" << endl;
+	//displayFullLine();
+
+	cout << "|" << setw(5) << school.id << "|" << setw(50) << school.name << "|"
+		<< setw(30) << school.city << "|" << setw(41) << school.address << "|"
+		<< setw(20) << school.maxMemberCountPerTeam << "|" << endl;
+	displayFullLine();
+}
+
+void displayTeachersInformation(SCHOOL school)
+{
+	displayFullLine();
+
+	cout << "|" << setw(5) << left << "ID" << "|" << setw(59) << left << "NAME" << "|"
+		<< setw(58) << left << "EMAIL" << "|" << setw(25) << left << "TEAM IDS" << "|" << endl;
+
+	displayFullLine();
+
+	for (size_t i = 0; i < school.teachers.size(); i++)
+	{
+		displayTeacherInformation(school.teachers[i]);
+	}
+
+	displayFullLine();
+}
+
+string nameToString(string fName, string mName, string surname)
+{
+	return fName + " " + mName + " " + surname;
+}
+
+string vectorIntToString(vector<int> vec)
+{
+	string result;
+
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		result += to_string(vec[i]);
+		result += " ";
+	}
+
+	return result;
+}
+
+string dateOfSetupToString(DATE date)
+{
+	string result;
+
+	result += to_string(date.day);
+	result += "/";
+	result += to_string(date.month);
+	result += "/";
+	result += to_string(date.year);
+
+	return result;
+}
+
+void displayTeacherInformation(TEACHER teacher)
+{
+	string name = nameToString(teacher.firstName, teacher.middleName, teacher.surname);
+	string teamIds = vectorIntToString(teacher.teamIds);
+
+	cout << "|" << setw(5) << teacher.id << "|" << setw(59) << name << "|"
+		<< setw(58) << teacher.email << "|" << setw(25) << teamIds << "|" << endl;
+}
+
+void displayTeamsInformation(SCHOOL school)
+{
+	displayFullLine();
+
+	cout << "|" << setw(5) << left << "ID" << "|" << setw(30) << left << "NAME" << "|"
+		<< setw(50) << left << "DESCRIPTION" << "|" << setw(15) << left << "DATE_OF_SETUP" << "|"
+		<< setw(16) << "STATUS" << "|" << setw(8) << "ROLE_ID" << "|" << setw(20) << "STUDENT_EMAILS" << "|" << endl;
+
+	displayFullLine();
+}
+
+void displayTeacherInformation(TEAM team)
+{
+	string date = dateOfSetupToString(team.dateOfSetUp);
+	string status = statusToString(team.status);
+	//string roleIds = vectorIntToString(team.members)
+
+	cout << "|" << setw(5) << left << team.id << "|" << setw(30) << left << team.name << "|"
+		<< setw(50) << left << team.desc << "|" << setw(15) << left << date << "|"
+		<< setw(16) << status << "|" << setw(8) << "ROLE_ID" << "|" << setw(20) << "STUDENT_EMAILS" << "|" << endl;
+}
+
+void displaySchoolWithTable(SCHOOL school)
+{
+	displayFullLine();
+
+	cout << "|" << setw(75) << "SCHOOL" << setw(76) << "|" << endl;
+	displaySchoolInformation(school);
+
+	cout << "|" << setw(75) << right << "TEACHERS" << setw(76) << "|" << endl;
+	displayTeachersInformation(school);
+
+	cout << "|" << setw(75) << right << "TEAMS" << setw(76) << "|" << endl;
+	displayTeamsInformation(school);
 }

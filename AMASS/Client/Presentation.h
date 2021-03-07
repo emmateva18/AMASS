@@ -1,10 +1,21 @@
 #pragma once
 #include "../CommunicationLibrary/CommunicationLibrary.h"
 
-void displaySchool(SCHOOL school, int id);
+std::string statusToString(STATUS status);
+void displaySchool(SCHOOL school);
 void displayTeacher(TEACHER teacher, int id);
 void displayTeam(TEAM team);
-std::string statusToString(STATUS status);
+
+std::string nameToString(std::string fName, std::string mName, std::string surname);
+std::string vectorIntToString(std::vector<int> vec);
+
+void displayFullLine();
+void displayString(std::string str, int count);
+void displaySchoolInformation(SCHOOL school);
+void displayTeachersInformation(SCHOOL school);
+void displayTeacherInformation(TEACHER teacher);
+void displayTeamsInformation(SCHOOL school);
+void displaySchoolWithTable(SCHOOL school);
 
 STUDENT enterStudent();
 TEACHER enterTeacher();
