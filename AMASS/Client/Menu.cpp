@@ -159,7 +159,7 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Create School",requestCrtSch,-1},
-			{false,'2',"Display all schools",nullptr,-1},
+			{false,'2',"Display information",nullptr,5},
 			{false,'3',"Edit School",nullptr,1},
 			{false,'4',"Exit",nullptr,0}
 		}
@@ -212,6 +212,25 @@ vector<MENU> initMenus()
 			{false,'6',"Exit",nullptr,1}
 		}
 	};
-	menus = { mainMenu,editMenu,createMenu,updateMenu,deleteMenu };
+
+	MENU displayMenu =
+	{
+		{
+			{true,'1',"Display all records",nullptr,-1},
+			{false,'2',"Display record by criteria",nullptr},
+			{false,'3',"Exit",nullptr,0}
+		}
+	};
+
+	MENU displayRecordsMenu =
+	{
+		{
+			{true,'1',"Show students in team",nullptr,-1},
+			{false,'2',"Show teachers without teams",nullptr,-1},
+			{false,'3',"Show archived teams",nullptr,-1},
+			{false,'4',"Exit",nullptr,6}
+		}
+	};
+	menus = { mainMenu,editMenu,createMenu,updateMenu,deleteMenu,displayMenu,displayRecordsMenu };
 	return menus;
 }
