@@ -116,6 +116,7 @@ void readDataBase(vector<SCHOOL>& schools)
 	fstream file;
 	file.open("data.dat", ios::in | ios::out | ios::binary);
 	SCHOOL school;
+	static const struct SCHOOL emptySchool;
 	file.seekg(0);
 	uint16_t size = 0;
 	readShortInt(file, size);
@@ -123,13 +124,15 @@ void readDataBase(vector<SCHOOL>& schools)
 	{
 		readRecord(file, school);
 		schools.push_back(school);
+		school = emptySchool;
 	}
 	file.close();
 }
 
 void saveDataBase(vector<SCHOOL>& schools)
 {
-	fstream file = initFile();
+	fstream file;
+	file.open("data.dat", ios::in | ios::out | ios::binary | ios::trunc);
 	file.seekp(0);
 	uint16_t size = (uint16_t)schools.size();
 	file.write((const char*)&size, sizeof(size));
