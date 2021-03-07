@@ -246,6 +246,46 @@ namespace ServerUnitTests
 			updateStudentEmail(testStudent, testEmail);
 			Assert::AreEqual(testStudent.email, testEmail);
 		}
+		TEST_METHOD(ShouldSuccessfullyUpdateTeacherFirstName)
+		{
+			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
+			string testFirstName = "Teodor";
+			updateTeacherFirstName(testTeacher, testFirstName);
+			Assert::AreEqual(testTeacher.firstName, testFirstName);
+		}
+
+		TEST_METHOD(ShouldSuccessfullyUpdateTeacherMiddleName)
+		{
+			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
+			string testMiddleName = "Ivanov";
+			updateTeacherMiddleName(testTeacher, testMiddleName);
+			Assert::AreEqual(testTeacher.middleName, testMiddleName);
+		}
+
+		TEST_METHOD(ShouldSuccessfullyUpdateTeacherSurname)
+		{
+			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
+			string testSurname = "Petrov";
+			updateTeacherSurname(testTeacher, testSurname);
+			Assert::AreEqual(testTeacher.surname, testSurname);
+		}
+
+		TEST_METHOD(ShouldSuccessfullyUpdateTeacherEmail)
+		{
+			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
+			string testEmail = "peturog@abv.bg";
+			updateTeacherEmail(testTeacher, testEmail);
+			Assert::AreEqual(testTeacher.email, testEmail);
+		}
+
+		TEST_METHOD(ShouldSuccessfullyUpdateTeacherTeamId)
+		{
+			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg",{0,1,2,3,4,5} };
+			int testTeamIdIndex = 3;
+			int testNewId = 6;
+			updateTeamIdInTeacher(testTeacher, testTeamIdIndex, testNewId);
+			Assert::AreEqual(testTeacher.teamIds[testTeamIdIndex], testNewId);
+		}
 
 	};
 }
