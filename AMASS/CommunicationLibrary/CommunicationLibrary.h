@@ -42,6 +42,7 @@ enum SYSTEM_CODE
 	readTeamMember = 605,
 	readTeam = 606,
 	readSchool = 607,
+	readDB = 608,
 	updRole = 701,
 	updStudent = 702,
 	updTeacher = 703,
@@ -169,6 +170,13 @@ void readShortInt(asio::ip::tcp::socket& socket, uint16_t& num);
 void readBool(asio::ip::tcp::socket& socket, bool& a);
 void readVec(asio::ip::tcp::socket& socket, std::vector<std::string>& vec);
 void readVec(asio::ip::tcp::socket& socket, std::vector<int>& vec);
+
+template<typename T>
+T staticRead(asio::ip::tcp::socket& socket,T data)
+{
+	data.read(socket);
+	return data;
+}
 
 template <typename T>
 void writeRequest(asio::ip::tcp::socket& socket, SYSTEM_CODE code, T data)

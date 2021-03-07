@@ -216,7 +216,7 @@ vector<MENU> initMenus()
 	MENU displayMenu =
 	{
 		{
-			{true,'1',"Display all records",nullptr,-1},
+			{true,'1',"Display all records",requestReadDB,-1},
 			{false,'2',"Display record by criteria",nullptr},
 			{false,'3',"Exit",nullptr,0}
 		}

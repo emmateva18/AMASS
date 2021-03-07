@@ -124,7 +124,7 @@ string codeToString(SYSTEM_CODE code)
 	}
 }
 
-void log(asio::ip::tcp::socket& socket, SYSTEM_CODE code)
+void logRecord(asio::ip::tcp::socket& socket, SYSTEM_CODE code)
 {
 	fstream file;
 	file.open("logs.txt", ios::app);
@@ -214,10 +214,12 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 		case crtTeam:
 			break;*/
 	case crtSchool:
+	{
 		SCHOOL school;
 		school.read(socket);
 		createSchool(schools, school);
 		break;
+	}
 		/*
 		case readRole:
 			break;
@@ -233,6 +235,18 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 			break;
 		case readSchool:
 			break;
+		*/
+	case readDB:
+	{
+		uint16_t size = (uint16_t)schools.size();
+		writeShortInt(socket, size);
+		for (size_t i = 0; i < schools.size(); i++)
+		{
+			schools[i].write(socket);
+		}
+		break;
+	}
+		/*
 		case updRole:
 			break;
 		case updStudent:
@@ -265,7 +279,7 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 			break;
 		}*/
 	}
-	log(socket, code);
+	logRecord(socket, code);
 }
 
 void startServer(vector<SCHOOL> schools)

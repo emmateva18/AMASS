@@ -286,11 +286,14 @@ void TEAM::read(asio::ip::tcp::socket& socket)
 	status = static_cast<STATUS>(tempStatus);
 
 	uint16_t size = (uint16_t)members.size();
+	TEAM_MEMBER member, emptyMember;
 	readShortInt(socket, size);
 
 	for (uint16_t i = 0; i < size; i++)
 	{
-		members[i].read(socket);
+		member.read(socket);
+		members.push_back(member);
+		member = emptyMember;
 	}
 }
 
@@ -303,30 +306,42 @@ void SCHOOL::read(asio::ip::tcp::socket& socket)
 	readStr(socket, address);
 
 	uint16_t size = (uint16_t)teachers.size();
+	TEACHER teacher,emptyTeacher;
 	readShortInt(socket, size);
 	for (uint16_t i = 0; i < size; i++)
 	{
-		teachers[i].read(socket);
+		teacher = staticRead(socket, teacher);
+		teachers.push_back(teacher);
+		teacher = emptyTeacher;
 	}
 
 	size = (uint16_t)teams.size();
+	TEAM team,emptyTeam;
 	readShortInt(socket, size);
 	for (uint16_t i = 0; i < size; i++)
 	{
-		teams[i].read(socket);
+		team = staticRead(socket, team);
+		teams.push_back(team);
+		team = emptyTeam;
 	}
 
 	size = (uint16_t)students.size();
+	STUDENT student,emptyStudent;
 	readShortInt(socket, size);
 	for (uint16_t i = 0; i < size; i++)
 	{
-		students[i].read(socket);
+		student = staticRead(socket, student);
+		students.push_back(student);
+		student = emptyStudent;
 	}
 
 	size = (uint16_t)roles.size();
+	ROLE role, emptyRole;
 	readShortInt(socket, size);
 	for (uint16_t i = 0; i < size; i++)
 	{
-		roles[i].read(socket);
+		role = staticRead(socket, role);
+		roles.push_back(role);
+		role = emptyRole;
 	}
 }
