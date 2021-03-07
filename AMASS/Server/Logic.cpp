@@ -145,4 +145,14 @@ void updateStudentSurname(STUDENT& student, string newSurname)
 	student.surname = newSurname;
 }
 
+void updateStudentGrade(STUDENT& student, string newGrade)
+{
+	student.grade = newGrade;
+}
+
+void updateStudentEmail(STUDENT& student, string newEmail)
+{
+	student.email = newEmail;
+}
+
 
