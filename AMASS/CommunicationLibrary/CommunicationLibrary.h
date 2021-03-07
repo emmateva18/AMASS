@@ -148,6 +148,15 @@ struct SCHOOL
 	void read(asio::ip::tcp::socket& socket);
 };
 
+struct COUNTERS
+{
+	int schoolId = 0;
+	int teamId = 0;
+	int roleId = 0;
+	int teacherId = 0;
+	int studentId = 0;
+};
+
 void writeShortInt(asio::ip::tcp::socket& socket, uint16_t num);
 void writeStr(asio::ip::tcp::socket& socket, std::string str);
 void writeInt(asio::ip::tcp::socket& socket, int integer);
