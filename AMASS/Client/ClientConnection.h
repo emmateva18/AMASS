@@ -9,7 +9,7 @@ void sendRequest(SYSTEM_CODE code, T data)
 	//asio::ip::tcp::socket socket = connectToServer();
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket(io_service);
-	socket.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket, code);
 	data.write(socket);
 }
@@ -18,7 +18,7 @@ void readRequest(SYSTEM_CODE code, T& data)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_,code);
 	readShortInt(socket_,size);

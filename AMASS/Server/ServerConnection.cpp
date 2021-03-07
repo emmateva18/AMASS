@@ -1,6 +1,28 @@
 #include "ServerConnection.h"
 
 using namespace std;
+
+string getCurrentHour()
+{
+	DATE date;
+	tm t;
+	time_t now = time(0);
+	localtime_s(&t, &now);
+	string temp;
+	if (t.tm_hour < 10)
+		temp += "0";
+	temp = to_string(t.tm_hour);
+	temp += ":";
+	if (t.tm_min < 10)
+		temp += "0";
+	temp += to_string(t.tm_min);
+	temp += ":";
+	if (t.tm_sec < 10)
+		temp += "0";
+	temp += to_string(t.tm_sec);
+	return temp;
+}
+
 DATE getCurrentDate()
 {
 	DATE date;
@@ -93,6 +115,8 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case readSchool: return "readSchool";
 		break;
+	case readDB: return "Extract all info from DB";
+		break;
 	case updRole: return "updateRole";
 		break;
 	case updStudent: return "updateStudent";
@@ -135,6 +159,8 @@ void logRecord(asio::ip::tcp::socket& socket, SYSTEM_CODE code)
 	log += to_string(date.month); 
 	log += '.';
 	log += to_string(date.year); 
+	log += " ";
+	log += getCurrentHour();
 	log += "> Log[i] CODE["; 
 	log += to_string(code);
 	log += "] OP["; 
@@ -286,7 +312,7 @@ void startServer(vector<SCHOOL> schools)
 {
 	asio::io_service io_service;
 	asio::error_code ec;
-	asio::ip::tcp::endpoint ep (asio::ip::tcp::v4(), 1234);
+	asio::ip::tcp::endpoint ep (asio::ip::tcp::v4(), SERVER_PORT);
 	asio::ip::tcp::acceptor acceptor_(io_service, ep.protocol());
 	asio::ip::tcp::socket socket(io_service);
 	acceptor_.bind(ep);

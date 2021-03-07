@@ -2,6 +2,9 @@
 #include "framework.h"
 #include "CommunicationLibrary.h"
 
+std::string SERVER_IP = "127.0.0.1";
+int SERVER_PORT = 1234;
+
 using namespace std;
 
 typedef unsigned char byte;

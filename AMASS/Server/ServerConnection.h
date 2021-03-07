@@ -3,6 +3,7 @@
 #include "../CommunicationLibrary/CommunicationLibrary.h"
 #include "Logic.h"
 #include <ctime>
+std::string getCurrentHour();
 DATE getCurrentDate();
 string codeToString(SYSTEM_CODE code);
 void logRecord(asio::ip::tcp::socket& socket, SYSTEM_CODE code);

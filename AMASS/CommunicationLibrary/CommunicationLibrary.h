@@ -2,6 +2,9 @@
 #include "Libraries.h"
 #include "../asio-1.18.1/include/asio.hpp"
 
+extern std::string SERVER_IP;
+extern int SERVER_PORT;
+
 enum SYSTEM_CODE
 {
 	ok = 0,

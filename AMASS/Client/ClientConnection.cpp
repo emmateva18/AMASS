@@ -4,7 +4,7 @@ asio::ip::tcp::socket connectToServer()
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	return socket_;
 }
 
@@ -12,7 +12,7 @@ void readRequest(SYSTEM_CODE code, ROLE& role)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -22,7 +22,7 @@ void readRequest(SYSTEM_CODE code, STUDENT& student)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -32,7 +32,7 @@ void readRequest(SYSTEM_CODE code, TEACHER& teacher)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -42,7 +42,7 @@ void readRequest(SYSTEM_CODE code, DATE& date)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -52,7 +52,7 @@ void readRequest(SYSTEM_CODE code, TEAM_MEMBER& member)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -62,7 +62,7 @@ void readRequest(SYSTEM_CODE code, TEAM& team)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -72,7 +72,7 @@ void readRequest(SYSTEM_CODE code, SCHOOL& school)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	readShortInt(socket_, size);
@@ -82,7 +82,7 @@ void readRequest(SYSTEM_CODE code, vector<SCHOOL>& school)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string("127.0.0.1"), 1234));
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	uint16_t size = 0;
 	writeInt(socket_, code);
 	SCHOOL temp, empty;
@@ -136,6 +136,7 @@ void requestReadDB()
 {
 	vector<SCHOOL> schools;
 	readRequest(SYSTEM_CODE::readDB,schools);
+	
 	for(size_t i=0;i<schools.size();i++)
-		displaySchool(schools[i]);
+		displaySchoolWithTable(schools[i]);
 }
