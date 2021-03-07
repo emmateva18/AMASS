@@ -1,6 +1,5 @@
 #include "Presentation.h"
 #include "Libraries.h"
-#include <functional>
 #include <iomanip>
 
 string statusToString(STATUS status)
@@ -137,7 +136,7 @@ TEAM enterTeam(int maxPlayerPerTeam)
 		cout << "Enter the count of the members: ";
 		cin >> playerCount;
 
-		if (playerCount > maxPlayerPerTeam ||  playerCount < 0)
+		if (playerCount > maxPlayerPerTeam || playerCount < 0)
 		{
 			cout << "The entered number doesn't match the criteria (1 - 5)" << endl;
 			cout << "Try again!" << endl;
@@ -178,12 +177,12 @@ void enterRecords(std::function<void()> callback, string text)
 		}
 		else
 		{
-			for (int i = 0; i < recordCount; i++)
+			if (callback)
 			{
-				cout << "Enter data for " << text << " [" << i << "]: " << endl;
-
-				if (callback)
+				for (int i = 0; i < recordCount; i++)
 				{
+					cout << "Enter data for " << text << " [" << i << "]: " << endl;
+
 					callback();
 				}
 			}
@@ -434,7 +433,7 @@ void displaySchoolStructure(SCHOOL school)
 {
 	displayFullLine();
 
-	cout << "| " << setw(101) <<right<< "SCHOOL" << setw(100) << "|" << endl;
+	cout << "| " << setw(101) << right << "SCHOOL" << setw(100) << "|" << endl;
 	displaySchoolInformation(school);
 
 	cout << "| " << setw(101) << right << "TEACHERS" << setw(100) << "|" << endl;

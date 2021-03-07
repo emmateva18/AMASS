@@ -267,3 +267,32 @@ void updateSchoolAdress(SCHOOL& school, string newAddress)
 	school.address = newAddress;
 }
 
+void assignSchoolId(SCHOOL& school, COUNTERS& ids)
+{
+	school.id = ids.schoolId;
+	ids.schoolId++;
+}
+
+void assignTeacherId(TEACHER& teacher, COUNTERS& ids)
+{
+	teacher.id = ids.teacherId;
+	ids.teacherId++;
+}
+
+void assignTeamId(TEAM& team, COUNTERS& ids)
+{
+	team.id = ids.teamId;
+	ids.teamId++;
+}
+
+void assignStudentId(STUDENT& student, COUNTERS& ids)
+{
+	student.id = ids.studentId;
+	ids.studentId++;
+}
+
+void assignRoleId(ROLE& role, COUNTERS& ids)
+{
+	role.id = ids.roleId;
+	ids.roleId++;
+}

@@ -44,3 +44,8 @@ void updateTeamStatus(TEAM& team, STATUS newStatus);
 void updateSchoolName(SCHOOL& school, string newName);
 void updateSchoolCity(SCHOOL& school, string newCity);
 void updateSchoolAdress(SCHOOL& school, string newAddress);
+void assignSchoolId(SCHOOL& school, COUNTERS& ids);
+void assignTeacherId(TEACHER& teacher, COUNTERS& ids);
+void assignTeamId(TEAM& team, COUNTERS& ids);
+void assignStudentId(STUDENT& student, COUNTERS& ids);
+void assignRoleId(ROLE& role, COUNTERS& ids);
