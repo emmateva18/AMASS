@@ -14,7 +14,7 @@ void sendRequest(SYSTEM_CODE code, T data)
 	data.write(socket);
 }
 template <typename T>
-void readRequest(SYSTEM_CODE code, T& data)
+/*void readRequest(SYSTEM_CODE code, T& data)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
@@ -30,7 +30,7 @@ void readRequest(SYSTEM_CODE code, T& data)
 		data.push_back(t);
 		//data[i].read(socket_);
 	}
-}
+}*/
 
 void readRequest(SYSTEM_CODE code, ROLE& role);
 void readRequest(SYSTEM_CODE code, STUDENT& student);
@@ -38,7 +38,7 @@ void readRequest(SYSTEM_CODE code, TEACHER& teacher);
 void readRequest(SYSTEM_CODE code, DATE& date);
 void readRequest(SYSTEM_CODE code, TEAM_MEMBER& member);
 void readRequest(SYSTEM_CODE code, TEAM& team);
-void readRequest(SYSTEM_CODE code, SCHOOL& school);
+void readRequest(SYSTEM_CODE code, SCHOOL& school, int id);
 void readRequest(SYSTEM_CODE code, std::vector<SCHOOL>& schools);
 
 void sendRequest(SYSTEM_CODE code, std::string data);
@@ -50,3 +50,4 @@ void exitProgram();
 void requestCrtSch();
 void requestReadDB();
 void requestDltSch();
+void requestDltTeam();

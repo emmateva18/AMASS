@@ -205,7 +205,7 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Delete School",requestDltSch,-1},
-			{false,'2',"Delete team"},
+			{false,'2',"Delete team",requestDltTeam,-1},
 			{false,'3',"Delete Role"},
 			{false,'4',"Delete student"},
 			{false,'5',"Delete teacher"},

@@ -38,9 +38,32 @@ void init(vector<SCHOOL>& schools)
 	string city = "Burgas";
 	string address = "Meden Rudnik 54";
 
-	SCHOOL school{ 0,5, name, city, address, teachers, teams, students, roles };
+	SCHOOL school{ 0,4, name, city, address, teachers, teams, students, roles };
 
 	schools.push_back(school);
+}
+
+int assignIdToSchool(vector<SCHOOL>& schools)
+{
+	int maxId = 0;
+	for (size_t i = 0; i < schools.size(); i++)
+	{
+		if (schools[i].id > maxId)
+			maxId = schools[i].id;
+	}
+	return maxId + 1;
+}
+
+void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id)
+{
+	for (size_t i = 0; i < schools.size(); i++)
+	{
+		if (schools[i].id == id)
+		{
+			school = schools[i];
+			return;
+		}
+	}
 }
 
 void createStudent(SCHOOL& school, STUDENT student)

@@ -7,6 +7,9 @@ using namespace std;
 
 void init(vector<SCHOOL>& schools);
 
+int assignIdToSchool(vector<SCHOOL>& schools);
+void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id);
+
 void createRole(SCHOOL& school, ROLE role);
 void createStudent(SCHOOL& school, STUDENT student);
 void createTeacher(SCHOOL& school, TEACHER teacher);

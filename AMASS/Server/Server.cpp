@@ -9,6 +9,8 @@ using namespace std;
 int main()
 {
 	vector<SCHOOL> schools;
+	//init(schools);
+	//saveDataBase(schools);
 	readDataBase(schools);
 	startServer(schools);
 }

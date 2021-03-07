@@ -5,12 +5,12 @@
 using namespace std;
 int main()
 {
-	/*vector<MENU> menus = initMenus();
+	vector<MENU> menus = initMenus();
 	int selectedIndex = 0;
 	menus[0].showMenuItems();
-	getUserInput(menus);*/
+	getUserInput(menus);
 
-	TEACHER t1 = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg", {1,2,3} };
+	/*TEACHER t1 = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg", {1,2,3} };
 	TEACHER t2 = { 1,"Gosho","Dizela","Petrov","dizela@gmail.com", {1,2,3} };
 	TEACHER t3 = { 2,"Vankata","Dunera","Vulchev","ILYDuner@abv.bg", {1,2,3} };
 	TEACHER t4 = { 3,"Eren","Grisha","Jaeger","fighter@titan.bg", {1,2,3} };
@@ -48,5 +48,5 @@ int main()
 	schools.push_back(school);
 	schools.push_back(school);
 
-	displaySchools(schools);
+	displaySchools(schools);*/
 }

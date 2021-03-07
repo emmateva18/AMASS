@@ -68,7 +68,7 @@ void readRequest(SYSTEM_CODE code, TEAM& team)
 	readShortInt(socket_, size);
 	team.read(socket_);
 }
-void readRequest(SYSTEM_CODE code, SCHOOL& school)
+void readRequest(SYSTEM_CODE code, SCHOOL& school, int id)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
@@ -143,9 +143,7 @@ void requestReadDB()
 {
 	vector<SCHOOL> schools;
 	readRequest(SYSTEM_CODE::readDB,schools);
-	
-	for(size_t i=0;i<schools.size();i++)
-		displaySchoolStructure(schools[i]);
+	displaySchools(schools);
 }
 
 void requestDltSch()
@@ -154,4 +152,12 @@ void requestDltSch()
 	int id;
 	cin >> id;
 	sendRequest(SYSTEM_CODE::dltSchool, id);
+}
+
+void requestDltTeam()
+{
+	requestReadDB();
+	int id,teamId;
+	cin >> id;
+	sendRequest(SYSTEM_CODE::readSchool, id);
 }

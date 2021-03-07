@@ -1,10 +1,7 @@
 #pragma once
 #include "Libraries.h"
 #include "../asio-1.18.1/include/asio.hpp"
-
-extern std::string SERVER_IP;
-extern int SERVER_PORT;
-
+#include "secrets.h"
 enum SYSTEM_CODE
 {
 	ok = 0,

@@ -27,8 +27,8 @@ DATE getCurrentDate()
 {
 	DATE date;
 	tm t;
-	time_t now= time(0);
-	localtime_s(&t,&now);
+	time_t now = time(0);
+	localtime_s(&t, &now);
 	date.day = t.tm_mday;
 	date.month = t.tm_mon + 1;
 	date.year = t.tm_year + 1900;
@@ -153,26 +153,26 @@ void logRecord(asio::ip::tcp::socket& socket, SYSTEM_CODE code)
 	fstream file;
 	file.open("logs.txt", ios::app);
 	DATE date = getCurrentDate();
-	string log ="<";
+	string log = "<";
 	log += to_string(date.day);
 	log += '.';
-	log += to_string(date.month); 
+	log += to_string(date.month);
 	log += '.';
-	log += to_string(date.year); 
+	log += to_string(date.year);
 	log += " ";
 	log += getCurrentHour();
-	log += "> Log[i] CODE["; 
+	log += "> Log[i] CODE[";
 	log += to_string(code);
-	log += "] OP["; 
-	log += codeToString(code); 
-	log += "] IP: "; 
+	log += "] OP[";
+	log += codeToString(code);
+	log += "] IP: ";
 	log += socket.remote_endpoint().address().to_string();
-	cout << log <<endl;
+	cout << log << endl;
 	file << log << endl;
 	file.close();
 }
 
-void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
+void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 {
 	SYSTEM_CODE code;
 	int temp;
@@ -246,22 +246,29 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 		createSchool(schools, school);
 		break;
 	}
-		/*
-		case readRole:
-			break;
-		case readStudent:
-			break;
-		case readTeacher:
-			break;
-		case readDate:
-			break;
-		case readTeamMember:
-			break;
-		case readTeam:
-			break;
-		case readSchool:
-			break;
-		*/
+	/*
+	case readRole:
+		break;
+	case readStudent:
+		break;
+	case readTeacher:
+		break;
+	case readDate:
+		break;
+	case readTeamMember:
+		break;
+	case readTeam:
+		break;*/
+	case readSchool:
+	{
+		int id;
+		readInt(socket, id);
+		SCHOOL school;
+		findSchoolById(schools, school, id);
+		school.write(socket);
+		break;
+	}
+
 	case readDB:
 	{
 		uint16_t size = (uint16_t)schools.size();
@@ -272,39 +279,39 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 		}
 		break;
 	}
-		/*
-		case updRole:
-			break;
-		case updStudent:
-			break;
-		case updTeacher:
-			break;
-		case updDate:
-			break;
-		case updTeamMember:
-			break;
-		case updTeam:
-			break;
-		case updSchool:
-			break;
-		case dltRole:
-			break;
-		case dltStudent:
-			break;
-		case dltTeacher:
-			break;
-		case dltDate:
-			break;
-		case dltTeamMember:
-			break;
-		case dltTeam:
-			break;
-		*/
-		case dltSchool:
-			int id;
-			readInt(socket, id);
-			deleteSchool(schools, id);
-			break;
+	/*
+	case updRole:
+		break;
+	case updStudent:
+		break;
+	case updTeacher:
+		break;
+	case updDate:
+		break;
+	case updTeamMember:
+		break;
+	case updTeam:
+		break;
+	case updSchool:
+		break;
+	case dltRole:
+		break;
+	case dltStudent:
+		break;
+	case dltTeacher:
+		break;
+	case dltDate:
+		break;
+	case dltTeamMember:
+		break;
+	case dltTeam:
+		break;
+	*/
+	case dltSchool:
+		int id;
+		readInt(socket, id);
+		deleteSchool(schools, id);
+		break;
 		/*
 		default:
 			break;
@@ -317,18 +324,18 @@ void startServer(vector<SCHOOL> schools)
 {
 	asio::io_service io_service;
 	asio::error_code ec;
-	asio::ip::tcp::endpoint ep (asio::ip::tcp::v4(), SERVER_PORT);
+	asio::ip::tcp::endpoint ep(asio::ip::tcp::v4(), SERVER_PORT);
 	asio::ip::tcp::acceptor acceptor_(io_service, ep.protocol());
 	asio::ip::tcp::socket socket(io_service);
 	acceptor_.bind(ep);
 
-	cout << "Server has been started! Waiting for client requests..."<<endl;
+	cout << "Server has been started! Waiting for client requests..." << endl;
 
 	while (1)
 	{
 		acceptor_.listen(100);
 		acceptor_.accept(socket);
-		processRequest(socket,schools);
+		processRequest(socket, schools);
 		socket.close();
 	}
 }

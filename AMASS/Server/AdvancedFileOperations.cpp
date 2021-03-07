@@ -111,6 +111,15 @@ void readRecord(fstream& file, SCHOOL& school)
 	}
 }
 
+void readRecord(std::fstream& file, COUNTERS& ids)
+{
+	readInt(file, ids.roleId);
+	readInt(file, ids.schoolId);
+	readInt(file, ids.studentId);
+	readInt(file, ids.teacherId);
+	readInt(file, ids.teamId);
+}
+
 void readDataBase(vector<SCHOOL>& schools)
 {
 	fstream file;
@@ -235,4 +244,12 @@ void save(std::fstream& file, SCHOOL school)
 	{
 		save(file, school.roles[i]);
 	}
+}
+void save(std::fstream& file, COUNTERS ids)
+{
+	saveInt(file, ids.roleId);
+	saveInt(file, ids.schoolId);
+	saveInt(file, ids.studentId);
+	saveInt(file, ids.teacherId);
+	saveInt(file, ids.teamId);
 }
