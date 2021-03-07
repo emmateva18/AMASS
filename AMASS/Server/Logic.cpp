@@ -140,6 +140,9 @@ void updateStudentMiddleName(STUDENT& student, string newMiddleName)
 	student.middleName = newMiddleName;
 }
 
-
+void updateStudentSurname(STUDENT& student, string newSurname)
+{
+	student.surname = newSurname;
+}
 
 
