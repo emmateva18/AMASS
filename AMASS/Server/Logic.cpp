@@ -69,6 +69,11 @@ void createRole(SCHOOL& school, ROLE role)
 	school.roles.push_back(role);
 }
 
+void createTeamIdInTeacher(TEACHER& teacher, int teamId)
+{
+	teacher.teamIds.push_back(teamId);
+}
+
 void deleteStudent(SCHOOL& school, int studentId)
 {
 	for (size_t i = 0; i < school.students.size(); i++)
@@ -95,7 +100,7 @@ void deleteTeacher(SCHOOL& school, int teacherId)
 
 void deleteRoles(SCHOOL& school, int roleId)
 {
-	
+
 	for (size_t i = 0; i < school.roles.size(); i++)
 	{
 		if (school.roles[i].id == roleId)
@@ -154,5 +159,26 @@ void updateStudentEmail(STUDENT& student, string newEmail)
 {
 	student.email = newEmail;
 }
+
+void updateTeacherFirstName(TEACHER& teacher, string newFirstName)
+{
+	teacher.firstName = newFirstName;
+}
+
+void updateTeacherFirstName(TEACHER& teacher, string newMiddleName)
+{
+	teacher.middleName = newMiddleName;
+}
+
+void updateTeacherFirstName(TEACHER& teacher, string newSurname)
+{
+	teacher.surname = newSurname;
+}
+
+void updateTeacherFirstName(TEACHER& teacher, string newEmail)
+{
+	teacher.email = newEmail;
+}
+
 
 
