@@ -225,3 +225,21 @@ void updateTeamStaus(TEAM& team, STATUS newStatus)
 {
 	team.status = newStatus;
 }
+
+// SCHOOL
+
+void updateSchoolName(SCHOOL& school, string newName)
+{
+	school.name = newName;
+}
+
+void updateSchoolCity(SCHOOL& school, string newCity)
+{
+	school.city = newCity;
+}
+
+void updateSchoolAdress(SCHOOL& school, string newAddress)
+{
+	school.address = newAddress;
+}
+
