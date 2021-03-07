@@ -206,11 +206,6 @@ void updateTeamDesc(TEAM& team, string newDesc)
 	team.desc = newDesc;
 }
 
-void updateTeamName(TEAM& team, string newName)
-{
-	team.name = newName;
-}
-
 void updateTeamDayOfSetUp(TEAM& team, int newDay)
 {
 	team.dateOfSetUp.day = newDay;
