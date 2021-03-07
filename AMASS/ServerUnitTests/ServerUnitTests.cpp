@@ -179,5 +179,21 @@ namespace ServerUnitTests
 
 			}
 		}
+		TEST_METHOD(ShouldSuccessfullyDeleteRolesFromSchool)
+		{
+			SCHOOL testSchool;
+			ROLE testRole1 = { 0, "Scrum Master" };
+			ROLE testRole2 = { 1, "Backend Developer" };
+			createRole(testSchool, testRole2);
+			createRole(testSchool, testRole1);
+			deleteRoles(testSchool, testRole1.id);
+
+			for (size_t i = 0; i < testSchool.roles.size(); i++)
+			{
+				Assert::AreNotEqual(testSchool.roles[i].id, testRole1.id);
+				Assert::AreNotEqual(testSchool.roles[i].name, testRole1.name);
+
+			}
+		}
 	};
 }

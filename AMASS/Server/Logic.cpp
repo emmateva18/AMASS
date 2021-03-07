@@ -93,12 +93,12 @@ void deleteTeacher(SCHOOL& school, int teacherId)
 	}
 }
 
-void deleteRoles(SCHOOL& school, int teamId)
+void deleteRoles(SCHOOL& school, int roleId)
 {
 	
 	for (size_t i = 0; i < school.roles.size(); i++)
 	{
-		if (school.roles[i].id == teamId)
+		if (school.roles[i].id == roleId)
 		{
 			school.roles.erase(school.roles.begin() + i);
 			return;
