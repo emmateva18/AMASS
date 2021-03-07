@@ -135,3 +135,11 @@ void updateStudentFirstName(STUDENT& student, string newFirstName)
 	student.firstName = newFirstName;
 }
 
+void updateStudentMiddleName(STUDENT& student, string newMiddleName)
+{
+	student.middleName = newMiddleName;
+}
+
+
+
+
