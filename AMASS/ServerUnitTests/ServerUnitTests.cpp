@@ -324,6 +324,26 @@ namespace ServerUnitTests
 			updateTeamStatus(testTeam, testTeamStatus);
 			Assert::AreEqual(statusToString(testTeam.status), statusToString(testTeamStatus));
 		}
-
+		TEST_METHOD(ShouldSuccessfullyUpdateSchoolName)
+		{
+			SCHOOL testSchool = { 0,4,"PGKPI","Burgas","Meden Rudnik", {{ 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" }}, {{ 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}}} },{{ 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" }},{{ 0, "Scrum Master" }} };
+			string testSchoolName = "VCSPI";
+			updateSchoolName(testSchool, testSchoolName);
+			Assert::AreEqual(testSchool.name, testSchoolName);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateSchoolCity)
+		{
+			SCHOOL testSchool = { 0,4,"PGKPI","Burgas","Meden Rudnik", {{ 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" }}, {{ 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}}} },{{ 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" }},{{ 0, "Scrum Master" }} };
+			string testSchoolCity = "Bourgas";
+			updateSchoolCity(testSchool, testSchoolCity);
+			Assert::AreEqual(testSchool.city, testSchoolCity);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateSchoolAdress)
+		{
+			SCHOOL testSchool = { 0,4,"PGKPI","Burgas","Meden Rudnik", {{ 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" }}, {{ 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}}} },{{ 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" }},{{ 0, "Scrum Master" }} };
+			string testSchoolAdress = "Burgas Meden Rudnik";
+			updateSchoolAdress(testSchool, testSchoolAdress);
+			Assert::AreEqual(testSchool.address, testSchoolAdress);
+		}
 	};
 }
