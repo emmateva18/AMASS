@@ -135,6 +135,11 @@ void deleteTeam(SCHOOL& school, int teamId)
 	}
 }
 
+void deleteTeamIdInTeacher(TEACHER& teacher, int teamIdIndex)
+{
+	teacher.teamIds.erase(teacher.teamIds.begin() + teamIdIndex);
+}
+
 void updateStudentFirstName(STUDENT& student, string newFirstName)
 {
 	student.firstName = newFirstName;
@@ -165,20 +170,23 @@ void updateTeacherFirstName(TEACHER& teacher, string newFirstName)
 	teacher.firstName = newFirstName;
 }
 
-void updateTeacherFirstName(TEACHER& teacher, string newMiddleName)
+void updateTeacherMiddleName(TEACHER& teacher, string newMiddleName)
 {
 	teacher.middleName = newMiddleName;
 }
 
-void updateTeacherFirstName(TEACHER& teacher, string newSurname)
+void updateTeacherSurname(TEACHER& teacher, string newSurname)
 {
 	teacher.surname = newSurname;
 }
 
-void updateTeacherFirstName(TEACHER& teacher, string newEmail)
+void updateTeacherEmail(TEACHER& teacher, string newEmail)
 {
 	teacher.email = newEmail;
 }
 
-
+void updateTeamIdInTeacher(TEACHER& teacher, int teamIdIndex, int newId)
+{
+	teacher.teamIds[teamIdIndex] = newId;
+}
 
