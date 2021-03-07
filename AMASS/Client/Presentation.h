@@ -15,7 +15,13 @@ void displaySchoolInformation(SCHOOL school);
 void displayTeachersInformation(SCHOOL school);
 void displayTeacherInformation(TEACHER teacher);
 void displayTeamsInformation(SCHOOL school);
-void displaySchoolWithTable(SCHOOL school);
+void displayTeamInformation(TEAM team);
+void displayStudentsInformation(SCHOOL school);
+void displayStudentInformation(STUDENT student);
+void displayRolesInformation(SCHOOL school);
+void displayRoleInformation(ROLE role);
+void displaySchoolStructure(SCHOOL school);
+void displaySchools(std::vector<SCHOOL> schools);
 
 STUDENT enterStudent();
 TEACHER enterTeacher();

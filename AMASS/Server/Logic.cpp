@@ -38,7 +38,7 @@ void init(vector<SCHOOL>& schools)
 	string city = "Burgas";
 	string address = "Meden Rudnik 54";
 
-	SCHOOL school{ 0,5, name, city, address, teachers, teams, students };
+	SCHOOL school{ 0,5, name, city, address, teachers, teams, students, roles };
 
 	schools.push_back(school);
 }

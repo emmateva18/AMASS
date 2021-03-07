@@ -145,7 +145,7 @@ void requestReadDB()
 	readRequest(SYSTEM_CODE::readDB,schools);
 	
 	for(size_t i=0;i<schools.size();i++)
-		displaySchoolWithTable(schools[i]);
+		displaySchoolStructure(schools[i]);
 }
 
 void requestDltSch()
