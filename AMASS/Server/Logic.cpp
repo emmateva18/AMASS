@@ -130,4 +130,8 @@ void deleteTeam(SCHOOL& school, int teamId)
 	}
 }
 
+void updateStudentFirstName(STUDENT& student, string newFirstName)
+{
+	student.firstName = newFirstName;
+}
 
