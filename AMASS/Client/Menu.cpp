@@ -161,7 +161,7 @@ vector<MENU> initMenus()
 			{true,'1',"Create School",requestCrtSch,-1},
 			{false,'2',"Display information",nullptr,5},
 			{false,'3',"Edit School",nullptr,1},
-			{false,'4',"Exit",nullptr,0}
+			{false,'4',"Exit",exitProgram,-1}
 		}
 	};
 
@@ -171,7 +171,7 @@ vector<MENU> initMenus()
 			{true,'1',"Create elements",nullptr,2},
 			{false,'2',"Update elements",nullptr,3},
 			{false,'3',"Delete elements",nullptr,4},
-			{false,'4',"Exit",nullptr,0}
+			{false,'4',"Back",nullptr,0}
 		}
 	};
 
@@ -183,7 +183,7 @@ vector<MENU> initMenus()
 			{false,'3',"Create student"},
 			{false, '4', "Create Role"},
 			{false, '5',"Input maximum number of members per team"},
-			{false,'6',"Exit",nullptr,1}
+			{false,'6',"Back",nullptr,1}
 		}
 	};
 
@@ -193,23 +193,23 @@ vector<MENU> initMenus()
 			{true,'1',"Update school name"},
 			{false,'2',"Update school address"},
 			{false,'3',"Update school city"},
-			{false,'4',"Update teachers"},
-			{false,'5',"Update students"},
-			{false,'6',"Update roles"},
-			{false,'7',"Update teams"},
-			{false,'8',"Exit",nullptr,1}
+			{false,'4',"Update teachers",nullptr,7},
+			{false,'5',"Update students",nullptr,10},
+			{false,'6',"Update roles",nullptr,9},
+			{false,'7',"Update teams",nullptr,8},
+			{false,'8',"Back",nullptr,1}
 		}
 	};
 
 	MENU deleteMenu =
 	{
 		{
-			{true,'1',"Delete School"},
+			{true,'1',"Delete School",requestDltSch,-1},
 			{false,'2',"Delete team"},
 			{false,'3',"Delete Role"},
 			{false,'4',"Delete student"},
 			{false,'5',"Delete teacher"},
-			{false,'6',"Exit",nullptr,1}
+			{false,'6',"Back",nullptr,1}
 		}
 	};
 
@@ -218,7 +218,7 @@ vector<MENU> initMenus()
 		{
 			{true,'1',"Display all records",requestReadDB,-1},
 			{false,'2',"Display record by criteria",nullptr},
-			{false,'3',"Exit",nullptr,0}
+			{false,'3',"Back",nullptr,0}
 		}
 	};
 
@@ -228,9 +228,60 @@ vector<MENU> initMenus()
 			{true,'1',"Show students in team",nullptr,-1},
 			{false,'2',"Show teachers without teams",nullptr,-1},
 			{false,'3',"Show archived teams",nullptr,-1},
-			{false,'4',"Exit",nullptr,6}
+			{false,'4',"Back",nullptr,6}
 		}
 	};
-	menus = { mainMenu,editMenu,createMenu,updateMenu,deleteMenu,displayMenu,displayRecordsMenu };
+
+	MENU updateTeacherMenu =
+	{
+		{
+			{true,'1',"Update first name",nullptr,-1},
+			{false,'2',"Update middle name",nullptr,-1},
+			{false,'3',"Update surname",nullptr,-1},
+			{false,'4',"Update email",nullptr,-1},
+			{false,'5',"Update the teacher's teams",nullptr,-1},
+			{false,'6',"Back",nullptr,3}
+		}
+	};
+
+	MENU updateTeamMenu = 
+	{
+		{
+			{true,'1',"Update team name",nullptr,-1},
+			{false,'2',"Update team description",nullptr,-1},
+			{false,'3',"Update team status",nullptr,-1},
+			{false,'4',"Update team members",nullptr,-1},
+			{false,'5',"Back",nullptr,3},
+		}
+	};
+
+	MENU updateTeamMemberMenu =
+	{
+		{
+			{true,'1',"Update student email",nullptr,-1},
+			{false,'2',"Update student role",nullptr,-1},
+			{false,'3',"Back",nullptr,3},
+		}
+	};
+
+	MENU updateStudentMenu =
+	{
+		{
+			{true,'1',"Update student's first name",nullptr,-1},
+			{false,'2',"Update student's middle name",nullptr,-1},
+			{false,'3',"Update student's surname",nullptr,-1},
+			{false,'4',"Update student's class",nullptr,-1},
+			{false,'5',"Update student's email",nullptr,-1},
+			{false,'6',"Update wether a student is in a team",nullptr,-1},
+			{false,'7',"Back",nullptr,3},
+		}
+	};
+	menus = 
+	{ 
+		mainMenu,editMenu,createMenu,updateMenu,
+		deleteMenu,displayMenu,displayRecordsMenu,updateTeacherMenu,
+		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu 
+	};
+
 	return menus;
 }

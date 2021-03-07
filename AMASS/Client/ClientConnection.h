@@ -46,6 +46,7 @@ void sendRequest(SYSTEM_CODE code, bool data);
 void sendRequest(SYSTEM_CODE code, int data);
 void sendRequest(SYSTEM_CODE code, uint16_t data);
 
-//void processCrtSch()
+void exitProgram();
 void requestCrtSch();
 void requestReadDB();
+void requestDltSch();

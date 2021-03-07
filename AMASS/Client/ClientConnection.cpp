@@ -97,34 +97,41 @@ void readRequest(SYSTEM_CODE code, vector<SCHOOL>& school)
 
 void sendRequest(SYSTEM_CODE code, std::string data, vector<SCHOOL> schools)
 {
-	asio::ip::tcp::socket socket = connectToServer();
-	writeInt(socket, code);
-	writeStr(socket, data);
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, code);
+	writeStr(socket_, data);
 }
 void sendRequest(SYSTEM_CODE code, bool data)
 {
-	asio::ip::tcp::socket socket = connectToServer();
-	writeInt(socket, code);
-	writeBool(socket, data);
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, code);
+	writeBool(socket_, data);
 }
 void sendRequest(SYSTEM_CODE code, int data)
 {
-	asio::ip::tcp::socket socket = connectToServer();
-	writeInt(socket, code);
-	writeInt(socket, data);
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, code);
+	writeInt(socket_, data);
 }
 void sendRequest(SYSTEM_CODE code, uint16_t data)
 {
-	asio::ip::tcp::socket socket = connectToServer();
-	writeInt(socket, code);
-	writeShortInt(socket, data);
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, code);
+	writeShortInt(socket_, data);
 }
 
-/*void processCrtSch()
+void exitProgram()
 {
-	SCHOOL school = enterSchool();
-	sendRequest(SYSTEM_CODE::crtSchool, school);
-}*/
+	exit(0);
+}
 
 void requestCrtSch()
 {
@@ -139,4 +146,12 @@ void requestReadDB()
 	
 	for(size_t i=0;i<schools.size();i++)
 		displaySchoolWithTable(schools[i]);
+}
+
+void requestDltSch()
+{
+	//validate()
+	int id;
+	cin >> id;
+	sendRequest(SYSTEM_CODE::dltSchool, id);
 }

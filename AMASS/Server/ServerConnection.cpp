@@ -299,8 +299,13 @@ void processRequest(asio::ip::tcp::socket& socket,vector<SCHOOL>& schools)
 			break;
 		case dltTeam:
 			break;
+		*/
 		case dltSchool:
+			int id;
+			readInt(socket, id);
+			deleteSchool(schools, id);
 			break;
+		/*
 		default:
 			break;
 		}*/

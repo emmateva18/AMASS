@@ -121,6 +121,7 @@ void deleteSchool(vector<SCHOOL>& schools, int schoolId)
 			schools.erase(schools.begin() + i);
 		}
 	}
+	saveDataBase(schools);
 }
 
 void deleteTeam(SCHOOL& school, int teamId)
