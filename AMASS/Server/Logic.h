@@ -37,7 +37,7 @@ void updateTeamName(TEAM& team, string newName);
 void updateTeamDayOfSetUp(TEAM& team, int newDay);
 void updateTeamMonthOfSetUp(TEAM& team, int newMonth);
 void updateTeamYearOfSetUp(TEAM& team, int newYear);
-void updateTeamStaus(TEAM& team, STATUS newStatus);
+void updateTeamStatus(TEAM& team, STATUS newStatus);
 void updateSchoolName(SCHOOL& school, string newName);
 void updateSchoolCity(SCHOOL& school, string newCity);
 void updateSchoolAdress(SCHOOL& school, string newAddress);

@@ -224,7 +224,6 @@ namespace ServerUnitTests
 			updateStudentMiddleName(testStudent, testMiddleName);
 			Assert::AreEqual(testStudent.middleName, testMiddleName);
 		}
-
 		TEST_METHOD(ShouldSuccessfullyUpdateStudentSurname)
 		{
 			STUDENT testStudent = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
@@ -253,7 +252,6 @@ namespace ServerUnitTests
 			updateTeacherFirstName(testTeacher, testFirstName);
 			Assert::AreEqual(testTeacher.firstName, testFirstName);
 		}
-
 		TEST_METHOD(ShouldSuccessfullyUpdateTeacherMiddleName)
 		{
 			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
@@ -261,7 +259,6 @@ namespace ServerUnitTests
 			updateTeacherMiddleName(testTeacher, testMiddleName);
 			Assert::AreEqual(testTeacher.middleName, testMiddleName);
 		}
-
 		TEST_METHOD(ShouldSuccessfullyUpdateTeacherSurname)
 		{
 			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
@@ -269,7 +266,6 @@ namespace ServerUnitTests
 			updateTeacherSurname(testTeacher, testSurname);
 			Assert::AreEqual(testTeacher.surname, testSurname);
 		}
-
 		TEST_METHOD(ShouldSuccessfullyUpdateTeacherEmail)
 		{
 			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
@@ -277,7 +273,6 @@ namespace ServerUnitTests
 			updateTeacherEmail(testTeacher, testEmail);
 			Assert::AreEqual(testTeacher.email, testEmail);
 		}
-
 		TEST_METHOD(ShouldSuccessfullyUpdateTeacherTeamId)
 		{
 			TEACHER testTeacher = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg",{0,1,2,3,4,5} };
@@ -285,6 +280,49 @@ namespace ServerUnitTests
 			int testNewId = 6;
 			updateTeamIdInTeacher(testTeacher, testTeamIdIndex, testNewId);
 			Assert::AreEqual(testTeacher.teamIds[testTeamIdIndex], testNewId);
+		}
+
+		TEST_METHOD(ShouldSuccessfullyUpdateTeamName)
+		{
+			TEAM testTeam = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			string testTeamName = "AMASS";
+			updateTeamName(testTeam, testTeamName);
+			Assert::AreEqual(testTeam.name, testTeamName);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateTeamDesc)
+		{
+			TEAM testTeam = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			string testTeamDesc = "Vivamus blandit tortor aliquam magna posuere auctor. ";
+			updateTeamDesc(testTeam, testTeamDesc);
+			Assert::AreEqual(testTeam.desc, testTeamDesc);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateTeamDayOfSetUp)
+		{
+			TEAM testTeam = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			int testTeamDayOfSetUp = 2;
+			updateTeamDayOfSetUp(testTeam, testTeamDayOfSetUp);
+			Assert::AreEqual(testTeam.dateOfSetUp.day, testTeamDayOfSetUp);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateTeamMonthOfSetUp)
+		{
+			TEAM testTeam = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			int testTeamMonthOfSetUp = 5;
+			updateTeamMonthOfSetUp(testTeam, testTeamMonthOfSetUp);
+			Assert::AreEqual(testTeam.dateOfSetUp.month, testTeamMonthOfSetUp);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateTeamYearOfSetUp)
+		{
+			TEAM testTeam = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			int testTeamYearOfSetUp = 2020;
+			updateTeamYearOfSetUp(testTeam, testTeamYearOfSetUp);
+			Assert::AreEqual(testTeam.dateOfSetUp.year, testTeamYearOfSetUp);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateTeamStatus)
+		{
+			TEAM testTeam = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			STATUS testTeamStatus = pendingApproval;
+			updateTeamStatus(testTeam, testTeamStatus);
+			Assert::AreEqual(statusToString(testTeam.status), statusToString(testTeamStatus));
 		}
 
 	};

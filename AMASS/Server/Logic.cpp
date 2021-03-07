@@ -221,7 +221,7 @@ void updateTeamYearOfSetUp(TEAM& team, int newYear)
 	team.dateOfSetUp.year = newYear;
 }
 
-void updateTeamStaus(TEAM& team, STATUS newStatus)
+void updateTeamStatus(TEAM& team, STATUS newStatus)
 {
 	team.status = newStatus;
 }
