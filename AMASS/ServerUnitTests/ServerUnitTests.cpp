@@ -210,5 +210,28 @@ namespace ServerUnitTests
 				Assert::AreNotEqual(schools[i].name, testSchool1.name);
 			}
 		}
+		TEST_METHOD(ShouldSuccessfullyUpdateStudentFirstName)
+		{
+			STUDENT testStudent = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
+			string testFirstName = "Teodor";
+			updateStudentFirstName(testStudent, testFirstName);
+			Assert::AreEqual(testStudent.firstName, testFirstName);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateStudentMiddleName)
+		{
+			STUDENT testStudent = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
+			string testMiddleName = "Petrov";
+			updateStudentMiddleName(testStudent, testMiddleName);
+			Assert::AreEqual(testStudent.middleName, testMiddleName);
+		}
+
+		TEST_METHOD(ShouldSuccessfullyUpdateStudentSurname)
+		{
+			STUDENT testStudent = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
+			string testSurname = "Ivanov";
+			updateStudentSurname(testStudent, testSurname);
+			Assert::AreEqual(testStudent.surname, testSurname);
+		}
+
 	};
 }
