@@ -140,6 +140,8 @@ void deleteTeamIdInTeacher(TEACHER& teacher, int teamIdIndex)
 	teacher.teamIds.erase(teacher.teamIds.begin() + teamIdIndex);
 }
 
+// STUDENT
+
 void updateStudentFirstName(STUDENT& student, string newFirstName)
 {
 	student.firstName = newFirstName;
@@ -164,6 +166,8 @@ void updateStudentEmail(STUDENT& student, string newEmail)
 {
 	student.email = newEmail;
 }
+
+// TEACHER
 
 void updateTeacherFirstName(TEACHER& teacher, string newFirstName)
 {
@@ -190,3 +194,39 @@ void updateTeamIdInTeacher(TEACHER& teacher, int teamIdIndex, int newId)
 	teacher.teamIds[teamIdIndex] = newId;
 }
 
+// TEAM
+
+void updateTeamName(TEAM& team, string newName)
+{
+	team.name = newName;
+}
+
+void updateTeamDesc(TEAM& team, string newDesc)
+{
+	team.desc = newDesc;
+}
+
+void updateTeamName(TEAM& team, string newName)
+{
+	team.name = newName;
+}
+
+void updateTeamDayOfSetUp(TEAM& team, int newDay)
+{
+	team.dateOfSetUp.day = newDay;
+}
+
+void updateTeamMonthOfSetUp(TEAM& team, int newMonth)
+{
+	team.dateOfSetUp.month = newMonth;
+}
+
+void updateTeamYearOfSetUp(TEAM& team, int newYear)
+{
+	team.dateOfSetUp.year = newYear;
+}
+
+void updateTeamStaus(TEAM& team, STATUS newStatus)
+{
+	team.status = newStatus;
+}
