@@ -232,6 +232,20 @@ namespace ServerUnitTests
 			updateStudentSurname(testStudent, testSurname);
 			Assert::AreEqual(testStudent.surname, testSurname);
 		}
+		TEST_METHOD(ShouldSuccessfullyUpdateStudentGrade)
+		{
+			STUDENT testStudent = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
+			string testGrade = "10G";
+			updateStudentGrade(testStudent, testGrade);
+			Assert::AreEqual(testStudent.grade, testGrade);
+		}
+		TEST_METHOD(ShouldSuccessfullyUpdateStudentEmail)
+		{
+			STUDENT testStudent = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
+			string testEmail = "gggeorgiev@abv.bg";
+			updateStudentEmail(testStudent, testEmail);
+			Assert::AreEqual(testStudent.email, testEmail);
+		}
 
 	};
 }
