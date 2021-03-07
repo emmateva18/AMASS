@@ -25,6 +25,7 @@ namespace ServerUnitTests
 			Assert::AreEqual(testSchool.students[0].grade, testStudent.grade);
 			Assert::AreEqual(testSchool.students[0].email, testStudent.email);
 		}
+
 		TEST_METHOD(ShouldSuccessfullyAddTeachertIntoSchool)
 		{
 			SCHOOL testSchool;
@@ -193,6 +194,20 @@ namespace ServerUnitTests
 				Assert::AreNotEqual(testSchool.roles[i].id, testRole1.id);
 				Assert::AreNotEqual(testSchool.roles[i].name, testRole1.name);
 
+			}
+		}
+		TEST_METHOD(ShouldSuccessfullyDeleteSchool)
+		{
+			std::vector<SCHOOL> schools;
+			SCHOOL testSchool1 = { 0,4,"PGKPI","Burgas","Meden Rudnik", {{ 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" }}, {{ 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}}} },{{ 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" }},{{ 0, "Scrum Master" }} };
+			SCHOOL testSchool2 = { 1,4,"PMG","Burgas","Centur", {{ 0,"Petur","Stoynov","Ivanov","PSIvanov@abv.bg" }}, { { 1, "Anti-Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"IUM@abv.bg", 1},{"SBP@abv.bg", 2}} } },{{ 4,"Ivan","Ivanov","Ivanov","10B","III@abv.bg" }},{{ 1, "Backend Developer" }} };
+			createSchool(schools, testSchool2);
+			createSchool(schools, testSchool1);
+			deleteSchool(schools, testSchool1.id);
+			for (size_t i = 0; i < schools.size(); i++)
+			{
+				Assert::AreNotEqual(schools[i].id, testSchool1.id);
+				Assert::AreNotEqual(schools[i].name, testSchool1.name);
 			}
 		}
 	};
