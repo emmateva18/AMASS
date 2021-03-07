@@ -81,7 +81,7 @@ namespace ServerUnitTests
 					Assert::AreEqual(schools[0].teachers[i].middleName, testSchool.teachers[i].middleName);
 					Assert::AreEqual(schools[0].teachers[i].surname, testSchool.teachers[i].surname);
 					Assert::AreEqual(schools[0].teachers[i].email, testSchool.teachers[i].email);
-					
+
 					// Test teams for teachers
 					for (size_t j = 0; j < testSchool.teachers[i].teamIds.size(); j++)
 					{
@@ -98,7 +98,7 @@ namespace ServerUnitTests
 					Assert::AreEqual(schools[0].teams[i].dateOfSetUp.month, testSchool.teams[i].dateOfSetUp.month);
 					Assert::AreEqual(schools[0].teams[i].dateOfSetUp.year, testSchool.teams[i].dateOfSetUp.year);
 					Assert::AreEqual(statusToString(schools[0].teams[0].status), statusToString(testSchool.teams[i].status));
-					
+
 					//Test members in team
 					for (size_t j = 0; j < testSchool.teams[i].members.size(); j++)
 					{
@@ -135,7 +135,7 @@ namespace ServerUnitTests
 			createStudent(testSchool, testStudent2);
 			createStudent(testSchool, testStudent1);
 			deleteStudent(testSchool, testStudent1.id);
-			
+
 			for (size_t i = 0; i < testSchool.students.size(); i++)
 			{
 				Assert::AreNotEqual(testSchool.students[i].id, testStudent1.id);
@@ -145,7 +145,7 @@ namespace ServerUnitTests
 				Assert::AreNotEqual(testSchool.students[i].grade, testStudent1.grade);
 				Assert::AreNotEqual(testSchool.students[i].email, testStudent1.email);
 			}
-			
+
 		}
 		TEST_METHOD(ShouldSuccessfullyDeleteTeacherFromSchool)
 		{
@@ -155,20 +155,29 @@ namespace ServerUnitTests
 			createTeacher(testSchool, testTeacher2);
 			createTeacher(testSchool, testTeacher1);
 			deleteTeacher(testSchool, testTeacher1.id);
-			
+
 			for (size_t i = 0; i < testSchool.teachers.size(); i++)
 			{
 				Assert::AreNotEqual(testSchool.teachers[i].id, testTeacher1.id);
-				Assert::AreNotEqual(testSchool.teachers[i].firstName, testTeacher1.firstName);
-				Assert::AreNotEqual(testSchool.teachers[i].middleName, testTeacher1.middleName);
-				Assert::AreNotEqual(testSchool.teachers[i].surname, testTeacher1.surname);
 				Assert::AreNotEqual(testSchool.teachers[i].email, testTeacher1.email);
-				for (size_t j = 0; j < testSchool.teachers[i].teamIds.size(); j++)
-				{
-					Assert::AreNotEqual(testSchool.teachers[i].teamIds[j], testTeacher1.teamIds[j]);
-				}
 			}
-			
+
+		}
+		TEST_METHOD(ShouldSuccessfullyDeleteTeamFromSchool)
+		{
+			SCHOOL testSchool;
+			TEAM testTeam1 = { 0, "Chupacabras","example 1 description lorem eipsum take up space",{1,2,2020},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			TEAM testTeam2 = { 1, "Anti-Chupacabras","example 2 description lorem eipsum take up space",{2,3,2019},STATUS::inUse,{{"IUM@abv.bg", 1},{"SBP@abv.bg", 2}} };
+			createTeam(testSchool, testTeam2);
+			createTeam(testSchool, testTeam1);
+			deleteTeam(testSchool, testTeam1.id);
+
+			for (size_t i = 0; i < testSchool.teams.size(); i++)
+			{
+				Assert::AreNotEqual(testSchool.teams[i].id, testTeam1.id);
+				Assert::AreNotEqual(testSchool.teams[i].name, testTeam1.name);
+
+			}
 		}
 	};
 }
