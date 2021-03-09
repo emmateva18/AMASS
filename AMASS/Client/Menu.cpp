@@ -6,7 +6,7 @@ void MENU::showMenuItems()
 	{
 		if (items[i].isSelected)
 		{
-			cout << "\x1b[36m" <<items[i].number<<"."<<items[i].text<<endl;
+			cout << "\x1b[36m" << items[i].number << "." << items[i].text << endl;
 		}
 		else
 		{
@@ -44,19 +44,19 @@ void showSecondaryMenu(int& selectedItem, int& ch)
 			system("cls");
 			switch (selectedItem)
 			{
-			case 1:
-			{
-				showMenuItems(editInfoMenuItems, selectedItem);
-				ch = _getch();
-				if (ch == 224)
+				case 1:
 				{
-					switch (_getch())
+					showMenuItems(editInfoMenuItems, selectedItem);
+					ch = _getch();
+					if (ch == 224)
 					{
-					case 80: selectedItem++; break;
-					case 72: selectedItem--; break;
+						switch (_getch())
+						{
+							case 80: selectedItem++; break;
+							case 72: selectedItem--; break;
+						}
 					}
 				}
-			}
 			}
 
 		}
@@ -96,22 +96,22 @@ void getUserInput(vector<MENU> menus)
 		{
 			switch (_getch())
 			{
-			case 80: //down
-				if (validate(currentItem+1, menus[currentMenu]))
-				{
-					menus[currentMenu].items[currentItem].isSelected=false;
-					currentItem++;
-					menus[currentMenu].items[currentItem].isSelected = true;
-				}	
-				break;
-			case 72: //up
-				if (validate(currentItem-1, menus[currentMenu]))
-				{
-					menus[currentMenu].items[currentItem].isSelected = false;
-					currentItem--;
-					menus[currentMenu].items[currentItem].isSelected = true;
-				}
-				break;
+				case 80: //down
+					if (validate(currentItem + 1, menus[currentMenu]))
+					{
+						menus[currentMenu].items[currentItem].isSelected = false;
+						currentItem++;
+						menus[currentMenu].items[currentItem].isSelected = true;
+					}
+					break;
+				case 72: //up
+					if (validate(currentItem - 1, menus[currentMenu]))
+					{
+						menus[currentMenu].items[currentItem].isSelected = false;
+						currentItem--;
+						menus[currentMenu].items[currentItem].isSelected = true;
+					}
+					break;
 			}
 		}
 		if (ch == 13)
@@ -119,7 +119,7 @@ void getUserInput(vector<MENU> menus)
 			action ac = menus[currentMenu].items[currentItem].action;
 			if (menus[currentMenu].items[currentItem].nextMenuPos == -1)
 				ac();
-			else 
+			else
 			{
 				currentMenu = menus[currentMenu].items[currentItem].nextMenuPos;
 				currentItem = 0;
@@ -145,8 +145,8 @@ void showMainMenu(int& selectedItem, int& ch)
 		{
 			switch (_getch())
 			{
-			case 80: selectedItem++; break;
-			case 72: selectedItem--; break;
+				case 80: selectedItem++; break;
+				case 72: selectedItem--; break;
 			}
 		}
 		showSecondaryMenu(selectedItem, ch);
@@ -244,7 +244,7 @@ vector<MENU> initMenus()
 		}
 	};
 
-	MENU updateTeamMenu = 
+	MENU updateTeamMenu =
 	{
 		{
 			{true,'1',"Update team name",nullptr,-1},
@@ -276,11 +276,11 @@ vector<MENU> initMenus()
 			{false,'7',"Back",nullptr,3},
 		}
 	};
-	menus = 
-	{ 
+	menus =
+	{
 		mainMenu,editMenu,createMenu,updateMenu,
 		deleteMenu,displayMenu,displayRecordsMenu,updateTeacherMenu,
-		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu 
+		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu
 	};
 
 	return menus;

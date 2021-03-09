@@ -43,15 +43,29 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
-int assignIdToSchool(vector<SCHOOL>& schools)
+void assignSchoolId(SCHOOL& school, COUNTERS& idCounter)
 {
-	int maxId = 0;
-	for (size_t i = 0; i < schools.size(); i++)
-	{
-		if (schools[i].id > maxId)
-			maxId = schools[i].id;
-	}
-	return maxId + 1;
+	school.id = idCounter.schoolId++;
+}
+
+void assignTeamId(TEAM& team, COUNTERS& idCounter)
+{
+	team.id = idCounter.teamId++;
+}
+
+void assignRoleId(ROLE& role, COUNTERS& idCounter)
+{
+	role.id = idCounter.roleId++;
+}
+
+void assignTeacherId(TEACHER& teacher, COUNTERS& idCounter)
+{
+	teacher.id = idCounter.teacherId++;
+}
+
+void assignStudentId(STUDENT& student, COUNTERS& idCounter)
+{
+	student.id = idCounter.studentId++;
 }
 
 void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id)

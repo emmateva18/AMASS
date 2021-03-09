@@ -1,3 +1,7 @@
 <7.3.2021> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
 <7.3.2021> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
 <7.3.2021> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<9.3.2021 20:30:42> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<9.3.2021 20:32:09> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<9.3.2021 20:33:44> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<9.3.2021 20:33:48> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
