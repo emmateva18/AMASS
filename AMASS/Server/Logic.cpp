@@ -43,29 +43,39 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
-void assignSchoolId(SCHOOL& school, COUNTERS& idCounter)
+void assignSchoolId(SCHOOL& school)
 {
-	school.id = idCounter.schoolId++;
+	COUNTERS ids = readRecord();
+	school.id = ids.schoolId++;
+	save(ids);
 }
 
-void assignTeamId(TEAM& team, COUNTERS& idCounter)
+void assignTeamId(TEAM& team)
 {
-	team.id = idCounter.teamId++;
+	COUNTERS ids = readRecord();
+	team.id = ids.teamId++;
+	save(ids);
 }
 
-void assignRoleId(ROLE& role, COUNTERS& idCounter)
+void assignRoleId(ROLE& role)
 {
-	role.id = idCounter.roleId++;
+	COUNTERS ids = readRecord();
+	role.id = ids.roleId++;
+	save(ids);
 }
 
-void assignTeacherId(TEACHER& teacher, COUNTERS& idCounter)
+void assignTeacherId(TEACHER& teacher)
 {
-	teacher.id = idCounter.teacherId++;
+	COUNTERS ids = readRecord();
+	teacher.id = ids.teacherId++;
+	save(ids);
 }
 
-void assignStudentId(STUDENT& student, COUNTERS& idCounter)
+void assignStudentId(STUDENT& student)
 {
-	student.id = idCounter.studentId++;
+	COUNTERS ids = readRecord();
+	student.id = ids.studentId++;
+	save(ids);
 }
 
 void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id)
@@ -279,34 +289,4 @@ void updateSchoolCity(SCHOOL& school, string newCity)
 void updateSchoolAdress(SCHOOL& school, string newAddress)
 {
 	school.address = newAddress;
-}
-
-void assignSchoolId(SCHOOL& school, COUNTERS& ids)
-{
-	school.id = ids.schoolId;
-	ids.schoolId++;
-}
-
-void assignTeacherId(TEACHER& teacher, COUNTERS& ids)
-{
-	teacher.id = ids.teacherId;
-	ids.teacherId++;
-}
-
-void assignTeamId(TEAM& team, COUNTERS& ids)
-{
-	team.id = ids.teamId;
-	ids.teamId++;
-}
-
-void assignStudentId(STUDENT& student, COUNTERS& ids)
-{
-	student.id = ids.studentId;
-	ids.studentId++;
-}
-
-void assignRoleId(ROLE& role, COUNTERS& ids)
-{
-	role.id = ids.roleId;
-	ids.roleId++;
 }

@@ -156,7 +156,7 @@ struct COUNTERS
 	int roleId = 0;
 	int teacherId = 0;
 	int studentId = 0;
-}idCounter;
+};
 
 void writeShortInt(asio::ip::tcp::socket& socket, uint16_t num);
 void writeStr(asio::ip::tcp::socket& socket, std::string str);

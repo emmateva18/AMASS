@@ -7,11 +7,11 @@ using namespace std;
 
 void init(vector<SCHOOL>& schools);
 
-void assignSchoolId(SCHOOL& school, COUNTERS& idCounter);
-void assignTeamId(TEAM& team, COUNTERS& idCounter);
-void assignRoleId(ROLE& role, COUNTERS& idCounter);
-void assignTeacherId(TEACHER& teacher, COUNTERS& idCounter);
-void assignStudentId(STUDENT& student, COUNTERS& idCounter);
+void assignSchoolId(SCHOOL& school);
+void assignTeamId(TEAM& team);
+void assignRoleId(ROLE& role);
+void assignTeacherId(TEACHER& teacher);
+void assignStudentId(STUDENT& student);
 
 void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id);
 
@@ -50,8 +50,3 @@ void updateTeamStatus(TEAM& team, STATUS newStatus);
 void updateSchoolName(SCHOOL& school, string newName);
 void updateSchoolCity(SCHOOL& school, string newCity);
 void updateSchoolAdress(SCHOOL& school, string newAddress);
-void assignSchoolId(SCHOOL& school, COUNTERS& ids);
-void assignTeacherId(TEACHER& teacher, COUNTERS& ids);
-void assignTeamId(TEAM& team, COUNTERS& ids);
-void assignStudentId(STUDENT& student, COUNTERS& ids);
-void assignRoleId(ROLE& role, COUNTERS& ids);

@@ -111,13 +111,18 @@ void readRecord(fstream& file, SCHOOL& school)
 	}
 }
 
-void readRecord(std::fstream& file, COUNTERS& ids)
+COUNTERS readRecord()
 {
+	COUNTERS ids;
+	fstream file;
+	file.open("ids.dat", ios::in|ios::out|ios::binary);
 	readInt(file, ids.roleId);
 	readInt(file, ids.schoolId);
 	readInt(file, ids.studentId);
 	readInt(file, ids.teacherId);
 	readInt(file, ids.teamId);
+	file.close();
+	return ids;
 }
 
 void readDataBase(vector<SCHOOL>& schools)
@@ -245,11 +250,14 @@ void save(std::fstream& file, SCHOOL school)
 		save(file, school.roles[i]);
 	}
 }
-void save(std::fstream& file, COUNTERS ids)
+void save(COUNTERS ids)
 {
+	fstream file;
+	file.open("ids.dat", ios::in | ios::out | ios::binary|ios::trunc);
 	saveInt(file, ids.roleId);
 	saveInt(file, ids.schoolId);
 	saveInt(file, ids.studentId);
 	saveInt(file, ids.teacherId);
 	saveInt(file, ids.teamId);
+	file.close();
 }
