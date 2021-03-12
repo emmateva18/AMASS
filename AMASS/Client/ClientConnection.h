@@ -32,6 +32,8 @@ void sendRequest(SYSTEM_CODE code, bool data);
 void sendRequest(SYSTEM_CODE code, int data);
 void sendRequest(SYSTEM_CODE code, uint16_t data);
 
+void sendTeamRequest(SYSTEM_CODE code, int id);
+
 void exitProgram();
 void requestCrtSch();
 void requestReadDB();
@@ -40,3 +42,5 @@ void requestDltTeam();
 void getSchoolId();
 int readSchoolId();
 void requestCrtTeacher();
+void requestCrtTeam();
+void requestCrtStudent();

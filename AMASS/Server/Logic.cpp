@@ -91,14 +91,13 @@ void assignStudentId(STUDENT& student)
 	save(ids);
 }
 
-void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id)
+int findSchoolById(vector<SCHOOL>& schools, int id)
 {
 	for (size_t i = 0; i < schools.size(); i++)
 	{
 		if (schools[i].id == id)
 		{
-			school = schools[i];
-			return;
+			return i;
 		}
 	}
 }

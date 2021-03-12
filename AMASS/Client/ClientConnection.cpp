@@ -1,12 +1,5 @@
 #include "ClientConnection.h"
 using namespace std;
-asio::ip::tcp::socket connectToServer()
-{
-	asio::io_service io_service;
-	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
-	return socket_;
-}
 
 void readRequest(SYSTEM_CODE code, ROLE& role)
 {
@@ -95,6 +88,15 @@ void readRequest(SYSTEM_CODE code, vector<SCHOOL>& school)
 	}
 }
 
+void readRequest(SYSTEM_CODE code, int& data)
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, code);
+	writeInt(socket_, data);
+}
+
 void sendRequest(SYSTEM_CODE code, std::string data, vector<SCHOOL> schools)
 {
 	asio::io_service io_service;
@@ -128,6 +130,27 @@ void sendRequest(SYSTEM_CODE code, uint16_t data)
 	writeShortInt(socket_, data);
 }
 
+void readIntBuffer(int& data)
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	readInt(socket_, data);
+}
+
+void sendTeamRequest(SYSTEM_CODE code, int id)
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, code);
+	writeInt(socket_, id);
+	int MMC;
+	readInt(socket_, MMC);
+	TEAM team = enterTeam(MMC);
+	team.write(socket_);
+}
+
 void exitProgram()
 {
 	exit(0);
@@ -136,13 +159,13 @@ void exitProgram()
 void requestCrtSch()
 {
 	SCHOOL school = enterSchool();
-	sendRequest(SYSTEM_CODE::crtSchool, school,-1);
+	sendRequest(SYSTEM_CODE::crtSchool, school, -1);
 }
 
 void requestReadDB()
 {
 	vector<SCHOOL> schools;
-	readRequest(SYSTEM_CODE::readDB,schools);
+	readRequest(SYSTEM_CODE::readDB, schools);
 	displaySchools(schools);
 }
 
@@ -157,7 +180,7 @@ void requestDltSch()
 void requestDltTeam()
 {
 	requestReadDB();
-	int id,teamId;
+	int id, teamId;
 	cin >> id;
 	sendRequest(SYSTEM_CODE::readSchool, id);
 }
@@ -166,9 +189,9 @@ void getSchoolId()
 {
 	int id;
 	requestReadDB();
-	enterInt(id,"Enter the school's id: ");
+	enterInt(id, "Please enter the ID of the school you wish to change");
 	fstream f;
-	f.open("schoolId.txt", ios::trunc|ios::in|ios::out);
+	f.open("schoolId.txt", ios::trunc | ios::in | ios::out);
 	f << id;
 	f.close();
 }
@@ -187,5 +210,18 @@ void requestCrtTeacher()
 {
 	int schoolId = readSchoolId();
 	TEACHER teacher = enterTeacher();
-	sendRequest(SYSTEM_CODE::crtTeacher, teacher,schoolId);
+	sendRequest(SYSTEM_CODE::crtTeacher, teacher, schoolId);
+}
+
+void requestCrtTeam()
+{
+	int schoolId = readSchoolId();
+	sendTeamRequest(SYSTEM_CODE::crtTeam, schoolId);
+}
+
+void requestCrtStudent()
+{
+	int schoolId = readSchoolId();
+	STUDENT student = enterStudent();
+	sendRequest(SYSTEM_CODE::crtStudent, student, schoolId);
 }

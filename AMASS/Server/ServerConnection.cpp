@@ -216,10 +216,17 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		case errorConnection:
 			break;
 		case crtRole: createRole()
-			break;
+			break;*/
 		case crtStudent:
+		{
+			int schoolId=0;
+			STUDENT student;
+			int pos = findSchoolById(schools, schoolId);
+			student.read(socket);
+			createStudent(schools[pos],student);
+			saveDataBase(schools);
 			break;
-		*/
+		}
 		case crtTeacher:
 		{
 			TEACHER teacher;
@@ -234,14 +241,25 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		case crtDate:
 			break;
 		case crtTeamMember:
-			break;
-		case crtTeam:
 			break;*/
+		case crtTeam:
+		{
+			TEAM team;
+			int schoolId;
+			readInt(socket, schoolId);
+			int pos = findSchoolById(schools,schoolId);
+			writeInt(socket, schools[pos].maxMemberCountPerTeam);
+			team.read(socket);
+			createTeam(schools[schoolId], team);
+			saveDataBase(schools);
+			break;
+		}
 	case crtSchool:
 	{
 		SCHOOL school;
 		school.read(socket);
 		createSchool(schools, school);
+		saveDataBase(schools);
 		break;
 	}
 	/*
@@ -261,9 +279,9 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	{
 		int id;
 		readInt(socket, id);
-		SCHOOL school;
-		findSchoolById(schools, school, id);
-		school.write(socket);
+		int pos = findSchoolById(schools,id);
+		schools[pos].write(socket);
+		saveDataBase(schools);
 		break;
 	}
 
@@ -309,12 +327,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		int id;
 		readInt(socket, id);
 		deleteSchool(schools, id);
+		saveDataBase(schools);
 		break;
 		/*
 		default:
 			break;
 		}*/
 	}
+	
 	logRecord(socket, code);
 }
 
@@ -331,9 +351,16 @@ void startServer(vector<SCHOOL> schools)
 
 	while (1)
 	{
-		acceptor_.listen(100);
-		acceptor_.accept(socket);
-		processRequest(socket, schools);
-		socket.close();
+		try {
+			acceptor_.listen(100);
+			acceptor_.accept(socket);
+			processRequest(socket, schools);
+			socket.close();
+		}
+		catch (exception& e)
+		{
+			cout << "Internal Server error: " << e.what();
+			break;
+		}
 	}
 }
