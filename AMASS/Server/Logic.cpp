@@ -92,27 +92,32 @@ void findSchoolById(vector<SCHOOL>& schools, SCHOOL& school, int id)
 
 void createStudent(SCHOOL& school, STUDENT student)
 {
+	assignStudentId(student);
 	school.students.push_back(student);
 }
 
 void createTeacher(SCHOOL& school, TEACHER teacher)
 {
+	assignTeacherId(teacher);
 	school.teachers.push_back(teacher);
 }
 
 void createTeam(SCHOOL& school, TEAM team)
 {
+	assignTeamId(team);
 	school.teams.push_back(team);
 }
 
 void createSchool(vector<SCHOOL>& schools, SCHOOL school)
 {
+	assignSchoolId(school);
 	schools.push_back(school);
 	saveDataBase(schools);
 }
 
 void createRole(SCHOOL& school, ROLE role)
 {
+	assignRoleId(role);
 	school.roles.push_back(role);
 }
 
