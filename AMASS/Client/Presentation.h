@@ -2,12 +2,21 @@
 #include "../CommunicationLibrary/CommunicationLibrary.h"
 
 std::string statusToString(STATUS status);
-void displaySchool(SCHOOL school);
-void displayTeacher(TEACHER teacher, int id);
-void displayTeam(TEAM team);
 
 std::string nameToString(std::string fName, std::string mName, std::string surname);
 std::string vectorIntToString(std::vector<int> vec);
+
+STUDENT enterStudent();
+TEACHER enterTeacher();
+SCHOOL enterSchool();
+TEAM enterTeam(int maxPlayerPerTeam);
+void enterRecords(std::function<void()> callback, std::string text);
+
+bool isStringInputValid(std::string input); 
+void enterString(std::string& str, std::string text);
+int tryReadInt();
+void enterInt(int& variable, std::string text);
+void enterEmail(std::string& email, std::string text);
 
 void displayFullLine();
 void displayString(std::string str, int count);
@@ -22,13 +31,3 @@ void displayRolesInformation(SCHOOL school);
 void displayRoleInformation(ROLE role);
 void displaySchoolStructure(SCHOOL school);
 void displaySchools(std::vector<SCHOOL> schools);
-
-STUDENT enterStudent();
-TEACHER enterTeacher();
-SCHOOL enterSchool();
-TEAM enterTeam(int maxPlayerPerTeam);
-void enterRecords(std::function<void()> callback, std::string text);
-
-bool isStringInputValid(std::string input);
-int tryReadInt();
-void enterInt(int& variable, std::string text);

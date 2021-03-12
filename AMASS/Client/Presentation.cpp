@@ -20,82 +20,17 @@ string statusToString(STATUS status)
 	}
 }
 
-void displayTeacher(TEACHER teacher, int id)
-{
-	cout << "Teacher " << id + 1 << ":" << endl;
-	cout << "First Name: " << teacher.firstName << endl;
-	cout << "Middle  Name: " << teacher.middleName << endl;
-	cout << "Surname: " << teacher.surname << endl;
-	cout << "E-mail: " << teacher.email << endl;
-	cout << "List of team ids he participates: " << endl;
-
-	for (size_t i = 0; i < teacher.teamIds.size(); i++)
-	{
-		cout << teacher.teamIds[i] << endl;
-		// display team's name by its id
-	}
-}
-
-void displayTeam(TEAM team)
-{
-	cout << "Team's id: " << team.id << endl;
-	cout << "Name: " << team.name << endl;
-	// make description on several lines, instead of 1
-	cout << "Description: " << team.desc << endl;
-	cout << "Date of set up:" << endl;
-	// may change the format later
-	cout << team.dateOfSetUp.day << "/"
-		<< team.dateOfSetUp.month << "/"
-		<< team.dateOfSetUp.year <<
-		" (dd/mm/yyyy)" << endl;
-	cout << "Status: " << statusToString(team.status) << endl;
-
-	cout << "List of team members:" << endl;
-
-	for (size_t j = 0; j < team.members.size(); j++)
-	{
-		cout << "Student " << j + 1 << ":" << endl;
-		cout << "Email: " << team.members[j].studentEmail << endl;
-		// display student's role by id
-	}
-}
-
-void displaySchool(SCHOOL school)
-{
-	cout << "School " << school.id << " details:" << endl;
-	cout << "Name: " << school.name << endl;
-	cout << "City: " << school.city << endl;
-	cout << "Adress: " << school.address << endl;
-
-	cout << "List of the teachers: " << endl;
-
-	for (size_t i = 0; i < school.teachers.size(); i++)
-	{
-		displayTeacher(school.teachers[i], school.id);
-	}
-
-	cout << "List of the teams:" << endl;
-
-	for (size_t i = 0; i < school.teams.size(); i++)
-	{
-		displayTeam(school.teams[i]);
-	}
-}
-
 STUDENT enterStudent()
 {
 	STUDENT student;
 
-	cout << "Enter student's first name: ";
-	cin >> student.firstName;
-	cout << "Enter student's middle name: ";
-	cin >> student.middleName;
-	cout << "Enter student's surname: ";
-	cin >> student.surname;
-	cout << "Enter student's grade: ";
-	cin >> student.grade;
-	cout << "Enter student's email: ";
-	cin >> student.email;
+	cout << "Enter student's data:" << endl;
+	
+	enterString(student.firstName, "First name: ");
+	enterString(student.middleName, "Middle name: ");
+	enterString(student.surname, "Surname: ");
+	enterString(student.grade, "Grade: ");
+	enterEmail(student.email, "Email: ");
 
 	return student;
 }
@@ -104,14 +39,12 @@ TEACHER enterTeacher()
 {
 	TEACHER teacher;
 
-	cout << "First name: ";
-	cin >> teacher.firstName;
-	cout << "Middle name: ";
-	cin >> teacher.middleName;
-	cout << "Surname: ";
-	cin >> teacher.surname;
-	cout << "Email: ";
-	cin >> teacher.email;
+	cout << "Enter teacher's data:" << endl;
+
+	enterString(teacher.firstName, "First name: ");
+	enterString(teacher.middleName, "Middle name: ");
+	enterString(teacher.surname, "Surname: ");
+	enterEmail(teacher.email, "Email: ");
 
 	return teacher;
 }
@@ -120,25 +53,24 @@ TEAM enterTeam(int maxPlayerPerTeam)
 {
 	TEAM team;
 
-	cout << "Enter team's name: ";
-	cin >> team.name;
-	cout << "Enter team's description: ";
-	cin.ignore();
-	getline(cin, team.desc);
+	cout << "Enter team's data:" << endl;
 
-	// date of set up
+	cin.ignore();
+	cout << "Name: ";
+	getline(cin, team.name);
+	cout << "Description: ";
+	getline(cin, team.desc);
 
 	int playerCount;
 	bool pass = true;
 
 	do
 	{
-		cout << "Enter the count of the members: ";
-		cin >> playerCount;
+		enterInt(playerCount, "Members' count: ");
 
 		if (playerCount > maxPlayerPerTeam || playerCount < 0)
 		{
-			cout << "The entered number doesn't match the criteria (1 - 5)" << endl;
+			cout << "The entered number doesn't match the criteria (1 - 4)" << endl;
 			cout << "Try again!" << endl;
 			pass = false;
 		}
@@ -147,10 +79,8 @@ TEAM enterTeam(int maxPlayerPerTeam)
 			for (int i = 0; i < playerCount; i++)
 			{
 				cout << "Enter data for student " << i + 1 << endl;
-				cout << "Email: ";
-				cin >> team.members[i].studentEmail;
-				cout << "Role id: ";
-				cin >> team.members[i].roleId;
+				enterEmail(team.members[i].studentEmail, "Email: ");
+				enterInt(team.members[i].roleId, "Role id: ");
 			}
 		}
 
@@ -195,15 +125,18 @@ SCHOOL enterSchool()
 {
 	SCHOOL school;
 
-	cout << "Enter school's name: ";
+	cout << "Enter data for the school:" << endl;
+
+	cout << "Name: ";
 	getline(cin, school.name);
-	cout << "Enter school's city: ";
+	cout << "City: ";
 	getline(cin, school.city);
-	cout << "Enter school's address: ";
+	cout << "Address: ";
 	getline(cin, school.address);
 
 	school.id = INT_MAX;
-	school.maxMemberCountPerTeam = INT_MAX;
+	enterInt(school.maxMemberCountPerTeam, "Max members per team: ");
+
 	school.teachers.clear();
 	school.students.clear();
 	school.teams.clear();
@@ -460,8 +393,6 @@ void displaySchools(vector<SCHOOL> schools)
 
 bool isStringInputValid(string input)
 {
-	//string check = ",<.>/?;:'\"\\|[{]}!@#$%^&*()-=_+1234567890";
-
 	if (input[0] == ' ')
 	{
 		return false;
@@ -477,15 +408,27 @@ bool isStringInputValid(string input)
 
 	}
 
-	/*for (size_t i = 0; i < check.size(); i++)
-	{
-		if (input.find(check[i]) != string::npos)
-		{
-			return false;
-		}
-	}*/
-
 	return true;
+}
+
+void enterString(string& str, string text)
+{
+	bool isValid = false;
+
+	while (!isValid)
+	{
+		cout << text;
+		cin >> str;
+
+		if (isStringInputValid(str))
+		{
+			isValid = true;
+		}
+		else
+		{
+			cout << "Ivalid characters, please try again!" << endl;
+		}
+	}
 }
 
 int tryReadInt()
@@ -513,7 +456,7 @@ void enterInt(int& variable, string text)
 	{
 		try
 		{
-			cout << text << endl;
+			cout << text;
 			variable = tryReadInt();
 			isValid = true;
 		}
@@ -523,4 +466,25 @@ void enterInt(int& variable, string text)
 			cout << "Please try again!" << endl;
 		}
 	}
+}
+
+void enterEmail(string& email, string text)
+{
+	bool isValid = false;
+
+	while (!isValid)
+	{
+		cout << text;
+		cin >> email;
+
+		if (email.find('@') != string::npos && email.find('.') != string::npos)
+		{
+			isValid = true;
+		}
+		else
+		{
+			cout << "You have entered invalid email address, please try again!" << endl;
+		}
+	}
+
 }
