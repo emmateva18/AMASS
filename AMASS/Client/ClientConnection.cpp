@@ -161,3 +161,8 @@ void requestDltTeam()
 	cin >> id;
 	sendRequest(SYSTEM_CODE::readSchool, id);
 }
+
+void getSchoolId(int& id)
+{
+	enterInt(id,"Please enter the ID of the school you wish to change");
+}

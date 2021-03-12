@@ -28,3 +28,7 @@ TEACHER enterTeacher();
 SCHOOL enterSchool();
 TEAM enterTeam(int maxPlayerPerTeam);
 void enterRecords(std::function<void()> callback, std::string text);
+
+bool isStringInputValid(std::string input);
+int tryReadInt();
+void enterInt(int& variable, std::string text);

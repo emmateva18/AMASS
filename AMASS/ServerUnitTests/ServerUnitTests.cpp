@@ -6,6 +6,7 @@
 #include "../asio-1.18.1/include/asio.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace std;
 
 namespace ServerUnitTests
 {

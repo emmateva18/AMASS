@@ -457,3 +457,70 @@ void displaySchools(vector<SCHOOL> schools)
 		cout << endl << endl << endl << endl << endl << endl << endl;
 	}
 }
+
+bool isStringInputValid(string input)
+{
+	//string check = ",<.>/?;:'\"\\|[{]}!@#$%^&*()-=_+1234567890";
+
+	if (input[0] == ' ')
+	{
+		return false;
+	}
+
+	for (size_t i = 0; i < input.size(); i++)
+	{
+		// checks if the element is not a letter
+		if (!isalpha(input[i]))
+		{
+			return false;
+		}
+
+	}
+
+	/*for (size_t i = 0; i < check.size(); i++)
+	{
+		if (input.find(check[i]) != string::npos)
+		{
+			return false;
+		}
+	}*/
+
+	return true;
+}
+
+int tryReadInt()
+{
+	int input;
+	cin >> input;
+
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		throw "Invalid int input!";
+	}
+	else
+	{
+		return input;
+	}
+}
+
+void enterInt(int& variable, string text)
+{
+	bool isValid = false;
+
+	while (!isValid)
+	{
+		try
+		{
+			cout << text << endl;
+			variable = tryReadInt();
+			isValid = true;
+		}
+		catch (const char* ex)
+		{
+			cout << "Exeption: " << ex << endl;
+			cout << "Please try again!" << endl;
+		}
+	}
+}

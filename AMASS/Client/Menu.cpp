@@ -164,7 +164,7 @@ vector<MENU> initMenus()
 		{
 			{true,'1',"Create School",requestCrtSch,-1},
 			{false,'2',"Display information",nullptr,5},
-			{false,'3',"Edit School",nullptr,1},
+			{false,'3',"Edit School",nullptr,11},
 			{false,'4',"Exit",exitProgram,-1}
 		}
 	};
@@ -280,11 +280,21 @@ vector<MENU> initMenus()
 			{false,'7',"Back",nullptr,3},
 		}
 	};
+
+	MENU idMenu =
+	{
+		{
+			{true,'1',"Press to enter the ID of the school",nullptr,-1,},
+			{false,'2',"Back",nullptr,0}
+		}
+	};
+
+
 	menus =
 	{
 		mainMenu,editMenu,createMenu,updateMenu,
 		deleteMenu,displayMenu,displayRecordsMenu,updateTeacherMenu,
-		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu
+		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu, idMenu
 	};
 
 	return menus;
