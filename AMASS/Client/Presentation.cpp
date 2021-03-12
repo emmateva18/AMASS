@@ -91,6 +91,15 @@ TEAM enterTeam(int maxPlayerPerTeam)
 	return team;
 }
 
+ROLE enterRole()
+{
+	ROLE role;
+	cout << "Enter data for the role:" << endl;
+	
+	enterString(role.name, "Name: ");
+	return role;
+}
+
 void enterRecords(std::function<void()> callback, string text)
 {
 	int recordCount;
@@ -196,6 +205,7 @@ void displayCriteriaTeamByStatus(SCHOOL school, STATUS status)
 		}
 	}
 }
+
 
 void displayFullLine()
 {
@@ -461,7 +471,7 @@ void enterString(string& str, string text)
 		}
 		else
 		{
-			cout << "Ivalid characters, please try again!" << endl;
+			cout << "Invalid characters, please try again!" << endl;
 		}
 	}
 }
