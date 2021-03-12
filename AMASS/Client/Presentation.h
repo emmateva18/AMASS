@@ -10,6 +10,7 @@ STUDENT enterStudent();
 TEACHER enterTeacher();
 SCHOOL enterSchool();
 TEAM enterTeam(int maxPlayerPerTeam);
+ROLE enterRole();
 void enterRecords(std::function<void()> callback, std::string text);
 
 bool isStringInputValid(std::string input); 

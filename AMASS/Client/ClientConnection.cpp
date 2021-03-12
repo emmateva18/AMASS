@@ -97,13 +97,17 @@ void readRequest(SYSTEM_CODE code, int& data)
 	writeInt(socket_, data);
 }
 
-void sendRequest(SYSTEM_CODE code, std::string data, vector<SCHOOL> schools)
+void sendRequest(SYSTEM_CODE code, std::string data, int id)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, code);
 	writeStr(socket_, data);
+	if (id != -1)
+	{
+		writeInt(socket_, id);
+	}
 }
 void sendRequest(SYSTEM_CODE code, bool data, int id)
 {
@@ -237,8 +241,8 @@ void requestCrtStudent()
 void requestCrtRole()
 {
 	int schoolId = readSchoolId();
-	//ROLE role =  WIP
-	//sendRequest(SYSTEM_CODE::crtRole, role, schoolId);
+	ROLE role = enterRole();
+	sendRequest(SYSTEM_CODE::crtRole, role, schoolId);
 }
 
 void requestInputMaxNumOfMem()
@@ -247,4 +251,12 @@ void requestInputMaxNumOfMem()
 	int num;
 	enterInt(num, "Enter the maximum number of members per team: ");
 	sendRequest(SYSTEM_CODE::receiveMaxMemberCount, num,schoolId);
+}
+
+void requestUpdateSchoolName()
+{
+	int schoolId = readSchoolId();
+	string name;
+	enterString(name, "Enter the new name of the school: ");
+	sendRequest(SYSTEM_CODE::updSchoolName, name, schoolId);
 }

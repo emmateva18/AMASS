@@ -187,7 +187,7 @@ vector<MENU> initMenus()
 			{true,'1',"Create teacher",requestCrtTeacher,-1},
 			{false, '2',"Create team",requestCrtTeam,-1},
 			{false,'3',"Create student",requestCrtStudent,-1},
-			{false, '4', "Create Role",requestCrtRole,-1}, //WIP
+			{false, '4', "Create Role",requestCrtRole,-1},
 			{false, '5',"Input maximum number of members per team",requestInputMaxNumOfMem,-1},
 			{false,'6',"Back",nullptr,1}
 		}
@@ -196,7 +196,7 @@ vector<MENU> initMenus()
 	MENU updateMenu =
 	{
 		{
-			{true,'1',"Update school name",nullptr,-1},
+			{true,'1',"Update school name",requestUpdateSchoolName,-1},
 			{false,'2',"Update school address",nullptr,-1},
 			{false,'3',"Update school city",nullptr,-1},
 			{false,'4',"Update teachers",nullptr,7},

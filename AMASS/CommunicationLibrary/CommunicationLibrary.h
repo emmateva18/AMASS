@@ -51,6 +51,7 @@ enum SYSTEM_CODE
 	updTeamMember=705,
 	updTeam = 706,
 	updSchool = 707,
+	updSchoolName=708,
 	updMaxMem=708,
 	dltRole = 801,
 	dltStudent = 802,

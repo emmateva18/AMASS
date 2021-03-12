@@ -121,6 +121,8 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case updSchool: return "updateSchool";
 		break;
+	case updSchoolName: return "updateSchoolName";
+		break;
 	case dltRole: return "deleteRole";
 		break;
 	case dltStudent: return "deleteStudent";
@@ -227,9 +229,19 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		}
 		/*
 		case errorConnection:
-			break;
-		case crtRole: createRole()
 			break;*/
+		case crtRole:
+		{
+			int schoolId;
+			ROLE role;
+			role.read(socket);
+			readInt(socket, schoolId);
+			int pos = findSchoolById(schools, schoolId);
+			
+			createRole(schools[pos], role);
+			saveDataBase(schools);
+			break;
+		}
 		case crtStudent:
 		{
 			int schoolId=0;
@@ -322,7 +334,19 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	case updTeam:
 		break;
 	case updSchool:
+		break;*/
+	case updSchoolName:
+	{
+		int schoolId = 0;
+		string name;
+		readStr(socket, name);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		schools[pos].name = name;
+		saveDataBase(schools);
 		break;
+	}
+	/*
 	case dltRole:
 		break;
 	case dltStudent:
