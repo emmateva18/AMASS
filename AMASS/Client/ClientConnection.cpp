@@ -105,21 +105,29 @@ void sendRequest(SYSTEM_CODE code, std::string data, vector<SCHOOL> schools)
 	writeInt(socket_, code);
 	writeStr(socket_, data);
 }
-void sendRequest(SYSTEM_CODE code, bool data)
+void sendRequest(SYSTEM_CODE code, bool data, int id)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, code);
 	writeBool(socket_, data);
+	if (id != -1)
+	{
+		writeInt(socket_, id);
+	}
 }
-void sendRequest(SYSTEM_CODE code, int data)
+void sendRequest(SYSTEM_CODE code, int data, int id)
 {
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, code);
 	writeInt(socket_, data);
+	if (id != -1)
+	{
+		writeInt(socket_, id);
+	}
 }
 void sendRequest(SYSTEM_CODE code, uint16_t data)
 {
@@ -174,7 +182,7 @@ void requestDltSch()
 	//validate()
 	int id;
 	cin >> id;
-	sendRequest(SYSTEM_CODE::dltSchool, id);
+	sendRequest(SYSTEM_CODE::dltSchool, id,-1);
 }
 
 void requestDltTeam()
@@ -182,7 +190,7 @@ void requestDltTeam()
 	requestReadDB();
 	int id, teamId;
 	cin >> id;
-	sendRequest(SYSTEM_CODE::readSchool, id);
+	sendRequest(SYSTEM_CODE::readSchool, id,-1);
 }
 
 void getSchoolId()
@@ -224,4 +232,19 @@ void requestCrtStudent()
 	int schoolId = readSchoolId();
 	STUDENT student = enterStudent();
 	sendRequest(SYSTEM_CODE::crtStudent, student, schoolId);
+}
+
+void requestCrtRole()
+{
+	int schoolId = readSchoolId();
+	//ROLE role =  WIP
+	//sendRequest(SYSTEM_CODE::crtRole, role, schoolId);
+}
+
+void requestInputMaxNumOfMem()
+{
+	int schoolId = readSchoolId();
+	int num;
+	enterInt(num, "Enter the maximum number of members per team: ");
+	sendRequest(SYSTEM_CODE::receiveMaxMemberCount, num,schoolId);
 }

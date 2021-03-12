@@ -73,6 +73,8 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case receiveShortInt: return "receiveShortInt";
 		break;
+	case receiveMaxMemberCount: return "receiveMaxMemberCount";
+		break;
 	case errorConnection: return "errorConnection";
 		break;
 	case crtRole: return "createRole";
@@ -212,7 +214,18 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		case receiveBool:
 			break;
 		case receiveShortInt:
+			break;*/
+		case receiveMaxMemberCount:
+		{
+			int schoolId=0;
+			int pos = findSchoolById(schools, schoolId);
+			int num;
+			readInt(socket, num);
+			schools[pos].maxMemberCountPerTeam = num;
+			saveDataBase(schools);
 			break;
+		}
+		/*
 		case errorConnection:
 			break;
 		case crtRole: createRole()

@@ -187,8 +187,8 @@ vector<MENU> initMenus()
 			{true,'1',"Create teacher",requestCrtTeacher,-1},
 			{false, '2',"Create team",requestCrtTeam,-1},
 			{false,'3',"Create student",requestCrtStudent,-1},
-			{false, '4', "Create Role"},
-			{false, '5',"Input maximum number of members per team"},
+			{false, '4', "Create Role",requestCrtRole,-1}, //WIP
+			{false, '5',"Input maximum number of members per team",requestInputMaxNumOfMem,-1},
 			{false,'6',"Back",nullptr,1}
 		}
 	};

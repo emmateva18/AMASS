@@ -29,7 +29,7 @@ void readRequest(SYSTEM_CODE code, std::vector<SCHOOL>& schools);
 
 void sendRequest(SYSTEM_CODE code, std::string data);
 void sendRequest(SYSTEM_CODE code, bool data);
-void sendRequest(SYSTEM_CODE code, int data);
+void sendRequest(SYSTEM_CODE code, int data, int id);
 void sendRequest(SYSTEM_CODE code, uint16_t data);
 
 void sendTeamRequest(SYSTEM_CODE code, int id);
@@ -44,3 +44,5 @@ int readSchoolId();
 void requestCrtTeacher();
 void requestCrtTeam();
 void requestCrtStudent();
+void requestCrtRole();
+void requestInputMaxNumOfMem();
