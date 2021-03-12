@@ -52,6 +52,7 @@ TEACHER enterTeacher()
 TEAM enterTeam(int maxPlayerPerTeam)
 {
 	TEAM team;
+	TEAM_MEMBER member;
 
 	cout << "Enter team's data:" << endl;
 
@@ -79,8 +80,9 @@ TEAM enterTeam(int maxPlayerPerTeam)
 			for (int i = 0; i < playerCount; i++)
 			{
 				cout << "Enter data for student " << i + 1 << endl;
-				enterEmail(team.members[i].studentEmail, "Email: ");
-				enterInt(team.members[i].roleId, "Role id: ");
+				enterEmail(member.studentEmail, "Email: ");
+				enterInt(member.roleId, "Role id: ");
+				team.members.push_back(member);
 			}
 		}
 
@@ -126,7 +128,7 @@ SCHOOL enterSchool()
 	SCHOOL school;
 
 	cout << "Enter data for the school:" << endl;
-
+	cin.ignore();
 	cout << "Name: ";
 	getline(cin, school.name);
 	cout << "City: ";

@@ -166,7 +166,7 @@ void getSchoolId()
 {
 	int id;
 	requestReadDB();
-	enterInt(id,"Please enter the ID of the school you wish to change");
+	enterInt(id,"Enter the school's id: ");
 	fstream f;
 	f.open("schoolId.txt", ios::trunc|ios::in|ios::out);
 	f << id;

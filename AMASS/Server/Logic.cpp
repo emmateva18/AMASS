@@ -135,7 +135,7 @@ void createRole(SCHOOL& school, ROLE role)
 	school.roles.push_back(role);
 }
 
-void createTeamIdInTeacher(TEACHER& teacher, int teamId)
+void createTeamIdInTeacher(TEACHER& teacher, int teamId)	
 {
 	teacher.teamIds.push_back(teamId);
 }
