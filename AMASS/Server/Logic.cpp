@@ -45,20 +45,30 @@ void init(vector<SCHOOL>& schools)
 
 bool isStringInputValid(string input)
 {
-	string check = ",<.>/?;:'\"\\|[{]}!@#$%^&*()-=_+";
+	//string check = ",<.>/?;:'\"\\|[{]}!@#$%^&*()-=_+1234567890";
 
 	if (input[0] == ' ')
 	{
 		return false;
 	}
 
-	for (size_t i = 0; i < check.size(); i++)
+	for (size_t i = 0; i < input.size(); i++)
+	{
+		// checks if the element is not a letter
+		if (!isalpha(input[i]))
+		{
+			return false;
+		}
+
+	}
+	
+	/*for (size_t i = 0; i < check.size(); i++)
 	{
 		if (input.find(check[i]) != string::npos)
 		{
 			return false;
 		}
-	}
+	}*/
 
 	return true;
 }
