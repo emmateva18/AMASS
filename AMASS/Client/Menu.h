@@ -5,6 +5,7 @@
 #include <string>
 #include "ClientConnection.h"
 typedef void(*action)();
+typedef void(*idPtr)(int&);
 
 struct MENU_ITEMS
 {
@@ -13,6 +14,7 @@ struct MENU_ITEMS
 	std::string text;
 	action action = nullptr;
 	int nextMenuPos=-1;
+	idPtr id = nullptr;
 };
 struct MENU {
 	std::vector<MENU_ITEMS> items;

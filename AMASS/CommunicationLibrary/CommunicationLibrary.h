@@ -140,7 +140,7 @@ struct SCHOOL
 	std::string name;
 	std::string city;
 	std::string address;
-	//
+	
 	std::vector<TEACHER> teachers;
 	std::vector<TEAM> teams;
 	std::vector<STUDENT> students;

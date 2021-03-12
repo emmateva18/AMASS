@@ -7,6 +7,8 @@ using namespace std;
 
 void init(vector<SCHOOL>& schools);
 
+DATE getCurrentDate();
+
 bool isStringInputValid(std::string input);
 int tryReadInt();
 

@@ -23,18 +23,6 @@ string getCurrentHour()
 	return temp;
 }
 
-DATE getCurrentDate()
-{
-	DATE date;
-	tm t;
-	time_t now = time(0);
-	localtime_s(&t, &now);
-	date.day = t.tm_mday;
-	date.month = t.tm_mon + 1;
-	date.year = t.tm_year + 1900;
-	return date;
-}
-
 string codeToString(SYSTEM_CODE code)
 {
 	switch (code)

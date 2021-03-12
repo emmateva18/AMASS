@@ -126,6 +126,10 @@ void getUserInput(vector<MENU> menus)
 				resetPositions(menus);
 			}
 		}
+		if (ch == 27)
+		{
+			// Escape ch to be written
+		}
 	}
 }
 void showMainMenu(int& selectedItem, int& ch)
@@ -186,13 +190,13 @@ vector<MENU> initMenus()
 			{false,'6',"Back",nullptr,1}
 		}
 	};
-
+	
 	MENU updateMenu =
 	{
 		{
-			{true,'1',"Update school name"},
-			{false,'2',"Update school address"},
-			{false,'3',"Update school city"},
+			{true,'1',"Update school name",nullptr,-1},
+			{false,'2',"Update school address",nullptr,-1},
+			{false,'3',"Update school city",nullptr,-1},
 			{false,'4',"Update teachers",nullptr,7},
 			{false,'5',"Update students",nullptr,10},
 			{false,'6',"Update roles",nullptr,9},

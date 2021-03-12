@@ -43,6 +43,18 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
+DATE getCurrentDate()
+{
+	DATE date;
+	tm t;
+	time_t now = time(0);
+	localtime_s(&t, &now);
+	date.day = t.tm_mday;
+	date.month = t.tm_mon + 1;
+	date.year = t.tm_year + 1900;
+	return date;
+}
+
 bool isStringInputValid(string input)
 {
 	//string check = ",<.>/?;:'\"\\|[{]}!@#$%^&*()-=_+1234567890";
@@ -173,6 +185,7 @@ void createTeacher(SCHOOL& school, TEACHER teacher)
 void createTeam(SCHOOL& school, TEAM team)
 {
 	assignTeamId(team);
+	team.dateOfSetUp = getCurrentDate();
 	school.teams.push_back(team);
 }
 
