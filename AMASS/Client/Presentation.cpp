@@ -164,6 +164,39 @@ SCHOOL enterSchool()
 	return school;
 }
 
+void displayCriteriaTeachersWithNoTeams(SCHOOL school)
+{
+	for (size_t i = 0; i < school.teachers.size(); i++)
+	{
+		if (school.teachers[i].teamIds.empty())
+		{
+			cout << school.teachers[i].firstName << " " << school.teachers[i].middleName << " " << school.teachers[i].surname << endl;
+		}
+	}
+}
+
+void displayCriteriaStudentsWithNoTeam(SCHOOL school)
+{
+	for (size_t i = 0; i < school.students.size(); i++)
+	{
+		if (!school.students[i].isInTeam)
+		{
+			cout << school.students[i].firstName << " " << school.students[i].middleName << school.students[i].surname << endl;
+		}
+	}
+}
+
+void displayCriteriaTeamByStatus(SCHOOL school, STATUS status)
+{
+	for (size_t i = 0; i < school.teams.size(); i++)
+	{
+		if (school.teams[i].status == status)
+		{
+			cout << school.teams[i].name << endl;
+		}
+	}
+}
+
 void displayFullLine()
 {
 	cout << "|";

@@ -18,6 +18,10 @@ int tryReadInt();
 void enterInt(int& variable, std::string text);
 void enterEmail(std::string& email, std::string text);
 
+void displayCriteriaTeachersWithNoTeams(SCHOOL school);
+void displayCriteriaStudentsWithNoTeam(SCHOOL school);
+void displayCriteriaTeamByStatus(SCHOOL school, STATUS status);
+
 void displayFullLine();
 void displayString(std::string str, int count);
 void displaySchoolInformation(SCHOOL school);
