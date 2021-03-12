@@ -184,7 +184,7 @@ vector<MENU> initMenus()
 	MENU createMenu =
 	{
 		{
-			{true,'1',"Create teacher"},
+			{true,'1',"Create teacher",requestCrtTeacher,-1},
 			{false, '2',"Create team"},
 			{false,'3',"Create student"},
 			{false, '4', "Create Role"},
@@ -290,7 +290,6 @@ vector<MENU> initMenus()
 			{false,'2',"Back",nullptr,0}
 		}
 	};
-
 
 	menus =
 	{

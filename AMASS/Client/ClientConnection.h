@@ -4,7 +4,7 @@
 asio::ip::tcp::socket connectToServer();
 
 template <typename T>
-void sendRequest(SYSTEM_CODE code, T data)
+void sendRequest(SYSTEM_CODE code, T data, int schoolId)
 {
 	//asio::ip::tcp::socket socket = connectToServer();
 	asio::io_service io_service;
@@ -12,25 +12,11 @@ void sendRequest(SYSTEM_CODE code, T data)
 	socket.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket, code);
 	data.write(socket);
-}
-template <typename T>
-/*void readRequest(SYSTEM_CODE code, T& data)
-{
-	asio::io_service io_service;
-	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
-	uint16_t size = 0;
-	writeInt(socket_,code);
-	readShortInt(socket_,size);
-	T t;
-	//vector<T> temp;
-	for (uint16_t i = 0; i < size; i++)
+	if (schoolId != -1)
 	{
-		t.read(socket_);
-		data.push_back(t);
-		//data[i].read(socket_);
+		writeInt(socket, schoolId);
 	}
-}*/
+}
 
 void readRequest(SYSTEM_CODE code, ROLE& role);
 void readRequest(SYSTEM_CODE code, STUDENT& student);
@@ -53,3 +39,4 @@ void requestDltSch();
 void requestDltTeam();
 void getSchoolId();
 int readSchoolId();
+void requestCrtTeacher();

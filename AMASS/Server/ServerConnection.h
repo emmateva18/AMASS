@@ -2,6 +2,7 @@
 #include "Libraries.h"
 #include "../CommunicationLibrary/CommunicationLibrary.h"
 #include "Logic.h"
+#include "AdvancedFileOperations.h"
 #include <ctime>
 std::string getCurrentHour();
 std::string codeToString(SYSTEM_CODE code);
