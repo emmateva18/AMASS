@@ -219,8 +219,18 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			break;
 		case crtStudent:
 			break;
+		*/
 		case crtTeacher:
+		{
+			TEACHER teacher;
+			int schoolId;
+			teacher.read(socket);
+			readInt(socket, schoolId);
+			createTeacher(schools[schoolId], teacher);
+			saveDataBase(schools);
 			break;
+		}
+		/*
 		case crtDate:
 			break;
 		case crtTeamMember:

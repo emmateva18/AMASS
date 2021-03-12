@@ -136,7 +136,7 @@ void exitProgram()
 void requestCrtSch()
 {
 	SCHOOL school = enterSchool();
-	sendRequest(SYSTEM_CODE::crtSchool, school);
+	sendRequest(SYSTEM_CODE::crtSchool, school,-1);
 }
 
 void requestReadDB()
@@ -177,8 +177,15 @@ int readSchoolId()
 {
 	fstream f;
 	string temp;
-	f.open("schoolId.txt", ios::trunc | ios::in | ios::out);
+	f.open("schoolId.txt", ios::in | ios::out);
 	f >> temp;
 	f.close();
 	return stoi(temp);
+}
+
+void requestCrtTeacher()
+{
+	int schoolId = readSchoolId();
+	TEACHER teacher = enterTeacher();
+	sendRequest(SYSTEM_CODE::crtTeacher, teacher,schoolId);
 }
