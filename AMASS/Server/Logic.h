@@ -7,6 +7,9 @@ using namespace std;
 
 void init(vector<SCHOOL>& schools);
 
+bool isStringInputValid(std::string input);
+int tryReadInt();
+
 void assignSchoolId(SCHOOL& school);
 void assignTeamId(TEAM& team);
 void assignRoleId(ROLE& role);

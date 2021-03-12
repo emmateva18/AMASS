@@ -43,6 +43,41 @@ void init(vector<SCHOOL>& schools)
 	schools.push_back(school);
 }
 
+bool isStringInputValid(string input)
+{
+	string check = ",<.>/?;:'\"\\|[{]}!@#$%^&*()-=_+";
+
+	if (input[0] == ' ')
+	{
+		return false;
+	}
+
+	for (size_t i = 0; i < check.size(); i++)
+	{
+		if (input.find(check[i]) != string::npos)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int tryReadInt()
+{
+	int input;
+	cin >> input;
+
+	if (cin.fail())
+	{
+		throw "Invalid int input!";
+	}
+	else
+	{
+		return input;
+	}
+}
+
 void assignSchoolId(SCHOOL& school)
 {
 	COUNTERS ids = readRecord();
