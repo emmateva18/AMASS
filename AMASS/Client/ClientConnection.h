@@ -51,3 +51,5 @@ void requestCrtSch();
 void requestReadDB();
 void requestDltSch();
 void requestDltTeam();
+void getSchoolId();
+int readSchoolId();

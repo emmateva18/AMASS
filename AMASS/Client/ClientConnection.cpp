@@ -162,7 +162,23 @@ void requestDltTeam()
 	sendRequest(SYSTEM_CODE::readSchool, id);
 }
 
-void getSchoolId(int& id)
+void getSchoolId()
 {
+	int id;
+	requestReadDB();
 	enterInt(id,"Please enter the ID of the school you wish to change");
+	fstream f;
+	f.open("schoolId.txt", ios::trunc|ios::in|ios::out);
+	f << id;
+	f.close();
+}
+
+int readSchoolId()
+{
+	fstream f;
+	string temp;
+	f.open("schoolId.txt", ios::trunc | ios::in | ios::out);
+	f >> temp;
+	f.close();
+	return stoi(temp);
 }

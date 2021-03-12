@@ -117,13 +117,15 @@ void getUserInput(vector<MENU> menus)
 		if (ch == 13)
 		{
 			action ac = menus[currentMenu].items[currentItem].action;
-			if (menus[currentMenu].items[currentItem].nextMenuPos == -1)
-				ac();
-			else
+			if (menus[currentMenu].items[currentItem].nextMenuPos != -1)
 			{
 				currentMenu = menus[currentMenu].items[currentItem].nextMenuPos;
 				currentItem = 0;
 				resetPositions(menus);
+			}	
+			if (ac != nullptr)
+			{
+				ac();
 			}
 		}
 		if (ch == 27)
@@ -284,7 +286,7 @@ vector<MENU> initMenus()
 	MENU idMenu =
 	{
 		{
-			{true,'1',"Press to enter the ID of the school",nullptr,-1,},
+			{true,'1',"Press to enter the ID of the school",getSchoolId,1},
 			{false,'2',"Back",nullptr,0}
 		}
 	};
