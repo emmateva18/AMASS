@@ -80,6 +80,8 @@ int tryReadInt()
 
 	if (cin.fail())
 	{
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
 		throw "Invalid int input!";
 	}
 	else
@@ -87,6 +89,27 @@ int tryReadInt()
 		return input;
 	}
 }
+
+void readInt(int& variable, string text)
+{
+	bool isValid = false;
+
+	while (!isValid)
+	{
+		try
+		{
+			cout << text << endl;
+			variable = tryReadInt();
+			isValid = true;
+		}
+		catch (const char* ex)
+		{
+			cout << "Exeption: " << ex << endl;
+			cout << "Please try again!" << endl;
+		}
+	}
+}
+
 
 void assignSchoolId(SCHOOL& school)
 {
