@@ -280,7 +280,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			int pos = findSchoolById(schools,schoolId);
 			writeInt(socket, schools[pos].maxMemberCountPerTeam);
 			team.read(socket);
-			createTeam(schools[schoolId], team);
+			createTeam(schools[pos], team);
 			saveDataBase(schools);
 			break;
 		}
