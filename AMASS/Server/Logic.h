@@ -41,6 +41,7 @@ void updateStudentMiddleName(STUDENT& student, std::string newMiddleName);
 void updateStudentSurname(STUDENT& student, std::string newSurname);
 void updateStudentGrade(STUDENT& student, std::string newGrade);
 void updateStudentEmail(STUDENT& student, std::string newEmail);
+void setStudentIsInTeam(STUDENT& student, bool isInTeam);
 void updateTeacherFirstName(TEACHER& teacher, std::string newFirstName);
 void updateTeacherMiddleName(TEACHER& teacher, std::string newMiddleName);
 void updateTeacherSurname(TEACHER& teacher, std::string newSurname);

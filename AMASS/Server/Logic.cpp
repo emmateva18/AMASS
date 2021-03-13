@@ -285,10 +285,11 @@ void updateStudentEmail(STUDENT& student, string newEmail)
 	student.email = newEmail;
 }
 
-void setStudentInTeam(STUDENT& student)
+void setStudentIsInTeam(STUDENT& student, bool isInTeam)
 {
-	student.isInTeam = true;
+	student.isInTeam = isInTeam;
 }
+
 
 // TEACHER
 
