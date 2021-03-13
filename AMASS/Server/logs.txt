@@ -53,3 +53,22 @@
 <13.3.2021 8:50:09> Log[i] CODE[807] OP[deleteSchool] IP: 127.0.0.1
 <13.3.2021 8:50:23> Log[i] CODE[807] OP[deleteSchool] IP: 127.0.0.1
 <13.3.2021 8:50:42> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 12:14:17> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 12:14:27> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 12:14:31> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 12:15:43> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 12:15:45> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 12:17:18> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 12:18:20> Log[i] CODE[807] OP[deleteSchool] IP: 127.0.0.1
+<15.3.2021 12:18:26> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 12:18:31> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 21:38:02> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 21:38:21> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 21:38:42> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 21:52:24> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 21:52:29> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 21:53:09> Log[i] CODE[507] OP[createSchool] IP: 127.0.0.1
+<15.3.2021 21:53:13> Log[i] CODE[608] OP[Extract all info from DB] IP: 127.0.0.1
+<15.3.2021 21:54:01> Log[i] CODE[503] OP[createTeacher] IP: 127.0.0.1
+<15.3.2021 21:54:07> Log[i] CODE[506] OP[createTeam] IP: 127.0.0.1
+<15.3.2021 21:54:33> Log[i] CODE[502] OP[createStudent] IP: 127.0.0.1

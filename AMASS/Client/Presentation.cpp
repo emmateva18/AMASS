@@ -56,7 +56,8 @@ TEAM enterTeam(int maxPlayerPerTeam)
 
 	cout << "Enter team's data:" << endl;
 
-	cin.ignore();
+	clearInputStream();
+
 	cout << "Name: ";
 	getline(cin, team.name);
 	cout << "Description: ";
@@ -123,7 +124,6 @@ SCHOOL enterSchool()
 	
 	clearInputStream();
 
-	
 	cout << "Name: ";
 	getline(cin, school.name);
 	cout << "City: ";
@@ -140,7 +140,7 @@ SCHOOL enterSchool()
 		enterInt(school.maxMemberCountPerTeam, "Max members per team: ");
 		if (school.maxMemberCountPerTeam < 0 || school.maxMemberCountPerTeam > 5)
 		{
-			cout << "Invalid range (1 - 4)" << "Please try again!" << endl;
+			cout << "Invalid range (1 - 4)" << endl << "Please try again!" << endl;
 		}
 		else
 		{

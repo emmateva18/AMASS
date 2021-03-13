@@ -144,7 +144,7 @@ struct TEAM
 {
 	int id;
 	std::string name;
-	std::string desc;
+	std::string desc;	
 	DATE dateOfSetUp;
 	STATUS status = STATUS::pendingApproval;
 	std::vector<TEAM_MEMBER> members;
