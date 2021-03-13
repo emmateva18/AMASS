@@ -13,6 +13,7 @@ void assignTeamId(TEAM& team);
 void assignRoleId(ROLE& role);
 void assignTeacherId(TEACHER& teacher);
 void assignStudentId(STUDENT& student);
+int findSchoolById(std::vector<SCHOOL>& schools, int id);
 
 int findTeacherById(SCHOOL school, int teacherId);
 int findStudentById(SCHOOL school, int studentId);
