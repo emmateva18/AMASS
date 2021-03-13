@@ -254,9 +254,9 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Update team name",requestUpdateTeamName,-1},
-			{false,'2',"Update team description",nullptr,-1},
-			{false,'3',"Update team status",nullptr,-1},
-			{false,'4',"Update team members",nullptr,-1},
+			{false,'2',"Update team description",requestUpdateTeamDescription,-1},
+			{false,'3',"Update team status",requestUpdateTeamStatus,-1},
+			{false,'4',"Update team members",nullptr,9},
 			{false,'5',"Back",nullptr,3},
 		}
 	};
@@ -264,20 +264,19 @@ vector<MENU> initMenus()
 	MENU updateTeamMemberMenu =
 	{
 		{
-			{true,'1',"Update student email",nullptr,-1},
-			{false,'2',"Update student role",nullptr,-1},
-			{false,'3',"Back",nullptr,3},
+			{true,'1',"Update student role",nullptr,-1},
+			{false,'2',"Back",nullptr,8},
 		}
 	};
 
 	MENU updateStudentMenu =
 	{
 		{
-			{true,'1',"Update student's first name",nullptr,-1},
-			{false,'2',"Update student's middle name",nullptr,-1},
-			{false,'3',"Update student's surname",nullptr,-1},
-			{false,'4',"Update student's class",nullptr,-1},
-			{false,'5',"Update student's email",nullptr,-1},
+			{true,'1',"Update student's first name",requestUpdateStudentFirstName,-1},
+			{false,'2',"Update student's middle name",requestUpdateStudentMiddleName,-1},
+			{false,'3',"Update student's surname",requestUpdateStudentSurname,-1},
+			{false,'4',"Update student's class",requestUpdateStudentClass,-1},
+			{false,'5',"Update student's email",requestUpdateStudentEmail,-1},
 			{false,'6',"Update wether a student is in a team",nullptr,-1},
 			{false,'7',"Back",nullptr,3},
 		}

@@ -189,7 +189,7 @@ void getSchoolId()
 {
 	int id;
 	requestReadDB();
-	enterInt(id, "Please enter the ID of the school you wish to change");
+	enterInt(id, "Please enter the ID of the school you wish to change: ");
 	fstream f;
 	f.open("schoolId.txt", ios::trunc | ios::in | ios::out);
 	f << id;
@@ -376,5 +376,108 @@ void requestUpdateTeamName()
 	enterString(name, "New name of the team: ");
 	writeStr(socket_, name);
 	writeInt(socket_, teamId);
+	writeInt(socket_, schoolId);
+}
+
+void requestUpdateTeamDescription()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeamDescription);
+	int schoolId = readSchoolId(), teamId;
+	string name;
+	enterInt(teamId, "Id of the team: ");
+	enterString(name, "New description of the team: ");
+	writeStr(socket_, name);
+	writeInt(socket_, teamId);
+	writeInt(socket_, schoolId);
+}
+
+void requestUpdateTeamStatus()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeamStatus);
+	int schoolId = readSchoolId(), teamId, status;
+	enterInt(teamId, "Id of the team: ");
+	status = enterTeamStatus();
+	writeInt(socket_, status);
+	writeInt(socket_, teamId);
+	writeInt(socket_, schoolId);
+}
+
+//
+
+void requestUpdateStudentEmail()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updStudentEmail);
+	int schoolId = readSchoolId(), studentId;
+	enterInt(studentId, "Id of the team: ");
+	string email;
+	enterEmail(email, "New email of the student");
+	writeStr(socket_, email);
+	writeInt(socket_, studentId);
+	writeInt(socket_, schoolId);
+}
+
+void requestUpdateStudentFirstName()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updStudentFirstName);
+	int schoolId = readSchoolId(), studentId;
+	enterInt(studentId, "Id of the student: ");
+	string name;
+	enterString(name, "New first name of the student: ");
+	writeStr(socket_, name);
+	writeInt(socket_, studentId);
+	writeInt(socket_, schoolId);
+}
+void requestUpdateStudentMiddleName()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updStudentMiddleName);
+	int schoolId = readSchoolId(), studentId;
+	enterInt(studentId, "Id of the student: ");
+	string name;
+	enterString(name, "New middle name of the student: ");
+	writeStr(socket_, name);
+	writeInt(socket_, studentId);
+	writeInt(socket_, schoolId);
+}
+void requestUpdateStudentSurname()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updStudentSurname);
+	int schoolId = readSchoolId(), studentId;
+	enterInt(studentId, "Id of the student: ");
+	string name;
+	enterString(name, "New surname of the student: ");
+	writeStr(socket_, name);
+	writeInt(socket_, studentId);
+	writeInt(socket_, schoolId);
+}
+void requestUpdateStudentClass()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updStudentClass);
+	int schoolId = readSchoolId(), studentId;
+	enterInt(studentId, "Id of the student: ");
+	string name;
+	enterGrade(name, "New class of the student: ");
+	writeStr(socket_, name);
+	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
 }

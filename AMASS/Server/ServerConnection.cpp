@@ -137,6 +137,20 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case updTeamName: return "updateTeamName";
 		break;
+	case updTeamDescription: return "updateTeamDescription";
+		break;
+	case updTeamStatus: return "updateTeamStatus";
+		break;
+	case updStudentEmail: return "updateStudentEmail";
+		break;
+	case updStudentFirstName: return "updateStudentFirstName";
+		break;
+	case updStudentMiddleName: return "updateStudentMiddleName";
+		break;
+	case updStudentSurname: return "updateStudentSurname";
+		break;
+	case updStudentClass: return "updateStudentClass";
+		break;
 	case dltRole: return "deleteRole";
 		break;
 	case dltStudent: return "deleteStudent";
@@ -260,8 +274,9 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		{
 			int schoolId=0;
 			STUDENT student;
-			int pos = findSchoolById(schools, schoolId);
 			student.read(socket);
+			readInt(socket, schoolId);
+			int pos = findSchoolById(schools, schoolId);
 			createStudent(schools[pos],student);
 			saveDataBase(schools);
 			break;
@@ -445,6 +460,96 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeamById(schools[pos], teamId);
 		updateTeamName(schools[pos].teams[pos2], name);
+		saveDataBase(schools);
+		break;
+	}
+	case updTeamDescription:
+	{
+		int schoolId = 0, teamId;
+		string desc;
+		readStr(socket, desc);
+		readInt(socket, teamId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findTeamById(schools[pos], teamId);
+		updateTeamDesc(schools[pos].teams[pos2], desc);
+		saveDataBase(schools);
+		break;
+	}
+	case updTeamStatus:
+	{
+		int schoolId = 0, teamId, status;
+		readInt(socket, status);
+		readInt(socket, teamId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findTeamById(schools[pos], teamId);
+		updateTeamStatus(schools[pos].teams[pos2], static_cast<STATUS>(status));
+		saveDataBase(schools);
+		break;
+	}
+	case updStudentEmail:
+	{
+		int schoolId = 0, studentId;
+		string email;
+		readStr(socket, email);
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findStudentById(schools[pos], studentId);
+		updateStudentEmail(schools[pos].students[pos2], email);
+		saveDataBase(schools);
+		break;
+	}
+	case updStudentFirstName:
+	{
+		int schoolId = 0, studentId;
+		string name;
+		readStr(socket, name);
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findStudentById(schools[pos], studentId);
+		updateStudentFirstName(schools[pos].students[pos2], name);
+		saveDataBase(schools);
+		break;
+	}
+	case updStudentMiddleName:
+	{
+		int schoolId = 0, studentId;
+		string name;
+		readStr(socket, name);
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findStudentById(schools[pos], studentId);
+		updateStudentMiddleName(schools[pos].students[pos2], name);
+		saveDataBase(schools);
+		break;
+	}
+	case updStudentSurname:
+	{
+		int schoolId = 0, studentId;
+		string name;
+		readStr(socket, name);
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findStudentById(schools[pos], studentId);
+		updateStudentSurname(schools[pos].students[pos2], name);
+		saveDataBase(schools);
+		break;
+	}
+	case updStudentClass:
+	{
+		int schoolId = 0, studentId;
+		string name;
+		readStr(socket, name);
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findStudentById(schools[pos], studentId);
+		updateStudentGrade(schools[pos].students[pos2], name);
 		saveDataBase(schools);
 		break;
 	}

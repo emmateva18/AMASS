@@ -58,3 +58,14 @@ void requestUpdateTeacherSurname();
 void requestUpdateTeacherEmail();
 
 void requestUpdateTeamName();
+void requestUpdateTeamDescription();
+void requestUpdateTeamStatus();
+
+void requestUpdateStudentEmail();
+
+//
+
+void requestUpdateStudentFirstName();
+void requestUpdateStudentMiddleName();
+void requestUpdateStudentSurname();
+void requestUpdateStudentClass();
