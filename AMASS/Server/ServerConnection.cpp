@@ -244,9 +244,21 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			role.read(socket);
 			readInt(socket, schoolId);
 			int pos = findSchoolById(schools, schoolId);
-			
+			if (!isUniqueRole(schools[pos], role.name))
+			{
+				errorMsg = "There is already a role with that name!\n";
+				writeStr(socket, errorMsg);
+				break;
+			}
+			if (schools[pos].maxMemberCountPerTeam <= schools[pos].roles.size())
+			{
+				errorMsg = "You can't have more roles than available team members!\n";
+				writeStr(socket, errorMsg);
+				break;
+			}
 			createRole(schools[pos], role);
 			saveDataBase(schools);
+			writeStr(socket, "Operation Successful!\n");
 			break;
 		}
 		case crtStudent:
@@ -256,8 +268,15 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			student.read(socket);
 			readInt(socket, schoolId);
 			int pos = findSchoolById(schools, schoolId);
+			if (!isUniqueEmail(schools[pos], student.email))
+			{
+				errorMsg = "A person with that email already exists!\n";
+				writeStr(socket, errorMsg);
+				break;
+			}
 			createStudent(schools[pos],student);
 			saveDataBase(schools);
+			writeStr(socket, "Operation Successful!\n");
 			break;
 		}
 		case crtTeacher:
@@ -355,21 +374,6 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		}
 		break;
 	}
-	/*
-	case updRole:
-		break;
-	case updStudent:
-		break;
-	case updTeacher:
-		break;
-	case updDate:
-		break;
-	case updTeamMember:
-		break;
-	case updTeam:
-		break;
-	case updSchool:
-		break;*/
 	case updSchoolName:
 	{
 		int schoolId = 0;
@@ -377,8 +381,15 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readStr(socket, name);
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
+		if (!isUniqueSchoolName(schools, name))
+		{
+			errorMsg = "A school with that name already exists!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		schools[pos].name = name;
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updSchoolAddress:
@@ -412,8 +423,17 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeacherById(schools[pos], teacherId);
+		if (pos2 == -1)
+		{
+			errorMsg = "No teacher with id ";
+			errorMsg += to_string(teacherId);
+			errorMsg += " found!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		updateTeacherFirstName(schools[pos].teachers[pos2], name);
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updTeacherMiddleName:
@@ -425,8 +445,17 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeacherById(schools[pos], teacherId);
+		if (pos2 == -1)
+		{
+			errorMsg = "No teacher with id ";
+			errorMsg += to_string(teacherId);
+			errorMsg += " found!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		updateTeacherMiddleName(schools[pos].teachers[pos2], name);
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updTeacherSurname:
@@ -438,8 +467,17 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeacherById(schools[pos], teacherId);
+		if (pos2 == -1)
+		{
+			errorMsg = "No teacher with id ";
+			errorMsg += to_string(teacherId);
+			errorMsg += " found!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		updateTeacherSurname(schools[pos].teachers[pos2], name);
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updTeacherEmail:
@@ -451,8 +489,23 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeacherById(schools[pos], teacherId);
+		if (pos2 == -1)
+		{
+			errorMsg = "No teacher with id ";
+			errorMsg += to_string(teacherId);
+			errorMsg += " found!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
+		if (!isUniqueEmail(schools[pos], email))
+		{
+			errorMsg = "A person with that email already exists!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		updateTeacherEmail(schools[pos].teachers[pos2], email);
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updTeamName:
@@ -580,6 +633,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeacherById(schools[pos], teacherId);
+		for (int i = 0; i <teamIds.size(); i++)
+		{
+			int pos3 = findTeamById(schools[pos], teamIds[i]);
+			if (schools[pos].teams[pos3].status != STATUS::inUse)
+			{
+				errorMsg="The team "
+			}
+		}
 		if (pos2 == -1)
 		{
 			errorMsg = "No teacher with id ";

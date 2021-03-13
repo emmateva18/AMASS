@@ -195,6 +195,16 @@ void setStudentIsInTeamToFalseIfNotInTeam(SCHOOL school, STUDENT& student)
 	student.isInTeam = false;
 }
 
+bool isUniqueRole(SCHOOL school, string role)
+{
+	for (int i = 0; i < school.roles.size(); i++)
+	{
+		if (school.roles[i].name == role)
+			return 0;
+	}
+	return 1;
+}
+
 bool isUniqueSchoolName(vector<SCHOOL> schools, string name)
 {
 	for (int i = 0; i < schools.size(); i++)

@@ -135,10 +135,14 @@ void sendRequest(SYSTEM_CODE code, std::string data, int id)
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, code);
 	writeStr(socket_, data);
+	string result;
 	if (id != -1)
 	{
 		writeInt(socket_, id);
 	}
+	readStr(socket_, result);
+	std::cout << result;
+	_getch();
 }
 void sendRequest(SYSTEM_CODE code, bool data, int id)
 {
@@ -327,9 +331,6 @@ void requestInputMaxNumOfMem()
 void requestUpdateSchoolName()
 {
 	int schoolId = readSchoolId();
-	vector<SCHOOL> schools = tableRequest();
-	displayFullLine();
-	listSchoolsDetails(schools);
 	string name;
 	enterString(name, "Enter the new name of the school: ");
 	sendRequest(SYSTEM_CODE::updSchoolName, name, schoolId);
@@ -375,6 +376,10 @@ void requestUpdateTeacherFirstName()
 	writeStr(socket_, name);
 	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
+	string result;
+	readStr(socket_, result);
+	std::cout << result;
+	_getch();
 }
 
 void requestUpdateTeacherMiddleName()
@@ -395,6 +400,10 @@ void requestUpdateTeacherMiddleName()
 	writeStr(socket_, name);
 	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
+	string result;
+	readStr(socket_, result);
+	std::cout << result;
+	_getch();
 }
 
 void requestUpdateTeacherSurname()
@@ -415,6 +424,10 @@ void requestUpdateTeacherSurname()
 	writeStr(socket_, name);
 	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
+	string result;
+	readStr(socket_, result);
+	std::cout << result;
+	_getch();
 }
 
 void requestUpdateTeacherEmail()
@@ -435,6 +448,10 @@ void requestUpdateTeacherEmail()
 	writeStr(socket_, email);
 	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
+	string result;
+	readStr(socket_, result);
+	std::cout << result;
+	_getch();
 }
 
 void requestUpdateTeacherTeams()
