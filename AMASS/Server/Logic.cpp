@@ -102,6 +102,16 @@ int findSchoolById(vector<SCHOOL>& schools, int id)
 	}
 }
 
+int findTeacherById(vector<SCHOOL>& schools, int schoolIndex, int teacherId)
+{
+	for (int i = 0; i < schools[schoolIndex].teachers.size(); i++)
+	{
+		if (schools[schoolIndex].teachers[i].id == teacherId)
+			return i;
+	}
+	return -1;
+}
+
 void createStudent(SCHOOL& school, STUDENT student)
 {
 	assignStudentId(student);

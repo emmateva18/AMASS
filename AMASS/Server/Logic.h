@@ -15,7 +15,7 @@ void assignTeacherId(TEACHER& teacher);
 void assignStudentId(STUDENT& student);
 
 int findSchoolById(std::vector<SCHOOL>& schools, int id);
-
+int findTeacherById(std::vector<SCHOOL>& schools, int schoolIndex, int teacherId);
 
 void createRole(SCHOOL& school, ROLE role);
 void createStudent(SCHOOL& school, STUDENT student);

@@ -163,6 +163,8 @@ void sendTeamRequest(SYSTEM_CODE code, int id)
 	team.write(socket_);
 }
 
+//void sendUpdateTeacherRequest(int id,string )
+
 void exitProgram()
 {
 	exit(0);
@@ -300,3 +302,17 @@ void requestUpdateSchoolCity()
 	sendRequest(SYSTEM_CODE::updSchoolCity, name, schoolId);
 }
 
+void requestUpdateTeacherFirstName()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeacherFirstName);
+	int schoolId = readSchoolId(), teacherId;
+	string name;
+	enterInt(teacherId, "Id of the teacher: ");
+	enterString(name, "New first name of the teacher: ");
+	writeStr(socket_, name);
+	writeInt(socket_, teacherId);
+	writeInt(socket_, schoolId);
+}

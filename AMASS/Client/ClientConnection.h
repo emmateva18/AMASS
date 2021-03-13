@@ -52,3 +52,4 @@ void requestInputMaxNumOfMem();
 void requestUpdateSchoolName();
 void requestUpdateSchoolAddress();
 void requestUpdateSchoolCity();
+void requestUpdateTeacherFirstName();

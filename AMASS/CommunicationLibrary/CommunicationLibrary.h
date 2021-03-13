@@ -54,6 +54,7 @@ enum SYSTEM_CODE
 	updSchoolName=708,
 	updSchoolAddress=709,
 	updSchoolCity=710,
+	updTeacherFirstName=711,
 	dltRole = 801,
 	dltStudent = 802,
 	dltTeacher = 803,

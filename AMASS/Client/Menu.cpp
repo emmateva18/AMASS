@@ -241,7 +241,7 @@ vector<MENU> initMenus()
 	MENU updateTeacherMenu =
 	{
 		{
-			{true,'1',"Update first name",nullptr,-1},
+			{true,'1',"Update first name",requestUpdateTeacherFirstName,-1},
 			{false,'2',"Update middle name",nullptr,-1},
 			{false,'3',"Update surname",nullptr,-1},
 			{false,'4',"Update email",nullptr,-1},
