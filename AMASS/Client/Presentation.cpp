@@ -62,32 +62,6 @@ TEAM enterTeam(int maxPlayerPerTeam)
 	cout << "Description: ";
 	getline(cin, team.desc);
 
-	int playerCount;
-	bool pass = false;
-
-	do
-	{
-		enterInt(playerCount, "Members' count: ");
-
-		if (playerCount > maxPlayerPerTeam || playerCount < 0)
-		{
-			cout << "The entered number doesn't match the criteria (1 - " << maxPlayerPerTeam << ")" << endl;
-			cout << "Try again!" << endl;
-		}
-		else
-		{
-			for (int i = 0; i < playerCount; i++)
-			{
-				cout << "Enter data for student " << i + 1 << endl;
-				enterEmail(member.studentEmail, "Email: ");
-				enterInt(member.roleId, "Role id: ");
-				team.members.push_back(member);
-			}
-			pass = true;
-		}
-
-	} while (!pass);
-
 	return team;
 }
 
