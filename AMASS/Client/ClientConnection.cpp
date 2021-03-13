@@ -436,7 +436,6 @@ void requestUpdateTeacherTeams()
 {
 	int schoolId = readSchoolId(), teacherId;
 	SCHOOL school = tableRequest(schoolId);
-	string result;
 	displayFullLine();
 	displayTeachersInformation(school);
 	cout << endl;
@@ -448,15 +447,10 @@ void requestUpdateTeacherTeams()
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeacherTeams);
 
-	enterInt(teacherId, "Enter the id of the teacher you wish to change: ");
 	vector<int> teamIds;
 	enterVectorOfIntegers(teamIds);
 	writeVec(socket_, teamIds);
-	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
-	readStr(socket_, result);
-	cout << result;
-	_getch();
 }
 
 void requestUpdateTeamName()
@@ -518,7 +512,41 @@ void requestUpdateTeamStatus()
 	writeInt(socket_, schoolId);
 }
 
-//
+void requestUpateTeamMembers()
+{
+	int schoolId = readSchoolId(), teamId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeamsInformation(school);
+	displayFullLine();
+	displayStudentsInformation(school);
+	displayFullLine();
+	displayRolesInformation(school);
+
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeamMembers);
+
+	int choice, roleId;
+	string email, result;
+	TEAM_MEMBER member, temp;
+	writeInt(socket_, choice);
+	enterInt(choice, "Enter new amount of members: ");
+	for (int i = 0; i < choice; i++)
+	{
+		enterEmail(email, "Email of student " + to_string(i+1)+" :");
+		enterInt(roleId, "Role of student " + to_string(i + 1) + " :");
+		member.studentEmail = email;
+		member.roleId = roleId;
+		member.write(socket_);
+		member = temp;
+	}
+	writeInt(socket_,schoolId);
+	readStr(socket_, result);
+	cout << result;
+	_getch();
+}
 
 void requestUpdateStudentEmail()
 {

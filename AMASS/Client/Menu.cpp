@@ -264,7 +264,7 @@ vector<MENU> initMenus()
 	MENU updateTeamMemberMenu =
 	{
 		{
-			{true,'1',"Update student role",nullptr,-1},
+			{true,'1',"Update team members",requestUpateTeamMembers,-1},
 			{false,'2',"Back",nullptr,8},
 		}
 	};

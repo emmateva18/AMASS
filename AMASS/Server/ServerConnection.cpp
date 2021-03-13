@@ -157,6 +157,8 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case updTeacherTeams: return "updateTeacherTeams";
 		break;
+	case updTeamMembers: return "updateTeamMembers";
+		break;
 	case dltRole: return "deleteRole";
 		break;
 	case dltStudent: return "deleteStudent";
@@ -634,6 +636,21 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		writeStr(socket, errorMsg);
 		break;
 	}
+	case updTeamMembers:
+	{
+		int schoolId,size;
+		vector<TEAM_MEMBER> members;
+		TEAM_MEMBER member;
+		readInt(socket, size);
+		for (int i = 0; i < size; i++)
+		{
+			member.read(socket);
+			members.push_back(member);
+		}
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		break;
+	}
 	case dltRole:
 	{
 		int schoolId = 0,roleId;
@@ -673,6 +690,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		deleteTeam(schools[pos], teamId);
+		saveDataBase(schools);
 		break;
 	}
 	case dltSchool:
