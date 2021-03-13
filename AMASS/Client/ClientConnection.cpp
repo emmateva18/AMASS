@@ -183,9 +183,14 @@ void sendTeamRequest(SYSTEM_CODE code, int id)
 	writeInt(socket_, code);
 	writeInt(socket_, id);
 	int MMC;
+	string result;
 	readInt(socket_, MMC);
 	TEAM team = enterTeam(MMC);
-	team.write(socket_);
+	writeStr(socket_, team.name);
+	writeStr(socket_, team.desc);
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 //void sendUpdateTeacherRequest(int id,string )

@@ -278,29 +278,48 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			writeStr(socket, "Operation Successful!\n");
 			break;
 		}
-		/*
-		case crtDate:
-			break;
-		case crtTeamMember:
-			break;*/
 		case crtTeam:
 		{
 			TEAM team;
+			string name, desc;
 			int schoolId;
 			readInt(socket, schoolId);
 			int pos = findSchoolById(schools,schoolId);
 			writeInt(socket, schools[pos].maxMemberCountPerTeam);
-			team.read(socket);
+			readStr(socket, name);
+			readStr(socket, desc);
+			if (!isUniqueTeamName(schools[pos], name))
+			{
+				errorMsg = "There is already a team with that name!\n";
+				writeStr(socket, errorMsg);
+				break;
+			}
+			team.name = name;
+			team.desc = desc;
 			createTeam(schools[pos], team);
 			saveDataBase(schools);
+			writeStr(socket, "Operation successful!\n");
 			break;
 		}
 	case crtSchool:
 	{
 		SCHOOL school;
 		school.read(socket);
+		if (!isUniqueSchoolName(schools, school.name))
+		{
+			errorMsg = "There is already a school with that name!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
+		if (school.maxMemberCountPerTeam < 1)
+		{
+			errorMsg = "Maximum number of team members should be greater than 0!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		createSchool(schools, school);
 		saveDataBase(schools);
+		writeStr(socket, "Operation successful!\n");
 		break;
 	}
 	/*
