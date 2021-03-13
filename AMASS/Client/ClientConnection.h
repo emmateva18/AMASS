@@ -47,3 +47,5 @@ void requestCrtStudent();
 void requestCrtRole();
 void requestInputMaxNumOfMem();
 void requestUpdateSchoolName();
+void requestUpdateSchoolAddress();
+void requestUpdateSchoolCity();

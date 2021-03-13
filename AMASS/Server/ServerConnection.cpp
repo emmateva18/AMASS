@@ -123,6 +123,10 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case updSchoolName: return "updateSchoolName";
 		break;
+	case updSchoolAddress: return "updateSchoolAddress";
+		break;
+	case updSchoolCity: return "updateSchoolCity";
+		break;
 	case dltRole: return "deleteRole";
 		break;
 	case dltStudent: return "deleteStudent";
@@ -343,6 +347,28 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		schools[pos].name = name;
+		saveDataBase(schools);
+		break;
+	}
+	case updSchoolAddress:
+	{
+		int schoolId = 0;
+		string address;
+		readStr(socket, address);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		schools[pos].address = address;
+		saveDataBase(schools);
+		break;
+	}
+	case updSchoolCity:
+	{
+		int schoolId = 0;
+		string city;
+		readStr(socket, city);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		schools[pos].city = city;
 		saveDataBase(schools);
 		break;
 	}

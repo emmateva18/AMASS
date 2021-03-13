@@ -260,3 +260,19 @@ void requestUpdateSchoolName()
 	enterString(name, "Enter the new name of the school: ");
 	sendRequest(SYSTEM_CODE::updSchoolName, name, schoolId);
 }
+
+void requestUpdateSchoolAddress()
+{
+	int schoolId = readSchoolId();
+	string name;
+	enterString(name, "Enter the new address of the school: ");
+	sendRequest(SYSTEM_CODE::updSchoolAddress, name, schoolId);
+}
+
+void requestUpdateSchoolCity()
+{
+	int schoolId = readSchoolId();
+	string name;
+	enterString(name, "Enter the new city of the school: ");
+	sendRequest(SYSTEM_CODE::updSchoolCity, name, schoolId);
+}

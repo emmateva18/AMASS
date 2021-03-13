@@ -197,8 +197,8 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Update school name",requestUpdateSchoolName,-1},
-			{false,'2',"Update school address",nullptr,-1},
-			{false,'3',"Update school city",nullptr,-1},
+			{false,'2',"Update school address",requestUpdateSchoolAddress,-1},
+			{false,'3',"Update school city",requestUpdateSchoolCity,-1},
 			{false,'4',"Update teachers",nullptr,7},
 			{false,'5',"Update students",nullptr,10},
 			{false,'6',"Update roles",nullptr,9},
