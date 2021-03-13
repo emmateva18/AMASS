@@ -21,6 +21,7 @@ int tryReadInt();
 void enterInt(int& variable, std::string text);
 void enterEmail(std::string& email, std::string text);
 void enterGrade(std::string& grade, std::string text);
+void enterBool(bool& boolean, std::string text);
 
 int enterTeamStatus();
 

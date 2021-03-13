@@ -629,3 +629,31 @@ void enterGrade(string& grade, string text)
 		cout << "Invalid grade details, please try again!" << endl;
 	}
 }
+
+void enterBool(bool& boolean, string text)
+{
+	bool isValid = false;
+	string temp;
+
+	while (!isValid)
+	{
+		cout << text;
+		cin >> temp;
+
+		if (temp == "1")
+		{
+			boolean = true;
+			isValid = true;
+		}
+		else if (temp == "0")
+		{
+			boolean = false;
+			isValid = true;
+		}
+		else
+		{
+			cout << "Invalid input, please try again!" << endl;
+		}
+
+	}
+}
