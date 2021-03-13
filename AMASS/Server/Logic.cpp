@@ -149,6 +149,11 @@ int findRoleById(SCHOOL school, int roleId)
 	return -1;
 }
 
+bool hasTeamReachedMaxMembers(SCHOOL school, TEAM team)
+{
+	return team.members.size() >= school.maxMemberCountPerTeam ? true : false;
+}
+
 void createStudent(SCHOOL& school, STUDENT student)
 {
 	assignStudentId(student);

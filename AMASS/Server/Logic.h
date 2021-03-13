@@ -13,12 +13,14 @@ void assignTeamId(TEAM& team);
 void assignRoleId(ROLE& role);
 void assignTeacherId(TEACHER& teacher);
 void assignStudentId(STUDENT& student);
-int findSchoolById(std::vector<SCHOOL>& schools, int id);
 
+int findSchoolById(std::vector<SCHOOL>& schools, int id);
 int findTeacherById(SCHOOL school, int teacherId);
 int findStudentById(SCHOOL school, int studentId);
 int findTeamById(SCHOOL school, int teamId);
 int findRoleById(SCHOOL school, int roleId);;
+
+bool hasTeamReachedMaxMembers(SCHOOL school, TEAM team);
 
 void createRole(SCHOOL& school, ROLE role);
 void createStudent(SCHOOL& school, STUDENT student);
