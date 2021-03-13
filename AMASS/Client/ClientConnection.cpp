@@ -1,6 +1,37 @@
 #include "ClientConnection.h"
 using namespace std;
 
+SCHOOL tableRequest(int id)
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	SCHOOL school;
+	writeInt(socket_, SYSTEM_CODE::sendSchool);
+	writeInt(socket_, id);
+	school.read(socket_);
+	return school;
+}
+
+vector<SCHOOL> tableRequest()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	uint16_t size;
+	writeInt(socket_, SYSTEM_CODE::readDB);
+	readShortInt(socket_, size);
+	SCHOOL school, empty;
+	vector<SCHOOL> schools;
+	for (uint16_t i = 0; i < size; i++)
+	{
+		school.read(socket_);
+		schools.push_back(school);
+		school = empty;
+	}
+	return schools;
+}
+
 void readRequest(SYSTEM_CODE code, ROLE& role)
 {
 	asio::io_service io_service;
@@ -142,19 +173,13 @@ void sendRequest(SYSTEM_CODE code, uint16_t data)
 	writeShortInt(socket_, data);
 }
 
-void readIntBuffer(int& data)
-{
-	asio::io_service io_service;
-	asio::ip::tcp::socket socket_(io_service);
-	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
-	readInt(socket_, data);
-}
-
 void sendTeamRequest(SYSTEM_CODE code, int id)
 {
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	
 	writeInt(socket_, code);
 	writeInt(socket_, id);
 	int MMC;
@@ -236,22 +261,27 @@ void requestCrtRole()
 void requestDeleteSchool()
 {
 	//validate()
-	int id;
-	cin >> id;
+	int id = readSchoolId();
 	sendRequest(SYSTEM_CODE::dltSchool, id, -1);
 }
 
 void requestDeleteTeam()
 {
-	requestReadDB();
-	int id, teamId;
-	cin >> id;
-	sendRequest(SYSTEM_CODE::readSchool, id, -1);
+	
+	int schoolId = readSchoolId(), teamid;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeamsInformation(school);
+	enterInt(teamid, "Id of the team: ");
+	sendRequest(SYSTEM_CODE::dltTeam, teamid, schoolId);
 }
 
 void requestDeleteRole()
 {
 	int id, schoolId = readSchoolId();
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayRolesInformation(school);
 	enterInt(id, "Id of the role you wish to delete: ");
 	sendRequest(SYSTEM_CODE::dltRole, id, schoolId);
 }
@@ -259,6 +289,9 @@ void requestDeleteRole()
 void requestDeleteStudent()
 {
 	int id, schoolId = readSchoolId();
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
 	enterInt(id, "Id of the student you wish to delete: ");
 	sendRequest(SYSTEM_CODE::dltStudent, id, schoolId);
 }
@@ -266,6 +299,9 @@ void requestDeleteStudent()
 void requestDeleteTeacher()
 {
 	int id, schoolId = readSchoolId();
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeachersInformation(school);
 	enterInt(id, "Id of the student you wish to delete: ");
 	sendRequest(SYSTEM_CODE::dltTeacher, id, schoolId);
 }
@@ -274,6 +310,9 @@ void requestInputMaxNumOfMem()
 {
 	int schoolId = readSchoolId();
 	int num;
+	vector<SCHOOL> schools = tableRequest();
+	displayFullLine();
+	listSchoolsDetails(schools);
 	enterInt(num, "Enter the maximum number of members per team: ");
 	sendRequest(SYSTEM_CODE::receiveMaxMemberCount, num,schoolId);
 }
@@ -281,6 +320,9 @@ void requestInputMaxNumOfMem()
 void requestUpdateSchoolName()
 {
 	int schoolId = readSchoolId();
+	vector<SCHOOL> schools = tableRequest();
+	displayFullLine();
+	listSchoolsDetails(schools);
 	string name;
 	enterString(name, "Enter the new name of the school: ");
 	sendRequest(SYSTEM_CODE::updSchoolName, name, schoolId);
@@ -289,6 +331,9 @@ void requestUpdateSchoolName()
 void requestUpdateSchoolAddress()
 {
 	int schoolId = readSchoolId();
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displaySchoolInformation(school);
 	string name;
 	enterString(name, "Enter the new address of the school: ");
 	sendRequest(SYSTEM_CODE::updSchoolAddress, name, schoolId);
@@ -297,6 +342,9 @@ void requestUpdateSchoolAddress()
 void requestUpdateSchoolCity()
 {
 	int schoolId = readSchoolId();
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displaySchoolInformation(school);
 	string name;
 	enterString(name, "Enter the new city of the school: ");
 	sendRequest(SYSTEM_CODE::updSchoolCity, name, schoolId);
@@ -304,11 +352,16 @@ void requestUpdateSchoolCity()
 
 void requestUpdateTeacherFirstName()
 {
+	int schoolId = readSchoolId(), teacherId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeachersInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+
 	writeInt(socket_, SYSTEM_CODE::updTeacherFirstName);
-	int schoolId = readSchoolId(), teacherId;
 	string name;
 	enterInt(teacherId, "Id of the teacher: ");
 	enterString(name, "New first name of the teacher: ");
@@ -319,11 +372,16 @@ void requestUpdateTeacherFirstName()
 
 void requestUpdateTeacherMiddleName()
 {
+	int schoolId = readSchoolId(), teacherId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeachersInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeacherMiddleName);
-	int schoolId = readSchoolId(), teacherId;
+
 	string name;
 	enterInt(teacherId, "Id of the teacher: ");
 	enterString(name, "New middle name of the teacher: ");
@@ -334,11 +392,16 @@ void requestUpdateTeacherMiddleName()
 
 void requestUpdateTeacherSurname()
 {
+	int schoolId = readSchoolId(), teacherId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeachersInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeacherSurname);
-	int schoolId = readSchoolId(), teacherId;
+
 	string name;
 	enterInt(teacherId, "Id of the teacher: ");
 	enterString(name, "New surname of the teacher: ");
@@ -349,11 +412,16 @@ void requestUpdateTeacherSurname()
 
 void requestUpdateTeacherEmail()
 {
+	int schoolId = readSchoolId(), teacherId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeachersInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeacherEmail);
-	int schoolId = readSchoolId(), teacherId;
+
 	string email;
 	enterInt(teacherId, "Id of the teacher: ");
 	enterEmail(email, "New email of the teacher: ");
@@ -366,11 +434,16 @@ void requestUpdateTeacherEmail()
 
 void requestUpdateTeamName()
 {
+	int schoolId = readSchoolId(), teamId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeamsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeamName);
-	int schoolId = readSchoolId(), teamId;
+
 	string name;
 	enterInt(teamId, "Id of the team: ");
 	enterString(name, "New name of the team: ");
@@ -381,11 +454,16 @@ void requestUpdateTeamName()
 
 void requestUpdateTeamDescription()
 {
+	int schoolId = readSchoolId(), teamId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeamsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeamDescription);
-	int schoolId = readSchoolId(), teamId;
+
 	string name;
 	enterInt(teamId, "Id of the team: ");
 	enterString(name, "New description of the team: ");
@@ -396,11 +474,16 @@ void requestUpdateTeamDescription()
 
 void requestUpdateTeamStatus()
 {
+	int schoolId = readSchoolId(), teamId, status;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeamsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeamStatus);
-	int schoolId = readSchoolId(), teamId, status;
+
 	enterInt(teamId, "Id of the team: ");
 	status = enterTeamStatus();
 	writeInt(socket_, status);
@@ -412,11 +495,16 @@ void requestUpdateTeamStatus()
 
 void requestUpdateStudentEmail()
 {
+	int schoolId = readSchoolId(), studentId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updStudentEmail);
-	int schoolId = readSchoolId(), studentId;
+
 	enterInt(studentId, "Id of the team: ");
 	string email;
 	enterEmail(email, "New email of the student");
@@ -427,11 +515,16 @@ void requestUpdateStudentEmail()
 
 void requestUpdateStudentFirstName()
 {
+	int schoolId = readSchoolId(), studentId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updStudentFirstName);
-	int schoolId = readSchoolId(), studentId;
+
 	enterInt(studentId, "Id of the student: ");
 	string name;
 	enterString(name, "New first name of the student: ");
@@ -441,11 +534,16 @@ void requestUpdateStudentFirstName()
 }
 void requestUpdateStudentMiddleName()
 {
+	int schoolId = readSchoolId(), studentId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updStudentMiddleName);
-	int schoolId = readSchoolId(), studentId;
+
 	enterInt(studentId, "Id of the student: ");
 	string name;
 	enterString(name, "New middle name of the student: ");
@@ -455,11 +553,16 @@ void requestUpdateStudentMiddleName()
 }
 void requestUpdateStudentSurname()
 {
+	int schoolId = readSchoolId(), studentId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updStudentSurname);
-	int schoolId = readSchoolId(), studentId;
+
 	enterInt(studentId, "Id of the student: ");
 	string name;
 	enterString(name, "New surname of the student: ");
@@ -469,15 +572,40 @@ void requestUpdateStudentSurname()
 }
 void requestUpdateStudentClass()
 {
+	int schoolId = readSchoolId(), studentId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
+
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket_(io_service);
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updStudentClass);
-	int schoolId = readSchoolId(), studentId;
+
 	enterInt(studentId, "Id of the student: ");
 	string name;
 	enterGrade(name, "New class of the student: ");
 	writeStr(socket_, name);
+	writeInt(socket_, studentId);
+	writeInt(socket_, schoolId);
+}
+
+void requestUpdateStudentIsInTeam()
+{
+	int schoolId = readSchoolId(), studentId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayStudentsInformation(school);
+
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updStudentIsInTeam);
+
+	enterInt(studentId, "Id of the student: ");
+	bool isInTeam;
+	enterBool(isInTeam,"Enter wether the student is in a team (0 = false, 1 = true): ");
+	writeBool(socket_, isInTeam);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
 }

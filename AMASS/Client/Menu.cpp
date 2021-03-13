@@ -223,7 +223,7 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Display all records",requestReadDB,-1},
-			{false,'2',"Display record by criteria",nullptr},
+			{false,'2',"Display record by criteria",nullptr,7},
 			{false,'3',"Back",nullptr,0}
 		}
 	};
@@ -277,7 +277,7 @@ vector<MENU> initMenus()
 			{false,'3',"Update student's surname",requestUpdateStudentSurname,-1},
 			{false,'4',"Update student's class",requestUpdateStudentClass,-1},
 			{false,'5',"Update student's email",requestUpdateStudentEmail,-1},
-			{false,'6',"Update wether a student is in a team",nullptr,-1},
+			{false,'6',"Update wether a student is in a team",requestUpdateStudentIsInTeam,-1},
 			{false,'7',"Back",nullptr,3},
 		}
 	};

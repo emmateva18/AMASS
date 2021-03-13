@@ -5,17 +5,18 @@
 enum SYSTEM_CODE
 {
 	ok = 0,
+	sendSchool=100,
 	sendRole = 101,
 	sendStudent = 102,
 	sendTeacher = 103,
 	sendDate = 104,
 	sendTeamMember = 105,
 	sendTeam = 106,
-	sendSchool = 107,
 	sendString = 108,
 	sendInt = 109,
 	sendBool = 110,
 	sendShortInt = 111,
+	sendDBSize=112,
 	receiveRole=201,
 	receiveStudent = 202,
 	receiveTeacher = 203,
@@ -66,13 +67,14 @@ enum SYSTEM_CODE
 	updStudentMiddleName=720,
 	updStudentSurname=721,
 	updStudentClass=722,
+	updStudentIsInTeam=723,
 	dltRole = 801,
 	dltStudent = 802,
 	dltTeacher = 803,
 	dltDate = 804,
 	dltTeamMember = 805,
 	dltTeam = 806,
-	dltSchool = 807
+	dltSchool = 807,
 };
 
 enum STATUS

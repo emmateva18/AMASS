@@ -7,6 +7,7 @@ std::string vectorIntToString(std::vector<int> vec);
 
 std::vector<int> assignStudentInTeamMenu(SCHOOL& school);
 void listSchoolsDetails(std::vector<SCHOOL> schools);
+void listSchoolDetails(SCHOOL school);
 
 STUDENT enterStudent();
 TEACHER enterTeacher();

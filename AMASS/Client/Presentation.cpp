@@ -264,8 +264,13 @@ void listSchoolsDetails(vector<SCHOOL> schools)
 {
 	for (size_t i = 0; i < schools.size(); i++)
 	{
-		cout << schools[i].id << " " << schools[i].name << endl;
+		listSchoolDetails(schools[i]);
 	}
+}
+
+void listSchoolDetails(SCHOOL school)
+{
+	cout << school.id << " " << school.name << endl;
 }
 
 void displayFullLine()
@@ -606,9 +611,9 @@ void enterGrade(string& grade, string text)
 		if (grade.size() == 2)
 		{
 
-			if (grade[0] >= 49 && grade[0] <= 57)
+			if (int(grade[0]) >= 49 && int(grade[0]) <= 57)
 			{
-				if (grade[1] >= 65 && grade[1] <= 90)
+				if (int(grade[1]) >= 65 && int(grade[1]) <= 90)
 				{
 					return;
 				}
@@ -617,10 +622,10 @@ void enterGrade(string& grade, string text)
 
 		if (grade.size() == 3)
 		{
-			if (grade[0] >= 49 && grade[0] <= 57 && grade[1] >= 49 && grade[1] <= 57)
+			if (int(grade[0]) >= 49 && int(grade[0]) <= 57 && int(grade[1]) >= 48 && int(grade[1]) <= 57)
 			{
 
-				if (grade[2] >= 65 && grade[2] <= 90)
+				if (int(grade[2]) >= 65 && int(grade[2]) <= 90)
 				{
 					return;
 				}

@@ -17,6 +17,8 @@ void sendRequest(SYSTEM_CODE code, T data, int schoolId)
 		writeInt(socket, schoolId);
 	}
 }
+void tableRequest(asio::ip::tcp::socket& socket, SYSTEM_CODE code, SCHOOL& school, int id);
+
 
 void readRequest(SYSTEM_CODE code, ROLE& role);
 void readRequest(SYSTEM_CODE code, STUDENT& student);
@@ -69,3 +71,4 @@ void requestUpdateStudentFirstName();
 void requestUpdateStudentMiddleName();
 void requestUpdateStudentSurname();
 void requestUpdateStudentClass();
+void requestUpdateStudentIsInTeam();

@@ -29,6 +29,8 @@ string codeToString(SYSTEM_CODE code)
 	{
 	case ok: return "ok";
 		break;
+	case sendSchool: return "sendSchool";
+		break;
 	case sendRole: return "sendRole";
 		break;
 	case sendStudent: return "sendStudent";
@@ -41,8 +43,6 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case sendTeam: return "sendTeam";
 		break;
-	case sendSchool: return "sendSchool";
-		break;
 	case sendString: return "sendString";
 		break;
 	case sendInt: return "sendInt";
@@ -52,6 +52,8 @@ string codeToString(SYSTEM_CODE code)
 	case sendShortInt: return "sendShortInt";
 		break;
 	case receiveRole: return "receiveRole";
+		break;
+	case sendDBSize: return "sendDBSize";
 		break;
 	case receiveStudent: return "receiveStudent";
 		break;
@@ -151,6 +153,8 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case updStudentClass: return "updateStudentClass";
 		break;
+	case updStudentIsInTeam: return "updateStudentIsInTeam";
+		break;
 	case dltRole: return "deleteRole";
 		break;
 	case dltStudent: return "deleteStudent";
@@ -200,6 +204,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	code = static_cast<SYSTEM_CODE>(temp);
 	switch (code)
 	{
+	case sendSchool:
+	{
+		int schoolId;
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools,schoolId);
+		schools[pos].write(socket);
+		break;
+	}
 		/*
 		case sendRole:
 			break;
@@ -222,7 +234,12 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		case sendBool:
 			break;
 		case sendShortInt:
-			break;
+			break;*/
+	case sendDBSize:
+	{
+		writeShortInt(socket, uint16_t(schools.size()));
+		break;
+	}/*
 		case receiveRole:
 			break;
 		case receiveStudent:
@@ -553,6 +570,20 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		saveDataBase(schools);
 		break;
 	}
+	/*case updStudentIsInTeam:
+	{
+		int schoolId = 0, studentId;
+		bool isInTeam;
+		readBool(socket, isInTeam);
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findStudentById(schools[pos], studentId);
+		updateStudent(schools[pos].students[pos2], isInTeam);
+		updateStudent
+		saveDataBase(schools);
+		break;
+	}*/
 	case dltRole:
 	{
 		int schoolId = 0,roleId;
@@ -583,12 +614,17 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		saveDataBase(schools);
 		break;
 	}
-	case dltDate:
-		break;
 	case dltTeamMember:
 		break;
 	case dltTeam:
+	{
+		int schoolId,teamId;
+		readInt(socket, teamId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		deleteTeam(schools[pos], teamId);
 		break;
+	}
 	case dltSchool:
 		int id;
 		readInt(socket, id);
