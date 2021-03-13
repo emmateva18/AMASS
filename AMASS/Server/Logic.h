@@ -57,3 +57,4 @@ void updateTeamStatus(TEAM& team, STATUS newStatus);
 void updateSchoolName(SCHOOL& school, std::string newName);
 void updateSchoolCity(SCHOOL& school, std::string newCity);
 void updateSchoolAdress(SCHOOL& school, std::string newAddress);
+void enterVectorOfIntegers(std::vector<int>& vec, std::string text);

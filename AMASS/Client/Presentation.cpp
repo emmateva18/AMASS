@@ -662,3 +662,18 @@ void enterBool(bool& boolean, string text)
 
 	}
 }
+
+void enterVectorOfIntegers(vector<int>& vec, string text)
+{
+	int temp;
+	int n;
+
+	// < 0
+	enterInt(n, "Enter how much elements you will enter: ");
+
+	while (n--)
+	{
+		enterInt(temp, "Enter element: ");
+		vec.push_back(temp);
+	}
+}
