@@ -166,6 +166,18 @@ int findRoleById(SCHOOL school, int roleId)
 	return -1;
 }
 
+int findStudentByEmail(SCHOOL school, string email)
+{
+	for (size_t i = 0; i < school.students.size(); i++)
+	{
+		if (school.students[i].email == email)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 bool hasTeamRepeatedRole(vector<TEAM_MEMBER> members)
 {
 	for (size_t i = 0; i < members.size() - 1; i++)
