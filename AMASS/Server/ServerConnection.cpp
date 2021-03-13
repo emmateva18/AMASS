@@ -384,7 +384,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		break;
 	}
 	case dltStudent:
+	{
+		int schoolId = 0, studentId;
+		readInt(socket, studentId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		deleteStudent(schools[pos], studentId);
 		break;
+	}
 	case dltTeacher:
 		break;
 	case dltDate:

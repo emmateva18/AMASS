@@ -213,7 +213,7 @@ vector<MENU> initMenus()
 			{true,'1',"Delete School",requestDeleteSchool,-1},
 			{false,'2',"Delete team",requestDeleteTeam,-1},
 			{false,'3',"Delete Role",requestDeleteRole,-1},
-			{false,'4',"Delete student"},
+			{false,'4',"Delete student",requestDeleteStudent,-1},
 			{false,'5',"Delete teacher"},
 			{false,'6',"Back",nullptr,1}
 		}

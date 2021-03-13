@@ -254,6 +254,13 @@ void requestDeleteRole()
 	sendRequest(SYSTEM_CODE::dltRole, id, schoolId);
 }
 
+void requestDeleteStudent()
+{
+	int id, schoolId = readSchoolId();
+	enterInt(id, "Id of the student you wish to delete: ");
+	sendRequest(SYSTEM_CODE::dltStudent, id, schoolId);
+}
+
 void requestInputMaxNumOfMem()
 {
 	int schoolId = readSchoolId();
@@ -285,3 +292,4 @@ void requestUpdateSchoolCity()
 	enterString(name, "Enter the new city of the school: ");
 	sendRequest(SYSTEM_CODE::updSchoolCity, name, schoolId);
 }
+
