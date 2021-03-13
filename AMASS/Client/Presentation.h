@@ -2,7 +2,6 @@
 #include "../CommunicationLibrary/CommunicationLibrary.h"
 
 std::string statusToString(STATUS status);
-
 std::string nameToString(std::string fName, std::string mName, std::string surname);
 std::string vectorIntToString(std::vector<int> vec);
 
@@ -16,11 +15,14 @@ TEAM enterTeam(int maxPlayerPerTeam);
 ROLE enterRole();
 void enterRecords(std::function<void()> callback, std::string text);
 
-bool isStringInputValid(std::string input); 
+bool isStringInputValid(std::string input);
 void enterString(std::string& str, std::string text);
 int tryReadInt();
 void enterInt(int& variable, std::string text);
 void enterEmail(std::string& email, std::string text);
+void enterGrade(std::string& grade, std::string text);
+
+int enterTeamStatus();
 
 void displayCriteriaTeachersWithNoTeams(SCHOOL school);
 void displayCriteriaStudentsWithNoTeam(SCHOOL school);

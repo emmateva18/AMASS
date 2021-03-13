@@ -29,7 +29,7 @@ STUDENT enterStudent()
 	enterString(student.firstName, "First name: ");
 	enterString(student.middleName, "Middle name: ");
 	enterString(student.surname, "Surname: ");
-	enterString(student.grade, "Grade: ");
+	enterGrade(student.grade, "Grade: ");
 	enterEmail(student.email, "Email: ");
 
 	return student;
@@ -139,7 +139,7 @@ SCHOOL enterSchool()
 	cout << "Enter data for the school:" << endl;
 
 	cin.ignore();
-	
+
 	cout << "Name: ";
 	getline(cin, school.name);
 	cout << "City: ";
@@ -187,6 +187,29 @@ SCHOOL enterSchool()
 		// enter roles
 
 	return school;
+}
+
+int enterTeamStatus()
+{
+	cout << "0. Pending Approval" << endl;;
+	cout << "1. In Use" << endl;
+	cout << "2. Not Active" << endl;
+	cout << "3. Not Archived" << endl;
+
+	int choice;
+
+	do
+	{
+		enterInt(choice, "Enter option: ");
+		if (choice >= 0 && choice <= 3)
+		{
+			return choice;
+		}
+		else
+		{
+			cout << "Invalid option, please try again!" << endl;
+		}
+	} while (true);
 }
 
 vector<int> assignStudentInTeamMenu(SCHOOL& school)
@@ -570,4 +593,39 @@ void enterEmail(string& email, string text)
 		}
 	}
 
+}
+
+void enterGrade(string& grade, string text)
+{
+
+	while (true)
+	{
+		cout << text;
+		cin >> grade;
+
+		if (grade.size() == 2)
+		{
+
+			if (grade[0] >= 49 && grade[0] <= 57)
+			{
+				if (grade[1] >= 65 && grade[1] <= 90)
+				{
+					return;
+				}
+			}
+		}
+
+		if (grade.size() == 3)
+		{
+			if (grade[0] >= 49 && grade[0] <= 57 && grade[1] >= 49 && grade[1] <= 57)
+			{
+
+				if (grade[2] >= 65 && grade[2] <= 90)
+				{
+					return;
+				}
+			}
+		}
+		cout << "Invalid grade details, please try again!" << endl;
+	}
 }
