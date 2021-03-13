@@ -53,3 +53,8 @@ void requestUpdateSchoolName();
 void requestUpdateSchoolAddress();
 void requestUpdateSchoolCity();
 void requestUpdateTeacherFirstName();
+void requestUpdateTeacherMiddleName();
+void requestUpdateTeacherSurname();
+void requestUpdateTeacherEmail();
+
+void requestUpdateTeamName();

@@ -242,9 +242,9 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Update first name",requestUpdateTeacherFirstName,-1},
-			{false,'2',"Update middle name",nullptr,-1},
-			{false,'3',"Update surname",nullptr,-1},
-			{false,'4',"Update email",nullptr,-1},
+			{false,'2',"Update middle name",requestUpdateTeacherMiddleName,-1},
+			{false,'3',"Update surname",requestUpdateTeacherSurname,-1},
+			{false,'4',"Update email",requestUpdateTeacherEmail,-1},
 			{false,'5',"Update the teacher's teams",nullptr,-1},
 			{false,'6',"Back",nullptr,3}
 		}
@@ -253,7 +253,7 @@ vector<MENU> initMenus()
 	MENU updateTeamMenu =
 	{
 		{
-			{true,'1',"Update team name",nullptr,-1},
+			{true,'1',"Update team name",requestUpdateTeamName,-1},
 			{false,'2',"Update team description",nullptr,-1},
 			{false,'3',"Update team status",nullptr,-1},
 			{false,'4',"Update team members",nullptr,-1},

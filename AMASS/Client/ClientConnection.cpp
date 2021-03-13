@@ -316,3 +316,65 @@ void requestUpdateTeacherFirstName()
 	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
 }
+
+void requestUpdateTeacherMiddleName()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeacherMiddleName);
+	int schoolId = readSchoolId(), teacherId;
+	string name;
+	enterInt(teacherId, "Id of the teacher: ");
+	enterString(name, "New middle name of the teacher: ");
+	writeStr(socket_, name);
+	writeInt(socket_, teacherId);
+	writeInt(socket_, schoolId);
+}
+
+void requestUpdateTeacherSurname()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeacherSurname);
+	int schoolId = readSchoolId(), teacherId;
+	string name;
+	enterInt(teacherId, "Id of the teacher: ");
+	enterString(name, "New surname of the teacher: ");
+	writeStr(socket_, name);
+	writeInt(socket_, teacherId);
+	writeInt(socket_, schoolId);
+}
+
+void requestUpdateTeacherEmail()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeacherEmail);
+	int schoolId = readSchoolId(), teacherId;
+	string email;
+	enterInt(teacherId, "Id of the teacher: ");
+	enterEmail(email, "New email of the teacher: ");
+	writeStr(socket_, email);
+	writeInt(socket_, teacherId);
+	writeInt(socket_, schoolId);
+}
+
+//
+
+void requestUpdateTeamName()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeamName);
+	int schoolId = readSchoolId(), teamId;
+	string name;
+	enterInt(teamId, "Id of the team: ");
+	enterString(name, "New name of the team: ");
+	writeStr(socket_, name);
+	writeInt(socket_, teamId);
+	writeInt(socket_, schoolId);
+}
