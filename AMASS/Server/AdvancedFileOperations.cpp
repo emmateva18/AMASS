@@ -78,12 +78,13 @@ void readRecord(fstream& file, SCHOOL& school)
 
 	uint16_t itemCount=0;
 
-	TEACHER teacher;
+	TEACHER teacher,emptyTeacher;
 	readShortInt(file, itemCount);
 	for (int i = 0; i < itemCount; i++)
 	{
 		readRecord(file, teacher);
 		school.teachers.push_back(teacher);
+		teacher = emptyTeacher;
 	}
 
 	TEAM team, emptyTeam;
@@ -95,20 +96,22 @@ void readRecord(fstream& file, SCHOOL& school)
 		team = emptyTeam;
 	}
 
-	STUDENT student;
+	STUDENT student,emptyStudent;
 	readShortInt(file, itemCount);
 	for (int i = 0; i < itemCount; i++)
 	{
 		readRecord(file, student);
 		school.students.push_back(student);
+		student = emptyStudent;
 	}
 
-	ROLE role;
+	ROLE role,emptyRole;
 	readShortInt(file, itemCount);
 	for (int i = 0; i < itemCount; i++)
 	{
 		readRecord(file, role);
 		school.roles.push_back(role);
+		role = emptyRole;
 	}
 }
 

@@ -203,6 +203,7 @@ void logRecord(asio::ip::tcp::socket& socket, SYSTEM_CODE code)
 void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 {
 	SYSTEM_CODE code;
+	string errorMsg="";
 	int temp;
 	readInt(socket, temp);
 	code = static_cast<SYSTEM_CODE>(temp);
@@ -216,56 +217,11 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		schools[pos].write(socket);
 		break;
 	}
-		/*
-		case sendRole:
-			break;
-		case sendStudent:
-			break;
-		case sendTeacher:
-			break;
-		case sendDate:
-			break;
-		case sendTeamMember:
-			break;
-		case sendTeam:
-			break;
-		case sendSchool:
-			break;
-		case sendString:
-			break;
-		case sendInt:
-			break;
-		case sendBool:
-			break;
-		case sendShortInt:
-			break;*/
 	case sendDBSize:
 	{
 		writeShortInt(socket, uint16_t(schools.size()));
 		break;
-	}/*
-		case receiveRole:
-			break;
-		case receiveStudent:
-			break;
-		case receiveTeacher:
-			break;
-		case receiveDate:
-			break;
-		case receiveTeamMember:
-			break;
-		case receiveTeam:
-			break;
-		case receiveSchool:
-			break;
-		case receiveString:
-			break;
-		case receiveInt:
-			break;
-		case receiveBool:
-			break;
-		case receiveShortInt:
-			break;*/
+	}
 		case receiveMaxMemberCount:
 		{
 			int schoolId=0;
@@ -311,8 +267,15 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			teacher.read(socket);
 			readInt(socket, schoolId);
 			int pos = findSchoolById(schools, schoolId);
+			if (!isUniqueEmail(schools[pos], teacher.email))
+			{
+				errorMsg = "A person with that email already exists!\n";
+				writeStr(socket, errorMsg);
+				break;
+			}
 			createTeacher(schools[pos], teacher);
 			saveDataBase(schools);
+			writeStr(socket, "Operation Successful!\n");
 			break;
 		}
 		/*
@@ -592,7 +555,6 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	case updTeacherTeams:
 	{
 		int schoolId,teacherId;
-		string errorMsg="";
 		vector<int> teamIds;
 		readVec(socket, teamIds);
 		readInt(socket, teacherId);
@@ -618,14 +580,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 					else
 					{
 						errorMsg += "Team with id: ";
-						errorMsg += teamIds[i];
+						errorMsg += to_string(teamIds[i]);
 						errorMsg += "already has a teacher!";
 					}
 				}
 				else
 				{
 					errorMsg = "No team with id: ";
-					errorMsg += teamIds[i];
+					errorMsg += to_string(teamIds[i]);
 					errorMsg += " found!";
 					break;
 				}
@@ -640,31 +602,72 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		if(errorMsg=="")
 			errorMsg="Operation successful!";
 		writeStr(socket, errorMsg);
+		saveDataBase(schools);
 		break;
 	}
 	case updTeamMembers:
 	{
 		int schoolId,size,pos3,teamId;
-		vector<TEAM_MEMBER> members;
+		vector<TEAM_MEMBER> members,empty,oldMembers;
 		TEAM_MEMBER member,temp;
-		string errorMsg;
 		readInt(socket, teamId);
 		readInt(socket, size);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findTeamById(schools[pos], teamId);
+		if (pos2 == -1)
+		{
+			errorMsg = "No team with id ";
+			errorMsg += to_string(teamId);
+			errorMsg += " found!\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
+		if (!canEditTeam(schools[pos], teamId))
+		{
+			errorMsg = "Cannot edit this team, because its is not 'In Use'\n";
+			writeStr(socket, errorMsg);
+			break;
+		}
+		if(size==0)
+		{ 
+			for (int i = 0; i < oldMembers.size(); i++)
+			{
+				int pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+				schools[pos].students[pos3].isInTeam = false;
+			}
+			schools[pos].teams[pos2].members = empty;
+			writeStr(socket, "Operation Successful!");
+			saveDataBase(schools);
+			break;
+		}
+		if (size<0 or size>schools[pos].maxMemberCountPerTeam)
+		{
+			errorMsg += "There can't be more than ";
+			errorMsg += to_string(schools[pos].maxMemberCountPerTeam);
+			errorMsg += " members per team!";
+			writeStr(socket, errorMsg);
+			break;
+		}
 		for (int i = 0; i < size; i++)
 		{
 			member.read(socket);
 			members.push_back(member);
 			member = temp;
 		}
-		readInt(socket, schoolId);
-		int pos = findSchoolById(schools, schoolId);
-		int pos2 = findTeamById(schools[pos], teamId);
+		oldMembers = schools[pos].teams[pos2].members;
+		schools[pos].teams[pos2].members = empty;
 		if (size <= schools[pos].maxMemberCountPerTeam)
 		{
 			if (!hasTeamRepeatedRole(members))
 			{
 				for (int i = 0; i < size; i++)
 				{
+					for(int i=0;i<oldMembers.size();i++)
+					{
+						pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+						schools[pos].students[pos3].isInTeam = false;
+					}
 					pos3 = findStudentByEmail(schools[pos], members[i].studentEmail);
 					if (pos3!=-1)
 					{
@@ -673,6 +676,13 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 							errorMsg = "Student with email ";
 							errorMsg += schools[pos].students[pos3].email;
 							errorMsg += " is already in a team\n";
+							schools[pos].teams[pos2].members = oldMembers;
+							for (int i = 0; i < oldMembers.size(); i++)
+							{
+								pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+								schools[pos].students[pos3].isInTeam = true;
+							}
+							writeStr(socket, errorMsg);
 							break;
 						}
 					}
@@ -681,6 +691,27 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 						errorMsg = "No student with email ";
 						errorMsg += members[i].studentEmail;
 						errorMsg += " exists!\n";
+						schools[pos].teams[pos2].members = oldMembers;
+						for (int i = 0; i < oldMembers.size(); i++)
+						{
+							pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+							schools[pos].students[pos3].isInTeam = true;
+						}
+						writeStr(socket, errorMsg);
+						break;
+					}
+					if (findRoleById(schools[pos], members[i].roleId) == -1)
+					{
+						errorMsg = "No role with id ";
+						errorMsg += to_string(members[i].roleId);
+						errorMsg += " found!\n";
+						schools[pos].teams[pos2].members = oldMembers;
+						for (int i = 0; i < oldMembers.size(); i++)
+						{
+							pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+							schools[pos].students[pos3].isInTeam = true;
+						}
+						writeStr(socket, errorMsg);
 						break;
 					}
 				}
@@ -688,6 +719,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			else
 			{
 				errorMsg = "You can't have members with duplicated roles!\n";
+				schools[pos].teams[pos2].members = oldMembers;
+				for (int i = 0; i < oldMembers.size(); i++)
+				{
+					pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+					schools[pos].students[pos3].isInTeam = true;
+				}
+				writeStr(socket, errorMsg);
+				break;
 			}
 		}
 		else
@@ -695,6 +734,14 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			errorMsg = "There can't be more than ";
 			errorMsg += to_string(schools[pos].maxMemberCountPerTeam);
 			errorMsg += " members in a team\n";
+			schools[pos].teams[pos2].members = oldMembers;
+			for (int i = 0; i < oldMembers.size(); i++)
+			{
+				pos3 = findStudentByEmail(schools[pos], oldMembers[i].studentEmail);
+				schools[pos].students[pos3].isInTeam = true;
+			}
+			writeStr(socket, errorMsg);
+			break;
 		}
 		if (errorMsg == "")
 		{
@@ -710,9 +757,9 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 				setStudentIsInTeamToFalseIfNotInTeam(schools[pos], schools[pos].students[pos2]);
 			}
 			errorMsg = "Operation successful!\n";
+			saveDataBase(schools);
 		}
 		writeStr(socket, errorMsg);
-		saveDataBase(schools);
 		break;
 	}
 	case dltRole:

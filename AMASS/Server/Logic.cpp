@@ -195,6 +195,49 @@ void setStudentIsInTeamToFalseIfNotInTeam(SCHOOL school, STUDENT& student)
 	student.isInTeam = false;
 }
 
+bool isUniqueSchoolName(vector<SCHOOL> schools, string name)
+{
+	for (int i = 0; i < schools.size(); i++)
+	{
+		if (schools[i].name == name)
+			return 0;
+	}
+	return 1;
+}
+
+bool isUniqueEmail(SCHOOL school, string email)
+{
+	for (int i = 0; i < school.students.size();i++)
+	{
+		if (school.students[i].email == email)
+			return 0;
+	}
+	for (int i = 0; i < school.teachers.size();i++)
+	{
+		if (school.teachers[i].email == email)
+			return 0;
+	}
+	return 1;
+}
+
+bool canEditTeam(SCHOOL school,int teamId)
+{
+	int pos = findTeamById(school, teamId);
+	if (school.teams[pos].status == STATUS::inUse)
+		return 1;
+	return 0;
+}
+
+bool isUniqueTeamName(SCHOOL school, string name)
+{
+	for (int i = 0; i < school.teams.size(); i++)
+	{
+		if (school.teams[i].name == name)
+			return 0;
+	}
+	return 1;
+}
+
 bool hasTeamRepeatedRole(vector<TEAM_MEMBER> members)
 {
 	for (size_t i = 0; i < members.size() - 1; i++)

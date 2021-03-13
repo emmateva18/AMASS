@@ -6,16 +6,19 @@ asio::ip::tcp::socket connectToServer();
 template <typename T>
 void sendRequest(SYSTEM_CODE code, T data, int schoolId)
 {
-	//asio::ip::tcp::socket socket = connectToServer();
 	asio::io_service io_service;
 	asio::ip::tcp::socket socket(io_service);
 	socket.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket, code);
+	std::string result;
 	data.write(socket);
 	if (schoolId != -1)
 	{
 		writeInt(socket, schoolId);
 	}
+	readStr(socket, result);
+	std::cout << result;
+	_getch();
 }
 void tableRequest(asio::ip::tcp::socket& socket, SYSTEM_CODE code, SCHOOL& school, int id);
 

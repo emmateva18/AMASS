@@ -24,6 +24,12 @@ int findRoleById(SCHOOL school, int roleId);;
 
 void setStudentIsInTeamToFalseIfNotInTeam(SCHOOL school, STUDENT& student);
 
+bool isUniqueSchoolName(std::vector<SCHOOL> schools, std::string name);
+bool isUniqueEmail(SCHOOL school, std::string email);
+bool canEditTeam(SCHOOL school, int teamId);
+bool isUniqueTeamName(SCHOOL school, std::string name);
+
+bool canEditTeam(SCHOOL school, int teamId);
 bool hasTeamReachedMaxMembers(SCHOOL school, TEAM team);
 bool hasTeamRepeatedRole(std::vector<TEAM_MEMBER> members);
 
