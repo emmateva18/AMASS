@@ -100,14 +100,51 @@ int findSchoolById(vector<SCHOOL>& schools, int id)
 			return i;
 		}
 	}
+	return -1;
 }
 
-int findTeacherById(vector<SCHOOL>& schools, int schoolIndex, int teacherId)
+int findTeacherById(SCHOOL school, int teacherId)
 {
-	for (int i = 0; i < schools[schoolIndex].teachers.size(); i++)
+	for (int i = 0; i < school.teachers.size(); i++)
 	{
-		if (schools[schoolIndex].teachers[i].id == teacherId)
+		if (school.teachers[i].id == teacherId)
 			return i;
+	}
+	return -1;
+}
+
+int findStudentById(SCHOOL school, int studentId)
+{
+	for (size_t i = 0; i < school.students.size(); i++)
+	{
+		if (school.students[i].id == studentId)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+int findTeamById(SCHOOL school, int teamId)
+{
+	for (size_t i = 0; i < school.teams.size(); i++)
+	{
+		if (school.teams[i].id == teamId)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+int findRoleById(SCHOOL school, int roleId)
+{
+	for (size_t i = 0; i < school.roles.size(); i++)
+	{
+		if (school.roles[i].id == roleId)
+		{
+			return i;
+		}
 	}
 	return -1;
 }
@@ -241,6 +278,11 @@ void updateStudentGrade(STUDENT& student, string newGrade)
 void updateStudentEmail(STUDENT& student, string newEmail)
 {
 	student.email = newEmail;
+}
+
+void setStudentInTeam(STUDENT& student)
+{
+	student.isInTeam = true;
 }
 
 // TEACHER

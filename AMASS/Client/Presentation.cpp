@@ -25,7 +25,7 @@ STUDENT enterStudent()
 	STUDENT student;
 
 	cout << "Enter student's data:" << endl;
-	
+
 	enterString(student.firstName, "First name: ");
 	enterString(student.middleName, "Middle name: ");
 	enterString(student.surname, "Surname: ");
@@ -71,7 +71,7 @@ TEAM enterTeam(int maxPlayerPerTeam)
 
 		if (playerCount > maxPlayerPerTeam || playerCount < 0)
 		{
-			cout << "The entered number doesn't match the criteria (1 - 4)" << endl;
+			cout << "The entered number doesn't match the criteria (1 - " << maxPlayerPerTeam << ")" << endl;
 			cout << "Try again!" << endl;
 			pass = false;
 		}
@@ -95,7 +95,7 @@ ROLE enterRole()
 {
 	ROLE role;
 	cout << "Enter data for the role:" << endl;
-	
+
 	enterString(role.name, "Name: ");
 	return role;
 }
@@ -137,7 +137,9 @@ SCHOOL enterSchool()
 	SCHOOL school;
 
 	cout << "Enter data for the school:" << endl;
+
 	cin.ignore();
+	
 	cout << "Name: ";
 	getline(cin, school.name);
 	cout << "City: ";
@@ -146,7 +148,21 @@ SCHOOL enterSchool()
 	getline(cin, school.address);
 
 	school.id = INT_MAX;
-	enterInt(school.maxMemberCountPerTeam, "Max members per team: ");
+
+	bool isValid = false;
+
+	do
+	{
+		enterInt(school.maxMemberCountPerTeam, "Max members per team: ");
+		if (school.maxMemberCountPerTeam < 0 || school.maxMemberCountPerTeam > 5)
+		{
+			cout << "Invalid range (1 - 4)" << "Please try again!" << endl;
+		}
+		else
+		{
+			isValid = true;
+		}
+	} while (!isValid);
 
 	school.teachers.clear();
 	school.students.clear();
@@ -171,6 +187,21 @@ SCHOOL enterSchool()
 		// enter roles
 
 	return school;
+}
+
+vector<int> assignStudentInTeamMenu(SCHOOL& school)
+{
+	vector<int> result;
+	int teamId;
+	int studentId;
+
+	enterInt(teamId, "Enter team's id: ");
+	enterInt(studentId, "Enter student's id: ");
+
+	result.push_back(teamId);
+	result.push_back(studentId);
+
+	return result;
 }
 
 void displayCriteriaTeachersWithNoTeams(SCHOOL school)
@@ -206,6 +237,13 @@ void displayCriteriaTeamByStatus(SCHOOL school, STATUS status)
 	}
 }
 
+void listSchoolsDetails(vector<SCHOOL> schools)
+{
+	for (size_t i = 0; i < schools.size(); i++)
+	{
+		cout << schools[i].id << " " << schools[i].name << endl;
+	}
+}
 
 void displayFullLine()
 {

@@ -6,6 +6,9 @@ std::string statusToString(STATUS status);
 std::string nameToString(std::string fName, std::string mName, std::string surname);
 std::string vectorIntToString(std::vector<int> vec);
 
+std::vector<int> assignStudentInTeamMenu(SCHOOL& school);
+void listSchoolsDetails(std::vector<SCHOOL> schools);
+
 STUDENT enterStudent();
 TEACHER enterTeacher();
 SCHOOL enterSchool();
@@ -22,6 +25,10 @@ void enterEmail(std::string& email, std::string text);
 void displayCriteriaTeachersWithNoTeams(SCHOOL school);
 void displayCriteriaStudentsWithNoTeam(SCHOOL school);
 void displayCriteriaTeamByStatus(SCHOOL school, STATUS status);
+
+std::string dateOfSetupToString(DATE date);
+std::string studentEmailsToString(TEAM team);
+std::string isInTeamToString(bool isInTeam);
 
 void displayFullLine();
 void displayString(std::string str, int count);
