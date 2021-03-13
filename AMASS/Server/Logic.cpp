@@ -166,6 +166,21 @@ int findRoleById(SCHOOL school, int roleId)
 	return -1;
 }
 
+bool hasTeamRepeatedRole(vector<TEAM_MEMBER> members)
+{
+	for (size_t i = 0; i < members.size() - 1; i++)
+	{
+		for (size_t j = i + 1; j < members.size(); j++)
+		{
+			if (members[i].roleId == members[j].roleId)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 bool hasTeamReachedMaxMembers(SCHOOL school, TEAM team)
 {
 	return team.members.size() >= school.maxMemberCountPerTeam ? true : false;
@@ -203,7 +218,7 @@ void createRole(SCHOOL& school, ROLE role)
 	school.roles.push_back(role);
 }
 
-void createTeamIdInTeacher(TEACHER& teacher, int teamId)	
+void createTeamIdInTeacher(TEACHER& teacher, int teamId)
 {
 	teacher.teamIds.push_back(teamId);
 }

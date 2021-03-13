@@ -22,6 +22,7 @@ int findTeamById(SCHOOL school, int teamId);
 int findRoleById(SCHOOL school, int roleId);;
 
 bool hasTeamReachedMaxMembers(SCHOOL school, TEAM team);
+bool hasTeamRepeatedRole(std::vector<TEAM_MEMBER> members)
 
 void createRole(SCHOOL& school, ROLE role);
 void createStudent(SCHOOL& school, STUDENT student);
