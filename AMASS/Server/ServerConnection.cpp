@@ -155,6 +155,8 @@ string codeToString(SYSTEM_CODE code)
 		break;
 	case updStudentIsInTeam: return "updateStudentIsInTeam";
 		break;
+	case updTeacherTeams: return "updateTeacherTeams";
+		break;
 	case dltRole: return "deleteRole";
 		break;
 	case dltStudent: return "deleteStudent";
@@ -265,9 +267,11 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		case receiveMaxMemberCount:
 		{
 			int schoolId=0;
-			int pos = findSchoolById(schools, schoolId);
 			int num;
 			readInt(socket, num);
+			readInt(socket, schoolId);
+			int pos = findSchoolById(schools, schoolId);
+			
 			schools[pos].maxMemberCountPerTeam = num;
 			saveDataBase(schools);
 			break;
@@ -585,10 +589,49 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	}
 	case updTeacherTeams:
 	{
-		int schoolId;
+		int schoolId,teacherId;
+		string errorMsg="";
 		vector<int> teamIds;
 		readVec(socket, teamIds);
+		readInt(socket, teacherId);
 		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findTeacherById(schools[pos], teacherId);
+		if (teamIds.size()<= schools[pos].teams.size())
+		{
+			for (size_t i = 0; i < teamIds.size(); i++)
+			{
+				if (findTeamById(schools[pos], teamIds[i]) != -1)
+				{
+					if (findIfTeamHasTeacher(schools[pos], teamIds[i]) == -1)
+					{
+						schools[pos].teachers[pos2].teamIds.push_back(teamIds[i]);
+					}
+					else
+					{
+						errorMsg += "Team with id: ";
+						errorMsg += teamIds[i];
+						errorMsg += "already has a teacher!";
+					}
+				}
+				else
+				{
+					errorMsg = "No team with id: ";
+					errorMsg += teamIds[i];
+					errorMsg += " found!";
+					break;
+				}
+			}
+		}
+		else
+		{
+			errorMsg = "There are less than ";
+			errorMsg += to_string(teamIds.size());
+			errorMsg += " teams in existance at this school!";
+		}
+		if(errorMsg=="")
+			errorMsg="Operation successful!";
+		writeStr(socket, errorMsg);
 		break;
 	}
 	case dltRole:

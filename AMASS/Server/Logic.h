@@ -14,6 +14,7 @@ void assignRoleId(ROLE& role);
 void assignTeacherId(TEACHER& teacher);
 void assignStudentId(STUDENT& student);
 
+int findIfTeamHasTeacher(SCHOOL school, int teamId);
 int findSchoolById(std::vector<SCHOOL>& schools, int id);
 int findTeacherById(SCHOOL school, int teacherId);
 int findStudentById(SCHOOL school, int studentId);
@@ -49,10 +50,6 @@ void updateTeacherEmail(TEACHER& teacher, std::string newEmail);
 void updateTeamIdInTeacher(TEACHER& teacher, int teamIdIndex, int newId);
 void updateTeamName(TEAM& team, std::string newName);
 void updateTeamDesc(TEAM& team, std::string newDesc);
-void updateTeamName(TEAM& team, std::string newName);
-void updateTeamDayOfSetUp(TEAM& team, int newDay);
-void updateTeamMonthOfSetUp(TEAM& team, int newMonth);
-void updateTeamYearOfSetUp(TEAM& team, int newYear);
 void updateTeamStatus(TEAM& team, STATUS newStatus);
 void updateSchoolName(SCHOOL& school, std::string newName);
 void updateSchoolCity(SCHOOL& school, std::string newCity);

@@ -86,12 +86,13 @@ void readRecord(fstream& file, SCHOOL& school)
 		school.teachers.push_back(teacher);
 	}
 
-	TEAM team;
+	TEAM team, emptyTeam;
 	readShortInt(file, itemCount);
 	for (int i = 0; i < itemCount; i++)
 	{
 		readRecord(file, team);
 		school.teams.push_back(team);
+		team = emptyTeam;
 	}
 
 	STUDENT student;

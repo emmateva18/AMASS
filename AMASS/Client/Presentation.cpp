@@ -63,7 +63,7 @@ TEAM enterTeam(int maxPlayerPerTeam)
 	getline(cin, team.desc);
 
 	int playerCount;
-	bool pass = true;
+	bool pass = false;
 
 	do
 	{
@@ -73,7 +73,6 @@ TEAM enterTeam(int maxPlayerPerTeam)
 		{
 			cout << "The entered number doesn't match the criteria (1 - " << maxPlayerPerTeam << ")" << endl;
 			cout << "Try again!" << endl;
-			pass = false;
 		}
 		else
 		{
@@ -84,6 +83,7 @@ TEAM enterTeam(int maxPlayerPerTeam)
 				enterInt(member.roleId, "Role id: ");
 				team.members.push_back(member);
 			}
+			pass = true;
 		}
 
 	} while (!pass);

@@ -436,6 +436,7 @@ void requestUpdateTeacherTeams()
 {
 	int schoolId = readSchoolId(), teacherId;
 	SCHOOL school = tableRequest(schoolId);
+	string result;
 	displayFullLine();
 	displayTeachersInformation(school);
 	cout << endl;
@@ -447,10 +448,15 @@ void requestUpdateTeacherTeams()
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::updTeacherTeams);
 
+	enterInt(teacherId, "Enter the id of the teacher you wish to change: ");
 	vector<int> teamIds;
 	enterVectorOfIntegers(teamIds);
 	writeVec(socket_, teamIds);
+	writeInt(socket_, teacherId);
 	writeInt(socket_, schoolId);
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 void requestUpdateTeamName()

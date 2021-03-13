@@ -91,6 +91,23 @@ void assignStudentId(STUDENT& student)
 	save(ids);
 }
 
+int findIfTeamHasTeacher(SCHOOL school, int teamId)
+{
+
+	for (int i = 0; i < school.teachers.size(); i++)
+	{
+		for (int j = 0; j < school.teachers[i].teamIds.size(); j++)
+		{
+			if (school.teachers[i].teamIds[j] == teamId)
+			{
+				return i;
+			}
+		}
+	}
+
+	return -1;
+}
+
 int findSchoolById(vector<SCHOOL>& schools, int id)
 {
 	for (size_t i = 0; i < schools.size(); i++)
