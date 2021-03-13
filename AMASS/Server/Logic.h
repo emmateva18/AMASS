@@ -22,6 +22,8 @@ int findStudentByEmail(SCHOOL school, std::string email);
 int findTeamById(SCHOOL school, int teamId);
 int findRoleById(SCHOOL school, int roleId);;
 
+void setStudentIsInTeamToFalseIfNotInTeam(SCHOOL school, STUDENT& student);
+
 bool hasTeamReachedMaxMembers(SCHOOL school, TEAM team);
 bool hasTeamRepeatedRole(std::vector<TEAM_MEMBER> members);
 

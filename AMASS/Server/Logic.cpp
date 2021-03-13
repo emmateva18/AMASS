@@ -178,6 +178,23 @@ int findStudentByEmail(SCHOOL school, string email)
 	return -1;
 }
 
+void setStudentIsInTeamToFalseIfNotInTeam(SCHOOL school, STUDENT& student)
+{
+	for (size_t i = 0; i < school.teams.size(); i++)
+	{
+		for (size_t j = 0; j < school.teams[i].members.size(); j++)
+		{
+			if (school.teams[i].members[j].studentEmail == student.email)
+			{
+				student.isInTeam = true;
+				return;
+			}
+		}
+	}
+
+	student.isInTeam = false;
+}
+
 bool hasTeamRepeatedRole(vector<TEAM_MEMBER> members)
 {
 	for (size_t i = 0; i < members.size() - 1; i++)
