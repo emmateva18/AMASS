@@ -261,6 +261,13 @@ void requestDeleteStudent()
 	sendRequest(SYSTEM_CODE::dltStudent, id, schoolId);
 }
 
+void requestDeleteTeacher()
+{
+	int id, schoolId = readSchoolId();
+	enterInt(id, "Id of the student you wish to delete: ");
+	sendRequest(SYSTEM_CODE::dltTeacher, id, schoolId);
+}
+
 void requestInputMaxNumOfMem()
 {
 	int schoolId = readSchoolId();

@@ -381,6 +381,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		deleteRoles(schools[pos], roleId);
+		saveDataBase(schools);
 		break;
 	}
 	case dltStudent:
@@ -390,10 +391,19 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		deleteStudent(schools[pos], studentId);
+		saveDataBase(schools);
 		break;
 	}
 	case dltTeacher:
+	{
+		int schoolId = 0, teacherId;
+		readInt(socket, teacherId);
+		readInt(socket, schoolId);
+		int pos = findSchoolById(schools, schoolId);
+		deleteTeacher(schools[pos], teacherId);
+		saveDataBase(schools);
 		break;
+	}
 	case dltDate:
 		break;
 	case dltTeamMember:
