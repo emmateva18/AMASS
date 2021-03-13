@@ -181,21 +181,7 @@ void requestReadDB()
 	displaySchools(schools);
 }
 
-void requestDltSch()
-{
-	//validate()
-	int id;
-	cin >> id;
-	sendRequest(SYSTEM_CODE::dltSchool, id,-1);
-}
 
-void requestDltTeam()
-{
-	requestReadDB();
-	int id, teamId;
-	cin >> id;
-	sendRequest(SYSTEM_CODE::readSchool, id,-1);
-}
 
 void getSchoolId()
 {
@@ -243,6 +229,29 @@ void requestCrtRole()
 	int schoolId = readSchoolId();
 	ROLE role = enterRole();
 	sendRequest(SYSTEM_CODE::crtRole, role, schoolId);
+}
+
+void requestDeleteSchool()
+{
+	//validate()
+	int id;
+	cin >> id;
+	sendRequest(SYSTEM_CODE::dltSchool, id, -1);
+}
+
+void requestDeleteTeam()
+{
+	requestReadDB();
+	int id, teamId;
+	cin >> id;
+	sendRequest(SYSTEM_CODE::readSchool, id, -1);
+}
+
+void requestDeleteRole()
+{
+	int id, schoolId = readSchoolId();
+	enterInt(id, "Id of the role you wish to delete: ");
+	sendRequest(SYSTEM_CODE::dltRole, id, schoolId);
 }
 
 void requestInputMaxNumOfMem()
