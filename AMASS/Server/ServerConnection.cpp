@@ -599,6 +599,12 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findTeacherById(schools[pos], teacherId);
+		if (pos2 == -1)
+		{
+			errorMsg = "No teacher with id ";
+			errorMsg += to_string(teacherId);
+			errorMsg += " found!\n";
+		}
 		if (teamIds.size()<= schools[pos].teams.size())
 		{
 			for (size_t i = 0; i < teamIds.size(); i++)
@@ -638,17 +644,75 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	}
 	case updTeamMembers:
 	{
-		int schoolId,size;
+		int schoolId,size,pos3,teamId;
 		vector<TEAM_MEMBER> members;
-		TEAM_MEMBER member;
+		TEAM_MEMBER member,temp;
+		string errorMsg;
+		readInt(socket, teamId);
 		readInt(socket, size);
 		for (int i = 0; i < size; i++)
 		{
 			member.read(socket);
 			members.push_back(member);
+			member = temp;
 		}
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
+		int pos2 = findTeamById(schools[pos], teamId);
+		if (size <= schools[pos].maxMemberCountPerTeam)
+		{
+			if (!hasTeamRepeatedRole(members))
+			{
+				for (int i = 0; i < size; i++)
+				{
+					pos3 = findStudentByEmail(schools[pos], members[i].studentEmail);
+					if (pos3!=-1)
+					{
+						if (schools[pos].students[pos3].isInTeam)
+						{
+							errorMsg = "Student with email ";
+							errorMsg += schools[pos].students[pos3].email;
+							errorMsg += " is already in a team\n";
+							break;
+						}
+					}
+					else
+					{
+						errorMsg = "No student with email ";
+						errorMsg += members[i].studentEmail;
+						errorMsg += " exists!\n";
+						break;
+					}
+				}
+			}
+			else
+			{
+				errorMsg = "You can't have members with duplicated roles!\n";
+			}
+		}
+		else
+		{
+			errorMsg = "There can't be more than ";
+			errorMsg += to_string(schools[pos].maxMemberCountPerTeam);
+			errorMsg += " members in a team\n";
+		}
+		if (errorMsg == "")
+		{
+			schools[pos].teams[pos2].members = members;
+			for (int i = 0; i < size; i++)
+			{
+				pos3 = findStudentByEmail(schools[pos], members[i].studentEmail);
+				schools[pos].students[pos3].isInTeam = true;
+			}
+			for (int i = 0; i < size; i++)
+			{
+				pos3 = findStudentByEmail(schools[pos], members[i].studentEmail);
+				setStudentIsInTeamToFalseIfNotInTeam(schools[pos], schools[pos].students[pos2]);
+			}
+			errorMsg = "Operation successful!\n";
+		}
+		writeStr(socket, errorMsg);
+		saveDataBase(schools);
 		break;
 	}
 	case dltRole:

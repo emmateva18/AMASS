@@ -531,8 +531,10 @@ void requestUpateTeamMembers()
 	int choice, roleId;
 	string email, result;
 	TEAM_MEMBER member, temp;
-	writeInt(socket_, choice);
+	enterInt(teamId, "Enter the team whose members you wish to alter: ");
 	enterInt(choice, "Enter new amount of members: ");
+	writeInt(socket_, teamId);
+	writeInt(socket_, choice);
 	for (int i = 0; i < choice; i++)
 	{
 		enterEmail(email, "Email of student " + to_string(i+1)+" :");
