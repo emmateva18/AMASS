@@ -132,14 +132,24 @@ void enterRecords(std::function<void()> callback, string text)
 	} while (!isRecordValid);
 }
 
+void clearInputStream()
+{
+	int gc = cin.rdbuf()->in_avail();
+	if (gc)
+	{
+		cin.ignore(gc);
+	}
+}
+
 SCHOOL enterSchool()
 {
 	SCHOOL school;
 
 	cout << "Enter data for the school:" << endl;
+	
+	clearInputStream();
 
-	cin.ignore();
-
+	
 	cout << "Name: ";
 	getline(cin, school.name);
 	cout << "City: ";
@@ -663,7 +673,7 @@ void enterBool(bool& boolean, string text)
 	}
 }
 
-void enterVectorOfIntegers(vector<int>& vec, string text)
+void enterVectorOfIntegers(vector<int>& vec)
 {
 	int temp;
 	int n;

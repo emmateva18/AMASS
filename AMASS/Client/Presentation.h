@@ -1,6 +1,6 @@
 #pragma once
 #include "../CommunicationLibrary/CommunicationLibrary.h"
-
+#include <conio.h>
 std::string statusToString(STATUS status);
 std::string nameToString(std::string fName, std::string mName, std::string surname);
 std::string vectorIntToString(std::vector<int> vec);
@@ -8,6 +8,8 @@ std::string vectorIntToString(std::vector<int> vec);
 std::vector<int> assignStudentInTeamMenu(SCHOOL& school);
 void listSchoolsDetails(std::vector<SCHOOL> schools);
 void listSchoolDetails(SCHOOL school);
+
+void clearInputStream();
 
 STUDENT enterStudent();
 TEACHER enterTeacher();
@@ -23,6 +25,7 @@ void enterInt(int& variable, std::string text);
 void enterEmail(std::string& email, std::string text);
 void enterGrade(std::string& grade, std::string text);
 void enterBool(bool& boolean, std::string text);
+void enterVectorOfIntegers(std::vector<int>& vec);
 
 int enterTeamStatus();
 

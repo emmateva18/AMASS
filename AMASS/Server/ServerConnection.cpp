@@ -570,7 +570,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		saveDataBase(schools);
 		break;
 	}
-	/*case updStudentIsInTeam:
+	case updStudentIsInTeam:
 	{
 		int schoolId = 0, studentId;
 		bool isInTeam;
@@ -579,11 +579,18 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		readInt(socket, schoolId);
 		int pos = findSchoolById(schools, schoolId);
 		int pos2 = findStudentById(schools[pos], studentId);
-		updateStudent(schools[pos].students[pos2], isInTeam);
-		updateStudent
+		setStudentIsInTeam(schools[pos].students[pos2], isInTeam);
 		saveDataBase(schools);
 		break;
-	}*/
+	}
+	case updTeacherTeams:
+	{
+		int schoolId;
+		vector<int> teamIds;
+		readVec(socket, teamIds);
+		readInt(socket, schoolId);
+		break;
+	}
 	case dltRole:
 	{
 		int schoolId = 0,roleId;

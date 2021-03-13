@@ -1,5 +1,5 @@
 #pragma once
-#include "../CommunicationLibrary/CommunicationLibrary.h"
+//#include "../CommunicationLibrary/CommunicationLibrary.h"
 #include "Presentation.h"
 asio::ip::tcp::socket connectToServer();
 
@@ -58,7 +58,7 @@ void requestUpdateTeacherFirstName();
 void requestUpdateTeacherMiddleName();
 void requestUpdateTeacherSurname();
 void requestUpdateTeacherEmail();
-
+void requestUpdateTeacherTeams();
 void requestUpdateTeamName();
 void requestUpdateTeamDescription();
 void requestUpdateTeamStatus();

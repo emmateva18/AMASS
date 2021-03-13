@@ -68,6 +68,7 @@ enum SYSTEM_CODE
 	updStudentSurname=721,
 	updStudentClass=722,
 	updStudentIsInTeam=723,
+	updTeacherTeams=724,
 	dltRole = 801,
 	dltStudent = 802,
 	dltTeacher = 803,

@@ -206,6 +206,8 @@ void requestReadDB()
 	vector<SCHOOL> schools;
 	readRequest(SYSTEM_CODE::readDB, schools);
 	displaySchools(schools);
+	cout <<  "Enter any key to continue";
+	char a = _getch();
 }
 
 
@@ -430,7 +432,26 @@ void requestUpdateTeacherEmail()
 	writeInt(socket_, schoolId);
 }
 
-//
+void requestUpdateTeacherTeams()
+{
+	int schoolId = readSchoolId(), teacherId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayTeachersInformation(school);
+	cout << endl;
+	displayFullLine();
+	displayTeamsInformation(school);
+
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updTeacherTeams);
+
+	vector<int> teamIds;
+	enterVectorOfIntegers(teamIds);
+	writeVec(socket_, teamIds);
+	writeInt(socket_, schoolId);
+}
 
 void requestUpdateTeamName()
 {
