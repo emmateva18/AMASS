@@ -5,10 +5,12 @@
 2. [Our Team](#team)
 3. [Documentation](#documentation)
 4. [Used Technologies](#technologies)
-
+5. [How to download?](howToDownload)
+6. 
 <a name="desc"></a>
 ## 1. Description
-We created a C++ based application, with a Server side and a Client side, that helps schools organise projects and teams. The Server side helps for saving the data in binary files, that is being displayed in a table format, in the server and the Client side in mainly used for inputting information.
+We have created a C++ based application, with a Server side and a Client side, that helps schools organise projects and teams. The Server side helps for saving the data in binary files, that is being displayed in a table format and validate the inputs. The Client side in mainly used for inputting and displaying information.
+
 <a name="team"></a>
 ## 2. Our Team
 - :woman_teacher::mag: Ema Mateva (Project Manager / QA Engineer)
@@ -19,9 +21,13 @@ We created a C++ based application, with a Server side and a Client side, that h
 ## 3. Documentation
 * [Documentation](https://github.com/emmateva18/AMASS/wiki)
 * [QA Documentation](https://github.com/emmateva18/AMASS/wiki/QA-Documentation)
-* [Presentation]()
+* [Presentation](https://codingburgas-my.sharepoint.com/:p:/g/personal/emmateva18_codingburgas_bg/EaxM2fstXPJHoT7Tzc8BOdsBwgV5_T83UFQ0h5gXpyYJdQ?e=CablMn)
 
 <a name="technologies"></a>
 
 ## 4. Used Technologies
 * C++
+
+<a name="howToDownload"></a>
+## 5. How to download?
+- You can see how to download our application from [here](https://github.com/emmateva18/AMASS/wiki/How-to-download%3F).
