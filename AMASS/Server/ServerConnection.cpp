@@ -758,6 +758,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	{
 		int schoolId,teacherId;
 		vector<int> teamIds,empty;
+		bool pass = true;
 		readVec(socket, teamIds);
 		readInt(socket, teacherId);
 		readInt(socket, schoolId);
@@ -794,15 +795,13 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			{
 				if (findTeamById(schools[pos], teamIds[i]) != -1)
 				{
-					if (findIfTeamHasTeacher(schools[pos], teamIds[i]) == -1)
-					{
-						schools[pos].teachers[pos2].teamIds.push_back(teamIds[i]);
-					}
-					else
+					if (findIfTeamHasTeacher(schools[pos], teamIds[i],pos2) != -1)
 					{
 						errorMsg += "Team with id: ";
 						errorMsg += to_string(teamIds[i]);
 						errorMsg += " already has a teacher!";
+						writeStr(socket, errorMsg);
+						pass = false;
 						break;
 					}
 				}
@@ -811,8 +810,13 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 					errorMsg = "No team with id: ";
 					errorMsg += to_string(teamIds[i]);
 					errorMsg += " found!";
+					pass = false;
 					break;
 				}
+			}
+			if (!pass)
+			{
+				break;
 			}
 		}
 		else
@@ -822,8 +826,15 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			errorMsg += " teams in existance at this school!";
 			break;
 		}
-		if(errorMsg=="")
-			errorMsg="Operation successful!";
+		if (errorMsg == "")
+		{
+			schools[pos].teachers[pos2].teamIds = empty;
+			for (size_t i = 0; i < teamIds.size(); i++)
+			{
+				schools[pos].teachers[pos2].teamIds.push_back(teamIds[i]);
+			}
+			errorMsg = "Operation successful!";
+		}
 		writeStr(socket, errorMsg);
 		saveDataBase(schools);
 		break;
@@ -1000,6 +1011,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			writeStr(socket, errorMsg);
 			break;
 		}
+		updateRolesAfterDeletion(schools[pos], roleId);
 		deleteRoles(schools[pos], roleId);
 		saveDataBase(schools);
 		writeStr(socket, "Operation successful!\n");
@@ -1020,6 +1032,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			writeStr(socket, errorMsg);
 			break;
 		}
+		updateTeamAfterStudentDeletion(schools[pos], schools[pos].students[pos2].email);
 		deleteStudent(schools[pos], studentId);
 		saveDataBase(schools);
 		writeStr(socket, "Operation successful!\n");
@@ -1045,8 +1058,6 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		writeStr(socket, "Operation successful!\n");
 		break;
 	}
-	case dltTeamMember:
-		break;
 	case dltTeam:
 	{
 		int schoolId,teamId;
@@ -1062,6 +1073,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			writeStr(socket, errorMsg);
 			break;
 		}
+		updateTeacherAfterTeamDeletion(schools[pos], teamId);
 		deleteTeam(schools[pos], teamId);
 		saveDataBase(schools);
 		writeStr(socket, "Operation successful!\n");

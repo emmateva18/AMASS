@@ -14,7 +14,7 @@ void assignRoleId(ROLE& role);
 void assignTeacherId(TEACHER& teacher);
 void assignStudentId(STUDENT& student);
 
-int findIfTeamHasTeacher(SCHOOL school, int teamId);
+int findIfTeamHasTeacher(SCHOOL school, int teamId, int teacherId);
 int findSchoolById(std::vector<SCHOOL>& schools, int id);
 int findTeacherById(SCHOOL school, int teacherId);
 int findStudentById(SCHOOL school, int studentId);
@@ -67,3 +67,6 @@ void updateSchoolCity(SCHOOL& school, std::string newCity);
 void updateSchoolAdress(SCHOOL& school, std::string newAddress);
 void archiveTeam(SCHOOL& school, int teamId);
 void enterVectorOfIntegers(std::vector<int>& vec, std::string text);
+void updateRolesAfterDeletion(SCHOOL& school, int roleId);
+void updateTeacherAfterTeamDeletion(SCHOOL& school, int teamId);
+void updateTeamAfterStudentDeletion(SCHOOL& school, std::string studentEmail);

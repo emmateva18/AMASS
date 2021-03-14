@@ -730,3 +730,20 @@ void enterVectorOfIntegers(vector<int>& vec)
 		vec.push_back(temp);
 	}
 }
+
+string initAMASS()
+{
+	char sq;
+	sq = 178;
+	string tripleSq;
+	tripleSq += sq; tripleSq += sq; tripleSq += sq;
+	string sqWithSpace;
+	sqWithSpace += " "; sqWithSpace += sq;
+	string pixelArt;
+	pixelArt += " "; pixelArt += tripleSq; pixelArt += "  "; pixelArt += sq; pixelArt += "   "; pixelArt += sq; pixelArt += "  "; pixelArt += tripleSq; pixelArt += "   "; pixelArt += tripleSq; pixelArt += "  "; pixelArt += tripleSq; pixelArt += "\n";
+	pixelArt += sq; pixelArt += "   "; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += "   ";  pixelArt += sq; pixelArt += sqWithSpace; pixelArt += "    "; pixelArt += sq; pixelArt += "\n";
+	pixelArt += tripleSq; pixelArt += sq; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += sqWithSpace; pixelArt += sqWithSpace; pixelArt += sqWithSpace; pixelArt += tripleSq; pixelArt += sq;  pixelArt += " "; pixelArt += sqWithSpace;  pixelArt += sq; pixelArt += "  "; pixelArt += sqWithSpace; pixelArt += sq; pixelArt += "\n";
+	pixelArt += sq; pixelArt += "   "; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += "   "; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += "   "; pixelArt += sq; pixelArt += "    "; pixelArt += sq; pixelArt += "    "; pixelArt += sq; pixelArt += "\n";
+	pixelArt += sq; pixelArt += "   "; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += "   "; pixelArt += sq; pixelArt += sqWithSpace; pixelArt += "   "; pixelArt += sq; pixelArt += " "; pixelArt += tripleSq; pixelArt += "  "; pixelArt += tripleSq; pixelArt += "\n";
+	return pixelArt;
+}

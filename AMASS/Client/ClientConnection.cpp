@@ -208,6 +208,7 @@ bool pingServer()
 	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
 	writeInt(socket_, SYSTEM_CODE::ping);
 	string result;
+	cout << initAMASS();
 	cout << "Connecting to server...\n";
 	try
 	{

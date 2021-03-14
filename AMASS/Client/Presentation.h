@@ -60,3 +60,4 @@ void displayRolesInformation(SCHOOL school);
 void displayRoleInformation(ROLE role);
 void displaySchoolStructure(SCHOOL school);
 void displaySchools(std::vector<SCHOOL> schools);
+std::string initAMASS();

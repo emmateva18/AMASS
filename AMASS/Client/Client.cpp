@@ -8,6 +8,7 @@ int main()
 	pingServer();
 	vector<MENU> menus = initMenus();
 	int selectedIndex = 0;
+	
 	menus[0].showMenuItems();
 	try
 	{

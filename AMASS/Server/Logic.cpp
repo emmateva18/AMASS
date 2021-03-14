@@ -90,14 +90,14 @@ void assignStudentId(STUDENT& student)
 	save(ids);
 }
 
-int findIfTeamHasTeacher(SCHOOL school, int teamId)
+int findIfTeamHasTeacher(SCHOOL school, int teamId, int teacherId)
 {
 
 	for (int i = 0; i < school.teachers.size(); i++)
 	{
 		for (int j = 0; j < school.teachers[i].teamIds.size(); j++)
 		{
-			if (school.teachers[i].teamIds[j] == teamId)
+			if (school.teachers[i].teamIds[j] == teamId and school.teachers[teacherId].id != school.teachers[i].id)
 			{
 				return i;
 			}
@@ -488,4 +488,46 @@ void archiveTeam(SCHOOL& school, int teamId)
 void updateSchoolAdress(SCHOOL& school, string newAddress)
 {
 	school.address = newAddress;
+}
+
+void updateRolesAfterDeletion(SCHOOL& school,int roleId)
+{
+	int pos = findRoleById(school,roleId);
+	for (int i = 0; i < school.teams.size(); i++)
+	{
+		for (int j = 0; j < school.teams[i].members.size(); j++)
+		{
+			if (school.teams[i].members[j].roleId == roleId)
+			{
+				school.teams[i].members[j].roleId = -1;
+			}
+		}
+	}
+}
+
+void updateTeacherAfterTeamDeletion(SCHOOL& school, int teamId)
+{
+	for (int i = 0; i < school.teachers.size();i++)
+	{
+		for (int j = 0; j < school.teachers[i].teamIds.size(); j++)
+		{
+			if (school.teachers[i].teamIds[j] == teamId)
+				school.teachers[i].teamIds[j] = -1;
+		}
+	}
+}
+
+void updateTeamAfterStudentDeletion(SCHOOL& school, string studentEmail)
+{
+	for (int i = 0; i < school.teams.size(); i++)
+	{
+		for (int j = 0; j < school.teams[i].members.size(); j++)
+		{
+			if (school.teams[i].members[j].studentEmail == studentEmail)
+			{
+				school.teams[i].members[j].studentEmail = "DELETED";
+				school.teams[i].members[j].roleId = -1;
+			}
+		}
+	}
 }
