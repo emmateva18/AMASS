@@ -167,6 +167,10 @@ void sendRequest(SYSTEM_CODE code, int data, int id)
 	{
 		writeInt(socket_, id);
 	}
+	string result;
+	readStr(socket_, result);
+	std::cout << result;
+	_getch();
 }
 void sendRequest(SYSTEM_CODE code, uint16_t data)
 {
@@ -499,6 +503,11 @@ void requestUpdateTeamName()
 	writeStr(socket_, name);
 	writeInt(socket_, teamId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 void requestUpdateTeamDescription()
@@ -519,6 +528,11 @@ void requestUpdateTeamDescription()
 	writeStr(socket_, name);
 	writeInt(socket_, teamId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 void requestUpdateTeamStatus()
@@ -538,6 +552,11 @@ void requestUpdateTeamStatus()
 	writeInt(socket_, status);
 	writeInt(socket_, teamId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 void requestUpateTeamMembers()
@@ -596,6 +615,10 @@ void requestUpdateStudentEmail()
 	writeStr(socket_, email);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 void requestUpdateStudentFirstName()
@@ -616,6 +639,11 @@ void requestUpdateStudentFirstName()
 	writeStr(socket_, name);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 void requestUpdateStudentMiddleName()
 {
@@ -635,6 +663,11 @@ void requestUpdateStudentMiddleName()
 	writeStr(socket_, name);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 void requestUpdateStudentSurname()
 {
@@ -654,6 +687,11 @@ void requestUpdateStudentSurname()
 	writeStr(socket_, name);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 void requestUpdateStudentClass()
 {
@@ -673,6 +711,11 @@ void requestUpdateStudentClass()
 	writeStr(socket_, name);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }
 
 void requestUpdateStudentIsInTeam()
@@ -693,4 +736,34 @@ void requestUpdateStudentIsInTeam()
 	writeBool(socket_, isInTeam);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
+}
+
+void requestUpdateRoleName()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayRolesInformation(school);
+
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::updRole);
+
+	string name;
+	enterInt(roleId, "Id of the role: ");
+	enterString(name, "New role name: ");
+	writeInt(socket_, roleId);
+	writeStr(socket_, name);
+	writeInt(socket_, schoolId);
+
+	string result;
+	readStr(socket_, result);
+	cout << result;
+	_getch();
 }

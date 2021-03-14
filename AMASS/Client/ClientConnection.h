@@ -72,3 +72,4 @@ void requestUpdateStudentMiddleName();
 void requestUpdateStudentSurname();
 void requestUpdateStudentClass();
 void requestUpdateStudentIsInTeam();
+void requestUpdateRoleName();

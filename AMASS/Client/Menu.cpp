@@ -201,7 +201,7 @@ vector<MENU> initMenus()
 			{false,'3',"Update school city",requestUpdateSchoolCity,-1},
 			{false,'4',"Update teachers",nullptr,7},
 			{false,'5',"Update students",nullptr,10},
-			{false,'6',"Update roles",nullptr,9},
+			{false,'6',"Update role names",requestUpdateRoleName,-1},
 			{false,'7',"Update teams",nullptr,8},
 			{false,'8',"Back",nullptr,1}
 		}
@@ -210,7 +210,7 @@ vector<MENU> initMenus()
 	MENU deleteMenu =
 	{
 		{
-			{true,'1',"Delete School",requestDeleteSchool,-1},
+			{true,'1',"Delete School",requestDeleteSchool,0},
 			{false,'2',"Delete team",requestDeleteTeam,-1},
 			{false,'3',"Delete Role",requestDeleteRole,-1},
 			{false,'4',"Delete student",requestDeleteStudent,-1},
@@ -256,7 +256,7 @@ vector<MENU> initMenus()
 			{true,'1',"Update team name",requestUpdateTeamName,-1},
 			{false,'2',"Update team description",requestUpdateTeamDescription,-1},
 			{false,'3',"Update team status",requestUpdateTeamStatus,-1},
-			{false,'4',"Update team members",nullptr,9},
+			{false,'4',"Update team members",requestUpateTeamMembers,-1},
 			{false,'5',"Back",nullptr,3},
 		}
 	};
@@ -264,7 +264,7 @@ vector<MENU> initMenus()
 	MENU updateTeamMemberMenu =
 	{
 		{
-			{true,'1',"Update team members",requestUpateTeamMembers,-1},
+			{true,'1',"Update team members",nullptr,0},
 			{false,'2',"Back",nullptr,8},
 		}
 	};
