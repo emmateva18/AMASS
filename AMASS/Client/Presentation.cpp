@@ -503,23 +503,46 @@ void displayRoleInformation(ROLE role)
 
 }
 
+void displaySchoolTitle()
+{
+	cout << "| " << setw(101) << right << "SCHOOL" << setw(100) << "|" << endl;
+}
+
+void displayTeacherTitle()
+{
+	cout << "| " << setw(101) << right << "TEACHERS" << setw(100) << "|" << endl;
+}
+
+void displayTeamTitle()
+{
+	cout << "| " << setw(101) << right << "TEAMS" << setw(100) << "|" << endl;
+}
+
+void displayStudentTitle()
+{
+	cout << "| " << setw(101) << right << "STUDENTS" << setw(100) << "|" << endl;
+}
+
+void displayRoleTitle()
+{
+	cout << "| " << setw(101) << right << "ROLES" << setw(100) << "|" << endl;
+}
+
 void displaySchoolStructure(SCHOOL school)
 {
 	displayFullLine();
-
-	cout << "| " << setw(101) << right << "SCHOOL" << setw(100) << "|" << endl;
 	displaySchoolInformation(school);
 
-	cout << "| " << setw(101) << right << "TEACHERS" << setw(100) << "|" << endl;
+	displayTeacherTitle();
 	displayTeachersInformation(school);
 
-	cout << "| " << setw(101) << right << "TEAMS" << setw(100) << "|" << endl;
+	displayTeamTitle();
 	displayTeamsInformation(school);
-
-	cout << "| " << setw(101) << right << "STUDENTS" << setw(100) << "|" << endl;
+	
+	displayStudentTitle();
 	displayStudentsInformation(school);
 
-	cout << "| " << setw(101) << right << "ROLES" << setw(100) << "|" << endl;
+	displayRoleTitle();
 	displayRolesInformation(school);
 }
 
