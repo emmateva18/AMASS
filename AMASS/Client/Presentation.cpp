@@ -121,7 +121,7 @@ SCHOOL enterSchool()
 	SCHOOL school;
 
 	cout << "Enter data for the school:" << endl;
-	
+
 	clearInputStream();
 
 	cout << "Name: ";
@@ -335,28 +335,50 @@ void displayString(string str, int count)
 	}
 }
 
+void displaySchoolHeading()
+{
+	cout << "| " << setw(5) << left << "ID" << "| "
+		<< setw(71) << left << "NAME" << "| "
+		<< setw(40) << left << "CITY" << "| "
+		<< setw(59) << left << "ADDRESS" << "| "
+		<< setw(17) << left << "MAX_PLAYER_COUNT"
+		<< "| " << endl;
+}
+
 void displaySchoolInformation(SCHOOL school)
 {
-	//displayFullLine();
-	cout << "| " << setw(5) << left << "ID" << "| " << setw(71) << left << "NAME" << "| "
-		<< setw(40) << left << "CITY" << "| " << setw(59) << left << "ADDRESS" << "| "
-		<< setw(17) << left << "MAX_PLAYER_COUNT" << "| " << endl;
-	displayFullLine();
+	displaySchoolHeading();
 
-	cout << "| " << setw(5) << school.id << "| " << setw(71) << school.name << "| "
+	cout << "| " << setw(5) << " "
+		<< setw(73) << "| "
+		<< setw(42) << "| "
+		<< setw(61) << "| "
+		<< setw(19) << "| "
+		<< "|" << endl;
+
+	cout << "| " << setw(5) << left << school.id << "| " << setw(71) << school.name << "| "
 		<< setw(40) << school.city << "| " << setw(59) << school.address << "| "
 		<< setw(17) << school.maxMemberCountPerTeam << "| " << endl;
 	displayFullLine();
 }
 
+void displayTeacherHeading()
+{
+	cout << "| " << setw(5) << left << "ID" << "| "
+		<< setw(80) << left << "NAME" << "| "
+		<< setw(80) << left << "EMAIL" << "| "
+		<< setw(29) << left << "TEAM IDS" << "| " << endl;
+}
+
 void displayTeachersInformation(SCHOOL school)
 {
-	//displayFullLine();
+	displayTeacherHeading();
 
-	cout << "| " << setw(5) << left << "ID" << "| " << setw(80) << left << "NAME" << "| "
-		<< setw(80) << left << "EMAIL" << "| " << setw(29) << left << "TEAM IDS" << "| " << endl;
-
-	displayFullLine();
+	cout << "| " << setw(5) << " "
+		<< setw(82) << "| "
+		<< setw(82) << "| "
+		<< setw(31) << "| "
+		<< "|" << endl;
 
 	for (size_t i = 0; i < school.teachers.size(); i++)
 	{
@@ -375,15 +397,26 @@ void displayTeacherInformation(TEACHER teacher)
 		<< setw(80) << teacher.email << "| " << setw(29) << teamIds << "| " << endl;
 }
 
-void displayTeamsInformation(SCHOOL school)
+void displayTeamsHeading()
 {
-	//displayFullLine();
 
 	cout << "| " << setw(5) << left << "ID" << "| " << setw(20) << left << "NAME" << "| "
 		<< setw(80) << left << "DESCRIPTION" << "| " << setw(14) << left << "DATE_OF_SETUP" << "| "
 		<< setw(17) << "STATUS" << "| " << setw(8) << "ROLE_ID" << "| " << setw(44) << "STUDENT_EMAILS" << "| " << endl;
+}
 
-	displayFullLine();
+void displayTeamsInformation(SCHOOL school)
+{
+	displayTeamsHeading();
+
+	cout << "| " << setw(5) << " "
+		<< setw(22) << "| "
+		<< setw(82) << "| "
+		<< setw(16) << "| "
+		<< setw(19) << "| "
+		<< setw(10) << "| "
+		<< setw(46) << "| "
+		<< "|" << endl;
 
 	for (size_t i = 0; i < school.teams.size(); i++)
 	{
@@ -407,15 +440,23 @@ void displayTeamInformation(TEAM team)
 
 }
 
-void displayStudentsInformation(SCHOOL school)
+void displayStudentHeading()
 {
-	//displayFullLine();
-
 	cout << "| " << setw(5) << left << "ID" << "| " << setw(75) << left << "NAME" << "| "
 		<< setw(20) << left << "GRADE" << "| " << setw(75) << left << "EMAIL" << "| "
 		<< setw(17) << "IS_IN_TEAM" << "| " << endl;
+}
 
-	displayFullLine();
+void displayStudentsInformation(SCHOOL school)
+{
+	displayStudentHeading();
+
+	cout << "| " << setw(5) << " "
+		<< setw(77) << "| "
+		<< setw(22) << "| "
+		<< setw(77) << "| "
+		<< setw(19) << "| "
+		<< "|" << endl;
 
 	for (size_t i = 0; i < school.students.size(); i++)
 	{
@@ -435,13 +476,18 @@ void displayStudentInformation(STUDENT student)
 		<< setw(17) << isInTeam << "| " << endl;
 }
 
+void displayRoleHeading()
+{
+	cout << "| " << setw(5) << left << "ID" << "| " << setw(193) << left << "NAME" << "| " << endl;
+}
+
 void displayRolesInformation(SCHOOL school)
 {
-	//displayFullLine();
+	displayRoleHeading();
 
-	cout << "| " << setw(5) << left << "ID" << "| " << setw(193) << left << "NAME" << "| " << endl;
-
-	displayFullLine();
+	cout << "| " << setw(5) << " "
+		<< setw(195) << "| "
+		<< "|" << endl;
 
 	for (size_t i = 0; i < school.roles.size(); i++)
 	{

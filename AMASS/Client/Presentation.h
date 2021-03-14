@@ -39,13 +39,18 @@ std::string isInTeamToString(bool isInTeam);
 
 void displayFullLine();
 void displayString(std::string str, int count);
+void displaySchoolHeading();
 void displaySchoolInformation(SCHOOL school);
+void displayTeacherHeading();
 void displayTeachersInformation(SCHOOL school);
 void displayTeacherInformation(TEACHER teacher);
+void displayTeamsHeading();
 void displayTeamsInformation(SCHOOL school);
 void displayTeamInformation(TEAM team);
+void displayStudentHeading();
 void displayStudentsInformation(SCHOOL school);
 void displayStudentInformation(STUDENT student);
+void displayRoleHeading();
 void displayRolesInformation(SCHOOL school);
 void displayRoleInformation(ROLE role);
 void displaySchoolStructure(SCHOOL school);
