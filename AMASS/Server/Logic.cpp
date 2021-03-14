@@ -6,22 +6,21 @@ using namespace std;
 
 void init(vector<SCHOOL>& schools)
 {
-	TEACHER t1 = { 0,"Petur","Ognqnov","Georgiev","POGeorgiev@abv.bg" };
-	TEACHER t2 = { 1,"Gosho","Dizela","Petrov","dizela@gmail.com" };
-	TEACHER t3 = { 2,"Vankata","Dunera","Vulchev","ILYDuner@abv.bg" };
-	TEACHER t4 = { 3,"Eren","Grisha","Jaeger","fighter@titan.bg" };
-	TEACHER t5 = { 4,"Levi","Kenny","Ackermann","scouts@titan.com" };
+	TEACHER t1 = { 0,"Boiko","Zdravkov","Valchev","BZValchev@abv.bg" };
+	TEACHER t2 = { 1,"Deyan","Penkov","Bakalov","DPBakalov@gmail.com" };
+	TEACHER t3 = { 2,"Raina","Danailova","Simova","RDSimova@abv.bg" };
+	TEACHER t4 = { 3,"Apostol","Borislavov","Yankov","ABYankov@titan.bg" };
+	TEACHER t5 = { 4,"Vyara","Plamenova","Borisova","VPBorisova@titan.com" };
 
-	STUDENT s1 = { 0,"Georgi","Georgiev","Georgiev","10A","GG@abv.bg" };
-	STUDENT s2 = { 1,"Staiko","Binev","Pogriev","8A","SBP@abv.bg" };
-	STUDENT s3 = { 2,"Ivan","Usrefov","Milanov","9G","IUM@abv.bg" };
-	STUDENT s4 = { 3,"Stoicho","Breika","Petrov","8G","SBP@abv.bg" };
-	STUDENT s5 = { 4,"Ivan","Ivanov","Ivanov","10B","III@abv.bg" };
-	STUDENT s6 = { 5,"Mitko","Mitkov","Mitkov","9V","MMM@abv.bg" };
+	STUDENT s1 = { 0,"Ralitsa", "Dragomirova", "Kishisheva", "RDKishisheva@abv.bg" };
+	STUDENT s2 = { 1,"Dara", "Boikova", "Svetkova", "DBSvetkova@abv.bg" };
+	STUDENT s3 = { 2,"Yosif", "Emilov", "Borisov", "YEBorisov@abv.bg" };
+	STUDENT s4 = { 3,"Andon", "Atanasov", "Hristov", "AAHristov@abv.bg" };
+	STUDENT s5 = { 4,"Yordanka", "Ivailova", "Blagoeva", "YIBlagoeva@abv.bg" };
+	STUDENT s6 = { 5,"Tsvetan", "Penkov", "Manevski", "TPManevski@abv.bg" };
 
-	TEAM te1 = { 0, "Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"GG@abv.bg", 1},{"SBP@abv.bg", 2}} };
-	TEAM te2 = { 1, "Anti-Chupacabras","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"IUM@abv.bg", 1},{"SBP@abv.bg", 2}} };
-	TEAM te3 = { 2, "We exist too","example description lorem eipsum take up space",{0,0,0},STATUS::pendingApproval,{{"III@abv.bg", 1},{"MMM@abv.bg", 2}} };
+	TEAM te1 = { 0, "Chupacabras","example description",{0,0,0},STATUS::pendingApproval,{{"RDKishisheva@abv.bg", 1},{"AAHristov@abv.bg", 2}} };
+	TEAM te2 = { 1, "Anti-Chupacabras","example description",{0,0,0},STATUS::pendingApproval,{{"DBSvetkova@abv.bg", 1},{"YEBorisov@abv.bg", 2}} };
 
 	ROLE r1 = { 0, "Scrum Master" };
 	ROLE r2 = { 1, "Backend Developer" };
@@ -31,10 +30,10 @@ void init(vector<SCHOOL>& schools)
 
 	vector <TEACHER> teachers{ t1, t2, t3, t4, t5 };
 	vector <STUDENT> students{ s1,s2,s3,s4,s5,s6 };
-	vector<TEAM> teams{ te1,te2,te3 };
+	vector<TEAM> teams{ te1,te2 };
 	vector<ROLE> roles = { r1,r2,r3,r4,r5 };
 
-	string name = "PGKPI";
+	string name = "VCSPI";
 	string city = "Burgas";
 	string address = "Meden Rudnik 54";
 

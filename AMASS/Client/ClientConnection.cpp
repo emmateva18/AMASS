@@ -659,7 +659,7 @@ void requestUpdateStudentEmail()
 
 	enterInt(studentId, "Id of the team: ");
 	string email;
-	enterEmail(email, "New email of the student");
+	enterEmail(email, "New email of the student: ");
 	writeStr(socket_, email);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);
@@ -780,7 +780,7 @@ void requestUpdateStudentIsInTeam()
 
 	enterInt(studentId, "Id of the student: ");
 	bool isInTeam;
-	enterBool(isInTeam,"Enter wether the student is in a team (0 = false, 1 = true): ");
+	enterBool(isInTeam,"Enter whether the student is in a team (0 = false, 1 = true): ");
 	writeBool(socket_, isInTeam);
 	writeInt(socket_, studentId);
 	writeInt(socket_, schoolId);

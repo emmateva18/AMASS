@@ -164,9 +164,9 @@ vector<MENU> initMenus()
 	MENU mainMenu =
 	{
 		{
-			{true,'1',"Create School",requestCrtSch,-1},
+			{true,'1',"Create school",requestCrtSch,-1},
 			{false,'2',"Display information",nullptr,5},
-			{false,'3',"Edit School",nullptr,11},
+			{false,'3',"Edit school",nullptr,11},
 			{false,'4',"Exit",exitProgram,-1}
 		}
 	};
@@ -187,7 +187,7 @@ vector<MENU> initMenus()
 			{true,'1',"Create teacher",requestCrtTeacher,-1},
 			{false, '2',"Create team",requestCrtTeam,-1},
 			{false,'3',"Create student",requestCrtStudent,-1},
-			{false, '4', "Create Role",requestCrtRole,-1},
+			{false, '4', "Create role",requestCrtRole,-1},
 			{false, '5',"Input maximum number of members per team",requestInputMaxNumOfMem,-1},
 			{false,'6',"Back",nullptr,1}
 		}
@@ -210,9 +210,9 @@ vector<MENU> initMenus()
 	MENU deleteMenu =
 	{
 		{
-			{true,'1',"Delete School",requestDeleteSchool,0},
+			{true,'1',"Delete school",requestDeleteSchool,0},
 			{false,'2',"Delete team",requestDeleteTeam,-1},
-			{false,'3',"Delete Role",requestDeleteRole,-1},
+			{false,'3',"Delete role",requestDeleteRole,-1},
 			{false,'4',"Delete student",requestDeleteStudent,-1},
 			{false,'5',"Delete teacher",requestDeleteTeacher,-1},
 			{false,'6',"Back",nullptr,1}
@@ -224,9 +224,9 @@ vector<MENU> initMenus()
 		{
 			{true,'1',"Display all records",requestReadDB,-1},
 			{false,'2',"Display teachers with no teams",requestDisplayTeachersWithNoTeams,-1},
-			{false,'2',"Display students with no teams",requestDisplayStudentsWithNoTeams,-1},
-			{false,'2',"Display teams by status",nullptr,12},
-			{false,'3',"Back",nullptr,0}
+			{false,'3',"Display students with no teams",requestDisplayStudentsWithNoTeams,-1},
+			{false,'4',"Display teams by status",nullptr,12},
+			{false,'5',"Back",nullptr,0}
 		}
 	};
 

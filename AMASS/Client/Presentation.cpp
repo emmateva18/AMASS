@@ -24,7 +24,7 @@ STUDENT enterStudent()
 {
 	STUDENT student;
 
-	cout << "Enter student's data:" << endl;
+	cout << "Enter student's data: " << endl;
 
 	enterString(student.firstName, "First name: ");
 	enterString(student.middleName, "Middle name: ");
@@ -39,7 +39,7 @@ TEACHER enterTeacher()
 {
 	TEACHER teacher;
 
-	cout << "Enter teacher's data:" << endl;
+	cout << "Enter teacher's data: " << endl;
 
 	enterString(teacher.firstName, "First name: ");
 	enterString(teacher.middleName, "Middle name: ");
@@ -54,7 +54,7 @@ TEAM enterTeam(int maxPlayerPerTeam)
 	TEAM team;
 	TEAM_MEMBER member;
 
-	cout << "Enter team's data:" << endl;
+	cout << "Enter team's data: " << endl;
 
 	clearInputStream();
 
@@ -69,7 +69,7 @@ TEAM enterTeam(int maxPlayerPerTeam)
 ROLE enterRole()
 {
 	ROLE role;
-	cout << "Enter data for the role:" << endl;
+	cout << "Enter data for the role: " << endl;
 
 	enterString(role.name, "Name: ");
 	return role;
@@ -120,7 +120,7 @@ SCHOOL enterSchool()
 {
 	SCHOOL school;
 
-	cout << "Enter data for the school:" << endl;
+	cout << "Enter data for the school: " << endl;
 
 	clearInputStream();
 
@@ -228,7 +228,7 @@ void displayCriteriaStudentsWithNoTeam(SCHOOL school)
 	{
 		if (!school.students[i].isInTeam)
 		{
-			cout << school.students[i].firstName << " " << school.students[i].middleName << school.students[i].surname << endl;
+			cout << school.students[i].firstName << " " << school.students[i].middleName <<" "<< school.students[i].surname << endl;
 		}
 	}
 }
