@@ -159,10 +159,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedFileOperations.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ServerConnection.h" />
     <ClInclude Include="BasicFileOperations.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Logic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Server.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\user\Desktop\AMASSSERVRE.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
