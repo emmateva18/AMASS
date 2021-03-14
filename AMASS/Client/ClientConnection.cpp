@@ -485,8 +485,11 @@ void requestUpdateTeacherTeams()
 	SCHOOL school = tableRequest(schoolId);
 	string result;
 	displayFullLine();
+	displayTeacherTitle();
+	displayFullLine();
 	displayTeachersInformation(school);
 	cout << endl;
+	displayTeamTitle();
 	displayFullLine();
 	displayTeamsInformation(school);
 
@@ -585,9 +588,13 @@ void requestUpdateTeamMembers()
 	int schoolId = readSchoolId(), teamId;
 	SCHOOL school = tableRequest(schoolId);
 	displayFullLine();
+	displayTeamTitle();
+	displayFullLine();
 	displayTeamsInformation(school);
+	displayStudentTitle();
 	displayFullLine();
 	displayStudentsInformation(school);
+	displayRoleTitle();
 	displayFullLine();
 	displayRolesInformation(school);
 
