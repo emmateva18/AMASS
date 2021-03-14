@@ -221,16 +221,39 @@ void requestReadDB()
 	readRequest(SYSTEM_CODE::readDB, schools);
 	displaySchools(schools);
 	cout <<  "Enter any key to continue";
-	char a = _getch();
+	_getch();
 }
 
-
+int findSchoolById(vector<SCHOOL>& schools, int id)
+{
+	for (size_t i = 0; i < schools.size(); i++)
+	{
+		if (schools[i].id == id)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
 
 void getSchoolId()
 {
 	int id;
-	requestReadDB();
-	enterInt(id, "Please enter the ID of the school you wish to change: ");
+	vector<SCHOOL> schools = tableRequest();
+	displaySchools(schools);
+	bool pass = false;
+	do
+	{
+		enterInt(id, "Please enter the ID of the school you wish to change: ");
+		if (findSchoolById(schools, id)!=-1)
+		{
+			pass = true;
+		}
+		else
+		{
+			cout << "No school with that id found, try again!\n";
+		}
+	} while (!pass);
 	fstream f;
 	f.open("schoolId.txt", ios::trunc | ios::in | ios::out);
 	f << id;

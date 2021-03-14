@@ -42,6 +42,7 @@ void sendTeamRequest(SYSTEM_CODE code, int id);
 void exitProgram();
 void requestCrtSch();
 void requestReadDB();
+int findSchoolById(std::vector<SCHOOL>& schools, int id);
 void getSchoolId();
 int readSchoolId();
 void requestCrtTeacher();
