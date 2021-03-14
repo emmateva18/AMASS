@@ -229,14 +229,18 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			readInt(socket, num);
 			readInt(socket, schoolId);
 			int pos = findSchoolById(schools, schoolId);
-			
+			if (num <= 1)
+			{
+				errorMsg = "There should be atleast 2 people per team!\n";
+				writeStr(socket, errorMsg);
+				break;
+			}
+
 			schools[pos].maxMemberCountPerTeam = num;
 			saveDataBase(schools);
+			writeStr(socket, "Operation Successful!\n");
 			break;
 		}
-		/*
-		case errorConnection:
-			break;*/
 		case crtRole:
 		{
 			int schoolId;
@@ -341,19 +345,6 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		writeStr(socket, "Operation successful!\n");
 		break;
 	}
-	/*
-	case readRole:
-		break;
-	case readStudent:
-		break;
-	case readTeacher:
-		break;
-	case readDate:
-		break;
-	case readTeamMember:
-		break;
-	case readTeam:
-		break;*/
 	case readSchool:
 	{
 		int id;
@@ -401,6 +392,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		int pos = findSchoolById(schools, schoolId);
 		schools[pos].address = address;
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updSchoolCity:
@@ -412,6 +404,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 		int pos = findSchoolById(schools, schoolId);
 		schools[pos].city = city;
 		saveDataBase(schools);
+		writeStr(socket, "Operaition successful!\n");
 		break;
 	}
 	case updTeacherFirstName:

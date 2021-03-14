@@ -349,9 +349,6 @@ void requestInputMaxNumOfMem()
 {
 	int schoolId = readSchoolId();
 	int num;
-	vector<SCHOOL> schools = tableRequest();
-	displayFullLine();
-	listSchoolsDetails(schools);
 	enterInt(num, "Enter the maximum number of members per team: ");
 	sendRequest(SYSTEM_CODE::receiveMaxMemberCount, num,schoolId);
 }
