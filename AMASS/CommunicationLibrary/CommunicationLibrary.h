@@ -84,7 +84,7 @@ enum STATUS
 	pendingApproval,
 	inUse,
 	notActive,
-	notArchived
+	archived
 };
 
 struct ROLE

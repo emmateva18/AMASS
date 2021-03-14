@@ -13,8 +13,8 @@ string statusToString(STATUS status)
 			return "In Use";
 		case notActive:
 			return "Not Active";
-		case notArchived:
-			return "Not Archived";
+		case archived:
+			return "Archived";
 		default:
 			return "";
 	}

@@ -205,6 +205,7 @@ void sendTeamRequest(SYSTEM_CODE code, int id)
 
 void exitProgram()
 {
+	cout << "\x1b[97m";
 	exit(0);
 }
 
@@ -559,7 +560,7 @@ void requestUpdateTeamStatus()
 	_getch();
 }
 
-void requestUpateTeamMembers()
+void requestUpdateTeamMembers()
 {
 	int schoolId = readSchoolId(), teamId;
 	SCHOOL school = tableRequest(schoolId);
@@ -585,8 +586,8 @@ void requestUpateTeamMembers()
 	writeInt(socket_, schoolId);
 	for (int i = 0; i < choice; i++)
 	{
-		enterEmail(email, "Email of student " + to_string(i+1)+" :");
-		enterInt(roleId, "Role of student " + to_string(i + 1) + " :");
+		enterEmail(email, "Email of student " + to_string(i+1)+": ");
+		enterInt(roleId, "Role of student " + to_string(i + 1) + ": ");
 		member.studentEmail = email;
 		member.roleId = roleId;
 		member.write(socket_);
@@ -765,5 +766,65 @@ void requestUpdateRoleName()
 	string result;
 	readStr(socket_, result);
 	cout << result;
+	_getch();
+}
+
+void requestDisplayTeachersWithNoTeams()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayCriteriaTeachersWithNoTeams(school);
+	cout << "Enter any key to continue..." << endl;
+	_getch();
+}
+
+void requestDisplayStudentsWithNoTeams()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayCriteriaStudentsWithNoTeam(school);
+	cout << "Enter any key to continue..." << endl;
+	_getch();
+}
+
+void requestDisplayTeamsStatusPA()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayCriteriaTeamByStatus(school,STATUS::pendingApproval);
+	cout << "Enter any key to continue..." << endl;
+	_getch();
+}
+
+void requestDisplayTeamsStatusIU()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayCriteriaTeamByStatus(school, STATUS::inUse);
+	cout << "Enter any key to continue..." << endl;
+	_getch();
+}
+
+void requestDisplayTeamsStatusA()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayCriteriaTeamByStatus(school, STATUS::archived);
+	cout << "Enter any key to continue..." << endl;
+	_getch();
+}
+
+void requestDisplayTeamsStatusNA()
+{
+	int schoolId = readSchoolId(), roleId;
+	SCHOOL school = tableRequest(schoolId);
+	displayFullLine();
+	displayCriteriaTeamByStatus(school, STATUS::notActive);
+	cout << "Enter any key to continue..." << endl;
 	_getch();
 }

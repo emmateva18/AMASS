@@ -223,7 +223,9 @@ vector<MENU> initMenus()
 	{
 		{
 			{true,'1',"Display all records",requestReadDB,-1},
-			{false,'2',"Display record by criteria",nullptr,7},
+			{false,'2',"Display teachers with no teams",requestDisplayTeachersWithNoTeams,-1},
+			{false,'2',"Display students with no teams",requestDisplayStudentsWithNoTeams,-1},
+			{false,'2',"Display teams by status",nullptr,12},
 			{false,'3',"Back",nullptr,0}
 		}
 	};
@@ -256,7 +258,7 @@ vector<MENU> initMenus()
 			{true,'1',"Update team name",requestUpdateTeamName,-1},
 			{false,'2',"Update team description",requestUpdateTeamDescription,-1},
 			{false,'3',"Update team status",requestUpdateTeamStatus,-1},
-			{false,'4',"Update team members",requestUpateTeamMembers,-1},
+			{false,'4',"Update team members",requestUpdateTeamMembers,-1},
 			{false,'5',"Back",nullptr,3},
 		}
 	};
@@ -290,11 +292,22 @@ vector<MENU> initMenus()
 		}
 	};
 
+	MENU statusCriteriaMenu =
+	{
+		{
+			{true,'1',"Display teams, which are pending approval",requestDisplayTeamsStatusPA,-1},
+			{true,'2',"Display teams, which are in use",requestDisplayTeamsStatusIU,-1},
+			{true,'3',"Display teams, which are archived",requestDisplayTeamsStatusA,-1},
+			{true,'4',"Display teams, which are not active",requestDisplayTeamsStatusNA,-1},
+			{true,'5',"Back",nullptr,5}
+		}
+	};
+
 	menus =
 	{
 		mainMenu,editMenu,createMenu,updateMenu,
 		deleteMenu,displayMenu,displayRecordsMenu,updateTeacherMenu,
-		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu, idMenu
+		updateTeamMenu,updateTeamMemberMenu,updateStudentMenu, idMenu, statusCriteriaMenu
 	};
 
 	return menus;
