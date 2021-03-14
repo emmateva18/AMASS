@@ -1,5 +1,5 @@
 #include "ServerConnection.h"
-
+#include <conio.h>
 using namespace std;
 
 string getCurrentHour()
@@ -27,7 +27,7 @@ string codeToString(SYSTEM_CODE code)
 {
 	switch (code)
 	{
-	case ok: return "ok";
+	case ping: return "ping";
 		break;
 	case sendSchool: return "sendSchool";
 		break;
@@ -209,6 +209,11 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	code = static_cast<SYSTEM_CODE>(temp);
 	switch (code)
 	{
+	case ping:
+	{
+		writeStr(socket,"Server is online! Enter any key to continue...");
+		break;
+	}
 	case sendSchool:
 	{
 		int schoolId;
@@ -1099,7 +1104,9 @@ void startServer(vector<SCHOOL> schools)
 		}
 		catch (exception& e)
 		{
-			cout << "Internal Server error: " << e.what();
+			cout << "Internal Server error: " << e.what()<<endl;
+			cout << "Exiting server...";
+			_getch();
 			break;
 		}
 	}

@@ -201,7 +201,27 @@ void sendTeamRequest(SYSTEM_CODE code, int id)
 	_getch();
 }
 
-//void sendUpdateTeacherRequest(int id,string )
+bool pingServer()
+{
+	asio::io_service io_service;
+	asio::ip::tcp::socket socket_(io_service);
+	socket_.connect(asio::ip::tcp::endpoint(asio::ip::address::from_string(SERVER_IP), SERVER_PORT));
+	writeInt(socket_, SYSTEM_CODE::ping);
+	string result;
+	cout << "Connecting to server...\n";
+	try
+	{
+		readStr(socket_, result);
+	}
+	catch (...)
+	{
+		cout << "The server is offline, please come back alter!\n";
+		_getch();
+		exit(0);
+	}
+	cout << result;
+	_getch();
+}
 
 void exitProgram()
 {

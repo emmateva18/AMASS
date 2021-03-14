@@ -4,7 +4,7 @@
 #include "secrets.h"
 enum SYSTEM_CODE
 {
-	ok = 0,
+	ping = 0,
 	sendSchool=100,
 	sendRole = 101,
 	sendStudent = 102,

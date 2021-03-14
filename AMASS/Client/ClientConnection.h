@@ -39,6 +39,7 @@ void sendRequest(SYSTEM_CODE code, uint16_t data);
 
 void sendTeamRequest(SYSTEM_CODE code, int id);
 
+bool pingServer();
 void exitProgram();
 void requestCrtSch();
 void requestReadDB();
