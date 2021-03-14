@@ -476,6 +476,16 @@ void updateSchoolCity(SCHOOL& school, string newCity)
 	school.city = newCity;
 }
 
+void archiveTeam(SCHOOL& school, int teamId)
+{
+	int pos = findTeamById(school, teamId);
+	for (int i = 0; i < school.teams[pos].members.size(); i++)
+	{
+		int pos2 = findStudentByEmail(school, school.teams[pos].members[i].studentEmail);
+		school.students[pos2].isInTeam = false;
+	}
+}
+
 void updateSchoolAdress(SCHOOL& school, string newAddress)
 {
 	school.address = newAddress;

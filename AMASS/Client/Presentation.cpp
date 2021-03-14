@@ -178,7 +178,7 @@ int enterTeamStatus()
 	cout << "0. Pending Approval" << endl;;
 	cout << "1. In Use" << endl;
 	cout << "2. Not Active" << endl;
-	cout << "3. Not Archived" << endl;
+	cout << "3. Archived" << endl;
 
 	int choice;
 

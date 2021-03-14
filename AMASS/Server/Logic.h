@@ -20,7 +20,7 @@ int findTeacherById(SCHOOL school, int teacherId);
 int findStudentById(SCHOOL school, int studentId);
 int findStudentByEmail(SCHOOL school, std::string email);
 int findTeamById(SCHOOL school, int teamId);
-int findRoleById(SCHOOL school, int roleId);;
+int findRoleById(SCHOOL school, int roleId);
 
 void setStudentIsInTeamToFalseIfNotInTeam(SCHOOL school, STUDENT& student);
 
@@ -65,4 +65,5 @@ void updateTeamStatus(TEAM& team, STATUS newStatus);
 void updateSchoolName(SCHOOL& school, std::string newName);
 void updateSchoolCity(SCHOOL& school, std::string newCity);
 void updateSchoolAdress(SCHOOL& school, std::string newAddress);
+void archiveTeam(SCHOOL& school, int teamId);
 void enterVectorOfIntegers(std::vector<int>& vec, std::string text);

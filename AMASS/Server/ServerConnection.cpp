@@ -560,6 +560,7 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 	}
 	case updTeamStatus:
 	{
+
 		int schoolId = 0, teamId, status;
 		readInt(socket, status);
 		readInt(socket, teamId);
@@ -581,6 +582,10 @@ void processRequest(asio::ip::tcp::socket& socket, vector<SCHOOL>& schools)
 			break;
 		}
 		updateTeamStatus(schools[pos].teams[pos2], static_cast<STATUS>(status));
+		if (status == STATUS::archived)
+		{
+			archiveTeam(schools[pos], teamId);
+		}
 		saveDataBase(schools);
 		writeStr(socket, "Operaition successful!\n");
 		break;
