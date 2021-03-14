@@ -6,7 +6,7 @@
 3. [Documentation](#documentation)
 4. [Used Technologies](#technologies)
 5. [How to download?](howToDownload)
-6. 
+
 <a name="desc"></a>
 ## 1. Description
 We have created a C++ based application, with a Server side and a Client side, that helps schools organise projects and teams. The Server side helps for saving the data in binary files, that is being displayed in a table format and validate the inputs. The Client side in mainly used for inputting and displaying information.
