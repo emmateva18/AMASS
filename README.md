@@ -26,7 +26,7 @@ We have created a C++ based application, with a Server side and a Client side, t
 <a name="technologies"></a>
 
 ## 4. Used Technologies
-* C++
+* C++ and Asio libraries
 
 <a name="howToDownload"></a>
 ## 5. How to download?
